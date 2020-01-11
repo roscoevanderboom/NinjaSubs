@@ -1,6 +1,8 @@
 # NinjaSubs
 A webapp for schools to find substitute teachers.
 
+Created with React, MaterialUI and Firebase Cloud Firestore. 
+
 Here is  the test server.
 
 https://test-781ac.web.app/profile
