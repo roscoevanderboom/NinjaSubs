@@ -1,11 +1,13 @@
 import React from 'react';
+
+import * as fb from '../../../constants/firebase/constants';
 // Components
 import { Button } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { Close, ExitToApp } from '@material-ui/icons';
 
-export const DismissBtn = ({ onClick }) => (
+export const DismissBtn = ({ key, close }) => (
     <Button
-        onClick={onClick}>
+        onClick={() => { close(key) }}>
         <Close />
     </Button>
 )
@@ -16,11 +18,20 @@ export const AcceptBtn = ({ onClick }) => (
         Accept
     </Button>
 )
+export const LogoutBtn = ({ key, close }) => (
+    <Button       
+        onClick={() => {
+            fb.handleSignOut()
+            close(key)
+        }}>
+        <ExitToApp />
+    </Button>
+)
 export const CustomBtn = ({ text, onClick }) => (
     <Button
         variant='outlined'
         color='default'
-        onClick={onClick}>
+        onClick={() => onClick}>
         {text}
     </Button>
 )

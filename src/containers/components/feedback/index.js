@@ -1,34 +1,28 @@
 import React from 'react';
 
-import * as fb from '../../../constants/firebase/constants';
-
 // Components
-import { DismissBtn, CustomBtn } from '../buttons';
+import { DismissBtn, LogoutBtn } from '../buttons';
 
 export const createFeedback = (variant, message, action, duration, enqueueSnackbar, closeSnackbar) => {
-    const closeSnack = key => (
-        <DismissBtn
-            onClick={() => {
-                closeSnackbar(key)
-            }} />
-    );
+    const dismiss = key => (
+        <DismissBtn key={key} close={closeSnackbar} />
+    )
 
     const logout = key => (
-        <CustomBtn text='Logout'
-            onClick={() => {
-                fb.handleSignOut()
-                closeSnackbar(key)
-            }} />
+        <React.Fragment>
+            <LogoutBtn key={key} close={closeSnackbar} />
+            <DismissBtn key={key} close={closeSnackbar} />
+        </React.Fragment>
+
     )
     if (action === undefined) {
-        action = closeSnack
+        action = dismiss
     }
-   
+
     switch (variant) {
         case 'success':
             enqueueSnackbar(message, {
-                variant,
-                autoHideDuration: 2000
+                variant             
             });
             break;
         case 'warning':
@@ -40,13 +34,13 @@ export const createFeedback = (variant, message, action, duration, enqueueSnackb
             break;
         case 'logout':
             enqueueSnackbar(message, {
-                variant: 'error',
+                variant: 'warning',
                 action: logout,
                 autoHideDuration: null
             });
             break;
         case 'verifyNewPost':
-            enqueueSnackbar(message, {                
+            enqueueSnackbar(message, {
                 action,
                 autoHideDuration: null
             });

@@ -34,7 +34,6 @@ export const GlobalStatePovider = (props) => {
   // Loading / New user / History
   const [history, setHistory] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [isNewUser, setIsNewUser] = useState(false);
   // Get user details
   const [user, setUser] = useState(null);
   const [profileData, setProfileData] = useState(false);
@@ -172,22 +171,12 @@ export const GlobalStatePovider = (props) => {
 
   const state = {
     // User state
-    user,
-    isNewUser,
-    profileData,
-    stars,
+    user, profileData, stars,
     // App state
-    classes,
-    history,
-    loading,
-    title,
-    post_to_edit,
-    candidate,
-    selectedChat,
-    modals,
-    inbox,
-    noticeboardQuery,
-    activitiesQuery,
+    classes, history, loading,
+    title, post_to_edit, candidate,
+    selectedChat, modals, inbox,
+    noticeboardQuery, activitiesQuery,
     availableSubs,
     // Navigation
     routes
@@ -195,30 +184,18 @@ export const GlobalStatePovider = (props) => {
 
   const methods = {
     // General
-    isUserVerfied,
-    setIsNewUser,
-    setHistory,
-    setTitle,
-    setLoading,
-    handleModals,
-    feedback,
-    setModals,
-    checkStars,
+    isUserVerfied, setHistory, setTitle,
+    setLoading, handleModals, feedback,
+    setModals, checkStars,
     // FireBase data methods
-    handleAuthState,
-    handleProfileData,
-    updateProfileData,
-    queryNoticeboard,
-    queryActivities,
-    handleInbox,
+    handleAuthState, handleProfileData,
+    updateProfileData, queryNoticeboard,
+    queryActivities, handleInbox,
     handleAvailableSubs,
     // Chat methods
-    followChat,
-    searchInbox,
-    startChat,
+    followChat, searchInbox, startChat,
     // Methods for employers
-    set_post_to_edit,
-    setCandidate
+    set_post_to_edit, setCandidate
   };
 
   // Create provider

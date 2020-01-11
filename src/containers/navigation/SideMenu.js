@@ -4,8 +4,7 @@ import { NavLink } from 'react-router-dom';
 // Components
 import {
     List, ListItem, ListItemIcon, ListItemText,
-    Drawer, IconButton, Divider,
-} from '@material-ui/core';
+    Drawer, IconButton, } from '@material-ui/core';
 
 import { ChevronLeft } from '@material-ui/icons';
 
@@ -19,7 +18,7 @@ const useStyles = makeStyles(theme => ({
         flexShrink: 0,
     },
     drawerPaper: {
-        width: drawerWidth,
+        width: drawerWidth
     },
     drawerHeader: {
         display: 'flex',
@@ -31,6 +30,9 @@ const useStyles = makeStyles(theme => ({
     navLink: {
         textDecoration: 'none',
         color: 'black'
+    },
+    footer: {
+        textAlign: 'center'
     }
 }))
 
@@ -67,7 +69,6 @@ export default ({ props }) => {
                     <ChevronLeft />
                 </IconButton>
             </div>
-            <Divider />
             <List>
                 {list.map((btn, index) =>
                     <NavLink

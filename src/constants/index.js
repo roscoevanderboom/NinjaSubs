@@ -12,6 +12,12 @@ export const Taipei = [
     'Wenshen', 'Xinyi', 'Zhongshan', 'Zhongzheng'
 ];
 
+export const creativeCommons = {
+    href: "http://creativecommons.org/licenses/by/4.0/",
+    alt: "Creative Commons License",
+    png: "https://i.creativecommons.org/l/by/4.0/88x31.png"
+}
+
 // Sample text for new post
 const mon = 'Mon. 12/6 \nClass1 14:00 - 15:00; Class2: 17:50 - 18:50\n\n';
 const tue = 'Tues. 12/7 \nClass1 17:50 - 18:50\n\n';

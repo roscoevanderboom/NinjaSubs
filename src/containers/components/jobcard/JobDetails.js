@@ -3,7 +3,7 @@ import React from 'react';
 // Cmponents
 import {
     CardContent, Collapse, TextareaAutosize,
-    ListItemText, ListItem, Badge,
+    ListItemText, ListItem,
 } from '@material-ui/core';
 
 // Custom components
@@ -37,11 +37,6 @@ export default ({ data }) => {
         return arr
     }
 
-    React.useEffect(() => {
-
-        // console.log(data.stars)
-    }, [])
-
     return (
         <React.Fragment>
             <ListItem
@@ -60,10 +55,6 @@ export default ({ data }) => {
                             )}
                         </div>
                     } />
-
-
-
-
                 {expanded ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
