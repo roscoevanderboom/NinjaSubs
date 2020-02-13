@@ -5,7 +5,7 @@ Created with React, MaterialUI and Firebase Cloud Firestore.
 
 Here is  the test server.
 
-https://test-781ac.web.app/profile
+https://ninjasubs-test.firebaseapp.com/
 
 
 I have allowed access to unverified user to edit profiles, create chatrooms, create job posts and also apply to job posts.
