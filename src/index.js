@@ -1,29 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import { createBrowserHistory } from "history";
+import { Router } from "react-router-dom";
+import { GlobalStatePovider } from './state/store';
+
 import { SnackbarProvider } from 'notistack';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { GlobalStatePovider } from './state';
+
+import "bootstrap/dist/css/bootstrap.css";
+
+import './index.css';
+const hist = createBrowserHistory();
 
 ReactDOM.render(
     <SnackbarProvider
         anchorOrigin={{
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'center',
         }}
         hideIconVariant={false}
         autoHideDuration={5000}
         maxSnack={3}>
-        <GlobalStatePovider>
-            <BrowserRouter>
+        <Router history={hist}>
+            <GlobalStatePovider>
                 <App />
-            </BrowserRouter>
-        </GlobalStatePovider>
-    </SnackbarProvider>
-    , document.getElementById('root'));
+            </GlobalStatePovider>
+        </Router>
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+    </SnackbarProvider>,
+    document.getElementById('root'));
+
 serviceWorker.unregister();

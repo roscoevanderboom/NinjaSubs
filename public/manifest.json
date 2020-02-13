@@ -3,9 +3,9 @@
   "name": "NinjaSubs",
   "icons": [
     {
-      "src": "ninja.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/jpg"
+      "src": "ninja.png",     
+      "type": "image/jpg",
+      "sizes": "64x64 32x32 24x24 16x16"
     },
     {
       "src": "ninja.png",

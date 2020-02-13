@@ -1,22 +1,29 @@
 {
-  "name": "ninjaSubs",
+  "name": "ninja-subs",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ninjasubs-taipei.web.app/",
   "dependencies": {
     "@material-ui/core": "^4.2.1",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.35",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^4.4.1",
     "firebase": "^6.3.1",
     "history": "^4.10.1",
     "material-ui": "^0.20.2",
     "moment": "^2.24.0",
+    "node-sass": "^4.13.1",
     "notistack": "^0.8.9",
     "password-validator": "^5.0.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "react-scroll": "^1.7.14"
+    "react-scripts": "3.3.0",
+    "react-scroll": "^1.7.14",
+    "reactstrap": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +45,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "optionalDependencies": {
+    "@types/googlemaps": "3.36.2",
+    "@types/markerclustererplus": "2.1.33",
+    "@types/react": "16.8.19",
+    "ajv": "6.10.0",
+    "jquery": "3.4.1",
+    "typescript": "3.4.5"
   }
 }

@@ -1,8 +1,9 @@
 /* eslint-disable */
 // Image defaults
-import noImage from '../assets/img/download-free-ninja-png-icon-favicon-freepngimg-free-ninja-png-460_460.png';
+import noImage from '../assets/img/ninja.png';
 export const noUserImage = noImage;
-export const ninjaStar = 'http://www.handandbeak.com/wp-content/uploads/ij/ijmoiwninja-stars-png-png-free-library-shuriken-png.jpg';
+import ninjastar from '../assets/img/ninjastar.png';
+export const ninjaStar = ninjastar;
 export const terms = 'https://www.termsandconditionsgenerator.com/live.php?token=cUjuC2S5w2vTipxpiAQVx56WBJZReus7';
 // 
 // Locations
@@ -19,24 +20,28 @@ export const creativeCommons = {
 }
 
 // Sample text for new post
-const mon = 'Mon. 12/6 \nClass1 14:00 - 15:00; Class2: 17:50 - 18:50\n\n';
-const tue = 'Tues. 12/7 \nClass1 17:50 - 18:50\n\n';
-const wed = 'Wed. 12/8 \nClass1 14:00 - 15:00; Class2: 17:50 - 18:50\n\n';
-const thurs = 'Thurs. 12/9 \nClass1 14:00 - 15:00; Class2: 17:50 - 18:50\n\n';
-const fri = 'Fri. 12/10 \nClass1 14:00 - 15:00; Class2: 17:50 - 18:50\n\n';
-export const examplePost = `${mon}${tue}${wed}${thurs}${fri}`;
+const mon = 'Mon. 12/6 \nClass1 14:00 - 15:00\nClass2: 17:50 - 18:50\n\n';
+const tue = 'Tues. 12/7 \nClass1 17:50 - 18:50';
+export const examplePost = `${mon}${tue}`;
 
 // Array functions for firebase
-export const add_to_array = (array, val) => {
+export const add_if_not_included = (array, val) => {
     if (!array.includes(val)) {
         array.push(val)
     }
     return array;
 }
-export const remove_from_array = (current_array, value_to_remove) => {
-    let newArray = current_array;
+export const remove_from_array = (array, value_to_remove) => {
+    let newArray = array;
     newArray.splice(newArray.indexOf(value_to_remove), 1);
     return newArray
+}
+export const mapFromNumber = (num) => {
+    let arr = [];
+    for (let i = 0; i < num; ++i) {
+        arr.push(i);
+    }
+    return arr
 }
 // Create data objects for account settings
 export const newPost = (profileData) => {
@@ -46,7 +51,7 @@ export const newPost = (profileData) => {
         start: '',
         end: '',
         rates: '',
-        school: name,
+        name: name,
         contact: contact,
         location: location,
         address: address,
@@ -56,7 +61,19 @@ export const newPost = (profileData) => {
         ref: Math.floor(Math.random() * 10000),
         candidates: [],
         candidates_uid: [],
-        image: image
+        image: image,
+        type: 'Part-time'
+    }
+}
+export const newJobApplicationData = (profileData) => {
+    const { name, bio, image, history, rating, uid } = profileData;
+    return {
+        name: name,
+        bio: bio,
+        image: image,
+        history: history,
+        rating: rating,
+        uid: uid
     }
 }
 export const newChat = (profileData, chatee) => ({
@@ -67,6 +84,21 @@ export const newChat = (profileData, chatee) => ({
     user2_Image: chatee.image,
     messages: [],
     id: Math.floor(Math.random() * 10000)
+})
+export const newChatRoom = (profileData, chatee) => ({
+    participants: [profileData.uid, chatee.uid],
+    user1: {
+        uid: profileData.uid,
+        name: profileData.name,
+        image: profileData.image,
+    },
+    user2: {
+        uid: chatee.uid,
+        name: chatee.name,
+        image: chatee.image,
+    },   
+    messages: [],
+    room_id: Math.floor(Math.random() * 10000)
 })
 export const chatPost = (profileData, newPost) => ({
     sender_uid: profileData.uid,
@@ -101,12 +133,13 @@ export const newEmployerData = {
     address: '',
     phone: ''
 }
-export const newSubBoardListing = (profileData, stars) => ({
+export const newSubBoardListing = (profileData) => ({
     uid: profileData.uid,
-    rating: stars,
+    rating: profileData.rating,
     name: profileData.name,
     image: profileData.image,
     bio: profileData.bio,
+    likes: [],
     locations: profileData.locations,
     available: profileData.available ? false : true
 })
@@ -117,6 +150,20 @@ export const isEven = (value) => {
         return true;
     else
         return false;
+}
+export const isNewPostAllowed = (array, profileData) => {
+    let activePosts = array.filter(post => post.uid === profileData.uid);
+    if (activePosts.length > 3) {
+        return false;
+    }
+    return true
+}
+export const isArrayEqual = (array1, array2) => {
+    if (array1.length === array2.length
+        && array1.every(x => array2.includes(x))) {
+        return true
+    }
+    return false
 }
 
 

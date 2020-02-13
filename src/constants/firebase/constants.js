@@ -1,4 +1,5 @@
 // 
+import * as constants from '../';
 // App
 import Firebase from './index';
 // Auth
@@ -6,99 +7,101 @@ export const auth = Firebase.auth();
 // Firestore DB
 export const db = Firebase.firestore();
 export const noticeboard = db.collection('noticeboard');
-export const substitutes = db.collection('availableSubs');
+export const availableSubs = db.collection('availableSubs');
 export const users = db.collection('users');
 export const privateChats = db.collection('chats');
 // Messaging
-export const messaging = Firebase.messaging();
-messaging.usePublicVapidKey('BNhEupwDy7M8WKuLNiM14714ipDCYZc0ltzDK3mT03_R-JSCTIbvi-ZEcij7m_4qHbFo6Ib-_pMUzgyb3EbOCrA')
+// export const messaging = Firebase.messaging();
+
 // File Storage
 export const storage = Firebase.storage();
 export const storageRef = storage.ref();
+
 // ******************************************************
 //  Functions that are called from global state provider
 // ******************************************************
-export const handleAuthState = (setUser, setLoading) => {
+export const handleAuthState = (setUser, setLoading, setLoggedIn) => {
+    setLoading(true);
     auth.onAuthStateChanged(async (currentUser) => {
         if (currentUser === null) {
-            setUser(null);
+            setUser(currentUser);
+            setLoggedIn(false)
             setLoading(false);
             return;
         }
+        setLoggedIn(true)
         setUser(currentUser);
-    });
+    }, function (error) {
+        console.log(error.message);
+    })
 };
-export const handleProfileData = (uid, setProfileData, setLoading) => {
-    if (!uid) {
-        setProfileData(false);
-        setLoading(false);
-        return;
-    }
+export const handleProfileData = (uid, setProfileData, setLoading, setCreateUserProfile) => {
     users.doc(uid).onSnapshot(function (doc) {
         if (doc.exists && doc.data().type !== undefined) {
+            setCreateUserProfile(false)
             setProfileData(doc.data());
             setLoading(false);
             return;
         }
+        setCreateUserProfile(true)
+        setProfileData(false);
+        setLoading(false);
+    }, function (error) {
+        console.log(error.message);
         setProfileData(false);
         setLoading(false);
     });
 };
-export const queryNoticeboard = (locations, setNoticeboardQuery) => {
-    if (locations.length !== 0 && locations !== undefined) {
-        noticeboard
-            .where('location', 'in', locations)
-            .get().then((querySnapshot) => {
-                let posts = [];
-                querySnapshot.forEach(function (doc) {
-                    posts.push(doc.data())
-                });
-                if (posts.length === 0) {
-                    console.log('no matches found');
-                    setNoticeboardQuery([])
-                    return;
-                }
-                setNoticeboardQuery(posts)
-            }).catch(err => {
-                console.log(err.message);
-            });
+export const updateProfileData = (user, profileData, data) => {
+    if (user === null || !profileData) {
+        console.log('fail')
+        return;
     }
-
-};
-export const queryActivities = (uid, setActivitiesQuery) => {
-    noticeboard
-        .where('uid', '==', uid)
-        .get().then((querySnapshot) => {
-            let posts = [];
-            querySnapshot.forEach(function (doc) {
-                posts.push(doc.data())
-            });
-            if (posts.length === 0) {
-                setActivitiesQuery([])
-                return;
-            }
-            setActivitiesQuery(posts)
-        }).catch(err => {
+    return new Promise((resolve, reject) => {
+        users.doc(user.uid).update(data).then((doc) => {
+            console.log('Profile Updated')
+            resolve(true);
+        }).catch((err) => {
             console.log(err.message);
-        });
+            reject(err.message)
+        })
+    })
 };
-export const handleAvailableSubs = (profileData, setAvailableSubs) => {
-    substitutes.where('available', '==', true).get().then((querySnapshot) => {
-        let subs = [];
+export const queryNoticeboard = (setNoticeboardQuery) => {
+    noticeboard.onSnapshot(function (querySnapshot) {
+        let posts = [];
         querySnapshot.forEach(function (doc) {
-            subs.push(doc.data());
+            posts.push(doc.data());
         });
-        setAvailableSubs(subs)
-    }).catch(err => {
-        console.log(err.message);
-    });
+        if (posts.length === 0) {
+            setNoticeboardQuery([])
+            return;
+        }
+        setNoticeboardQuery(posts)
+    }, function (error) {
+        setNoticeboardQuery([])
+        console.log(error.message);
+    })
+}
+export const queryAvailableSubs = (setAvailableSubs) => {
+    availableSubs.where('available', '==', true)
+        .onSnapshot((querySnapshot) => {
+            let subs = [];
+            querySnapshot.forEach(function (doc) {
+                subs.push(doc.data());
+            });
+            setAvailableSubs(subs)
+        }, function (error) {
+            setAvailableSubs([])
+            console.log(error.message);
+        });
 };
 export const handleInbox = (user, setInbox) => {
     if (user === null) {
         return;
     }
     privateChats.where('participants', 'array-contains', `${user.uid}`)
-        .get().then((querySnapshot) => {
+        .onSnapshot((querySnapshot) => {
             let myChats = [];
             querySnapshot.forEach(function (doc) {
                 if (doc.exists) {
@@ -107,41 +110,119 @@ export const handleInbox = (user, setInbox) => {
                 }
             });
             setInbox(myChats);
-        }).catch(err => {
-            setInbox([]);
+        }, function (error) {
+            setInbox([])
+            console.log(error.message);
         })
 };
-export const updateProfileData = (user, profileData, data) => {   
-    if (user === null || !profileData) {
-        console.log('fail')
-        return;
-    }   
-    return new Promise((resolve, reject) => {
-        users.doc(user.uid).update(data).then(() => {
-            resolve(true);
-        }).catch((err) => {
-            console.log(err.message);
-            reject(err.message)
+export const startChat = (profileData, chatee, history, setSelectedChat) => {
+    let newChat = constants.newChatRoom(profileData, chatee)
+    privateChats.doc(`${newChat.room_id}`).set(newChat)
+        .then(() => {
+            followChat(newChat.room_id, history, setSelectedChat)
         })
+        .catch((err) => { console.log(err) })
+};
+export const followChat = async (id, history, setSelectedChat) => {
+    privateChats.doc(`${id}`).onSnapshot(function (doc) {
+        if (doc.exists) {
+            setSelectedChat(doc.data());
+            history.push('/home/chatroom');
+            return;
+        }
     })
-};
+}
+export const searchInbox = (inbox, profileData, chatee, history, setSelectedChat, handleModals) => {
+    if (chatee.uid === profileData.uid) {
+        return;
+    }
+    let res = inbox.filter(chat =>
+        chat.participants.includes(chatee.uid) &&
+        chat.participants.includes(profileData.uid));
+    if (res.length === 1) {
+        followChat(res[0].room_id, history, setSelectedChat);
+        handleModals('CandidateDetails', false);
+        return;
+    }
+    if (!window.confirm(`Are you sure you want to chat to ${chatee.name}?`)) {
+        return;
+    }
+    startChat(profileData, chatee, history, setSelectedChat)
+    handleModals('CandidateDetails', false);
+}
+export const deleteChatroom = (id, setSelectedChat, hist) => {
+    privateChats.doc(`${id}`).delete()
+        .then(() => {
+            hist.push('/contacts');
+            setSelectedChat(false);
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+}
+export const applyToJobPost = async (post, profileData, feedback) => {
+    let details = constants.newJobApplicationData(profileData);
+    noticeboard.doc(`${post.ref}`).update({
+        candidates: constants.add_if_not_included(post.candidates, details),
+        candidates_uid: constants.add_if_not_included(post.candidates_uid, profileData.uid)
+    })
+        .then(() => {
+            feedback('success', 'Applied to post');
+        })
+        .catch((err) => {
+            feedback('error', err.message)
+        })
+}
+export const removeJobApplication = (post, profileData, feedback) => {
+    let details = {}
+    post.candidates_uid.forEach((uid, index) => {
+        if (uid === profileData.uid) {
+            details = post.candidates[index]
+        }
+    });
+    noticeboard.doc(`${post.ref}`).update({
+        candidates: constants.remove_from_array(post.candidates, details),
+        candidates_uid: constants.remove_from_array(post.candidates_uid, profileData.uid)
+    })
+        .then(() => {
+            feedback('success', 'Removed application');
+        })
+        .catch((err) => {
+            feedback('error', err.message)
+        })
+}
+
+
 // ******************************************************
 //      Functions that are called from this module
 // ******************************************************
-export const handleVerification = (user) => {
-    return new Promise((resolve, reject) => {
-        if (user.emailVerified) {
-            reject('You are already verified')
-            return;
-        }
-        user.sendEmailVerification()
-            .then(function () {
-                resolve(true)
-                updateProfileData(user, { emailSent: true })
-            }).catch(function (error) {
-                reject(error.message)
-            });
-    })
+export const signIn = (data, resetData, feedback) => {
+    auth.signInWithEmailAndPassword(data.email, data.password)
+        .then((res) => { resetData() })
+        .catch(error => { feedback('error', error.message) })
+}
+export const register = (data, validateRegister, resetData, feedback, setErrors, hist) => {
+    if (!validateRegister(data, feedback, setErrors)) {
+        return;
+    }
+    auth.createUserWithEmailAndPassword(data.email, data.password)
+        .then((res) => { resetData(); hist.push('/newUser') })
+        .catch(error => { feedback('error', error.message) })
+}
+export const handleSignOut = (hist) => {
+    if (!window.confirm('Are you sure you want to log out?')) {
+        return;
+    }
+    auth.signOut()
+    hist.push('/login')
+};
+export const handleVerification = (user, feedback) => {
+    user.sendEmailVerification()
+        .then(function () {
+            feedback('success', 'Email sent')
+        }).catch(function (error) {
+            feedback('error', 'error.message')
+        });
 };
 export const createProfileData = (user, data) => {
     if (user === null) {
@@ -157,34 +238,54 @@ export const createProfileData = (user, data) => {
             })
     })
 };
-export const handleSignOut = () => {
-    auth.signOut()
-};
-export const remove_user_from_auth = (user) => {
-
-    return new Promise((resolve, reject) => {
-        user.delete().then(() => {
-            resolve(true)
-        }).catch((err) => {
-            reject(err.message)
+export const deleteUser = async (user, profileData, feedback) => {
+    if (profileData.type === 'Substitute') {
+        await availableSubs.doc(profileData.uid).delete()
+            .catch(error => feedback('error', error.message))
+    }
+    
+    privateChats.where('participants', 'array-contains', `${user.uid}`)
+        .get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                privateChats.doc(doc.id).delete()
+            });
         })
-    })
-};
-export const remove_user_from_sub_db = (user) => {
-    return new Promise((resolve, reject) => {
-        substitutes.doc(user.uid).delete().then(() => {
-            resolve(true)
-        }).catch((err) => {
-            reject(err.message)
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+        });
+       
+    await users.doc(profileData.uid).delete()
+        .catch(error => feedback('error', error.message))
+    await user.delete()
+        .catch(error => feedback('logout', error.message))
+}
+export const newJobPost = (post, stars, handleModals, feedback) => {
+    noticeboard.doc(`${post.ref}`).set({ ...post, stars: stars })
+        .then(() => {
+            handleModals('CreatePost', false);
+            feedback('success', 'Update success');
         })
-    })
-};
-export const remove_user_from_db = (user) => {
-    return new Promise((resolve, reject) => {
-        users.doc(user.uid).delete().then(() => {
-            resolve(true);
-        }).catch((err) => {
-            reject(err.message);
+        .catch(err => { feedback('error', err) })
+}
+export const deleteJobPost = (post, feedback) => {
+    noticeboard.doc(`${post.ref}`).delete()
+        .then(() => {
+            feedback('success', 'Post deleted');
         })
+        .catch((err) => {
+            feedback('error', err.message);
+        })
+}
+export const followDoc = (collection, id, setState) => {
+    collection.doc(id).onSnapshot(function (doc) {
+        if (doc.exists) {
+            setState(doc.data());
+            return;
+        }
     })
-};
+}
+export const unfollowDoc = (collection, id) => {
+    collection.doc(id).onSnapshot(function () {
+        return;
+    })
+}

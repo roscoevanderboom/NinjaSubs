@@ -1,67 +1,107 @@
 import React, { useContext, useEffect } from 'react';
-import { GlobalState } from './state';
-import { useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import routes from './routes/routes';
+// State
+import GlobalState from './state/store';
 
 // Components
-import Loader from './containers/components/loader';
-import Login from './containers/login';
-import Home from './containers/home';
+import AppNavBar from './components/AppNavBar/AppNavBar';
+import LoginForm from './components/LoginForm/FormDialog';
+import CreateNewUser from './components/createUserProfile/CreateNewUser';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
+// Dialogs
+import ChangeAvatar from './views/profile/ChangeAvatar';
+import CreatePost from './components/createPost/CreatePost';
+import BlockedUsers from './views/settings/BlockedUsers';
+import ChangeEmail from './views/settings/ChangeEmail';
+import ChangePassword from './views/settings/ChangePassword';
+
+// Loader 
+import Loader from './components/Loader';
+
+import { makeStyles } from '@material-ui/core';
+const useStyles = makeStyles(theme => ({
+  paper: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: '#282c34',
+    fontSize: `calc(10px + 2vmin)`,
+    marginTop: 64,
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 56
+    }
+  }
+}));
 
 export default function App() {
-  const routerHistory = useHistory();
-  const { state, methods } = useContext(GlobalState);
-  const { user, profileData } = state;
-  const { handleAuthState, setHistory, checkStars,
-    queryActivities, handleInbox, queryNoticeboard,
-    handleProfileData, handleAvailableSubs
-  } = methods;
+  const classes = useStyles();
+  const { state, setState, methods, hist } = useContext(GlobalState);
+  const { setProfileData, setNoticeboardQuery,
+    setAvailableSubs, setInbox } = setState;
 
-  const getSubData = () => {
-    handleAvailableSubs()
-    queryNoticeboard();
-    queryActivities();
-    handleInbox();
-  }
-  const getEmpData = () => {
-    handleAvailableSubs()
-    queryActivities();
-    handleInbox();
+  const resetState = (arr) => {
+    arr.map(setState => setState(false))
   }
 
   useEffect(() => {
-    handleAuthState();
-    // eslint-disable-next-line   
+    methods.handleAuthState()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
-    if (user !== null) {
-      handleProfileData(user.uid)
+    if (state.user === null) {
+      methods.handleModals('LoginForm', true);
+      resetState([
+        setProfileData, setNoticeboardQuery,
+        setAvailableSubs, setInbox
+      ])
+      return;
     }
+    methods.handleModals('LoginForm', false);
     // eslint-disable-next-line
-  }, [user])
+  }, [state.user])
 
   useEffect(() => {
-    if (profileData.type !== undefined) {
-      checkStars();
-      profileData.type === 'Substitute'
-        ? getSubData()
-        : getEmpData()
+    if (state.user !== false && state.user !== null) {
+      methods.handleProfileData();
+      methods.queryNoticeboard();
+      methods.queryAvailableSubs();
+      methods.handleInbox();
     }
     // eslint-disable-next-line
-  }, [profileData]);
-
+  }, [state.user])
   useEffect(() => {
-    setHistory(routerHistory);
-    // eslint-disable-next-line   
-  }, [routerHistory])
+    if (state.createUserProfile) {
+      hist.push('/newUser')
+    }
+    // eslint-disable-next-line
+  }, [state.createUserProfile]) 
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Loader />
-      {user === null ? <Login /> : <Home />}
+      <AppNavBar />
+      <div
+        className={classes.paper}>
+        <Switch>
+          {routes.map((route) =>
+            <Route key={route.path} path={route.path} component={route.component} />
+          )}
+        </Switch>
+      </div>
+      <Route path='/login' component={LoginForm} />
+      <Route path='/newUser' component={CreateNewUser} />
+
+      {!state.user || state.user === null ? <Redirect to='/login' /> : <Redirect to='/home/activities' />}
+
+      <ChangeAvatar />
+      <CreatePost />
+      <BlockedUsers />
+      <ChangeEmail />
+      <ChangePassword />
     </React.Fragment>
   );
 }
