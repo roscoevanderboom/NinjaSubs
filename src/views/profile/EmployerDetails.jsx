@@ -106,8 +106,7 @@ const DetailsCard = () => {
                             <FormGroup>
                                 <label htmlFor="email"> Email Address</label>
                                 <Input
-                                    id='email'
-                                    onFocus={(e) => console.log(e.currentTarget.validity)}
+                                    id='email'                                   
                                     onChange={handleData('email')}
                                     placeholder="Email"
                                     value={formData ? formData.email : ''}
@@ -131,12 +130,11 @@ const DetailsCard = () => {
                                 <label htmlFor="phone">Phone Number</label>
                                 <Input
                                     required
-                                    id='phone'
-                                    onFocus={(e) => console.log(e.currentTarget)}
+                                    id='phone'                                    
                                     onChange={handleData('phone')}
                                     placeholder="Add a Phone Number"
                                     value={formData ? formData.phone : ''}
-                                    type="tel" />
+                                    type="text" />
                             </FormGroup>
                         </Col>
                         <Col md="6">

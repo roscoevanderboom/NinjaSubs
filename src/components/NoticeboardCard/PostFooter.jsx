@@ -42,7 +42,7 @@ const PostFooter = ({ post }) => {
         });
     }
 
-    return (
+    return (state.profileData.type === 'Substitute' &&
         <CardFooter className='d-flex align-items-center bt-1'>
             <Col md='6' sm='12'>
                 <div className="stats text-dark">

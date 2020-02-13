@@ -1,15 +1,12 @@
 import React from "react";
 
-// reactstrap components
-import { CardBody, Col, Row } from "reactstrap";
-
 import {
     Chip, Collapse, Avatar, Button,
     ListItemIcon, ListItemText, ListItem
 } from '@material-ui/core';
 
 import {
-    EmojiPeople, AccountBox, ExpandLess, ExpandMore
+    EmojiPeople, ExpandLess, ExpandMore
 } from '@material-ui/icons';
 
 export default ({ candidates }) => {
@@ -17,7 +14,7 @@ export default ({ candidates }) => {
     const handleCollapse = () => {
         collapse ? setCollapse(false) : setCollapse(true)
     }
-    return (
+    return (candidates.length > 0 &&
         <React.Fragment>
             <ListItem className='p-0'>
                 <ListItemIcon>
