@@ -144,7 +144,7 @@ export const searchInbox = (inbox, profileData, chatee, history, setSelectedChat
         handleModals('CandidateDetails', false);
         return;
     }
-    if (!window.confirm(`Are you sure you want to chat to ${chatee.name}?`)) {
+    if (!window.confirm(`Are you sure you want to start a conversation with ${chatee.name}?`)) {
         return;
     }
     startChat(profileData, chatee, history, setSelectedChat)

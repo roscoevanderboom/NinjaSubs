@@ -50,7 +50,8 @@ export const GlobalStatePovider = (props) => {
     CreatePost: false,
     BlockedUsers: false,
     ChangeEmail: false,
-    ChangePassword: false
+    ChangePassword: false,
+    SubCard: false
   });
 
 
@@ -117,11 +118,11 @@ export const GlobalStatePovider = (props) => {
       setSearchList(currentList)
       return;
     }
-    if (currentList[0] !== undefined && currentList[0].user1 !== undefined) {     
+    if (currentList[0] !== undefined && currentList[0].user1 !== undefined) {
       setSearchList(currentList.filter(item =>
         item.user1.name.toLowerCase().includes(value.toLowerCase())
         || item.user2.name.toLowerCase().includes(value.toLowerCase())
-      ))      
+      ))
       return;
     }
     setSearchList(currentList.filter(item => item.name.toLowerCase().includes(value.toLowerCase())));
@@ -146,11 +147,13 @@ export const GlobalStatePovider = (props) => {
   };
 
   // Create provider
-  return (<GlobalState.Provider value={{
-    state, setState, methods, fb,
-    constants, filters, hist
-  }}>
-    {props.children}
-  </GlobalState.Provider>)
+  return (
+    <GlobalState.Provider
+      value={{
+        state, setState, methods, fb,
+        constants, filters, hist
+      }}>
+      {props.children}
+    </GlobalState.Provider>)
 }
 export default GlobalState

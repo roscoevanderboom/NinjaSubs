@@ -78,7 +78,7 @@ export default function App() {
       hist.push('/newUser')
     }
     // eslint-disable-next-line
-  }, [state.createUserProfile]) 
+  }, [state.createUserProfile])
 
   return (
     <React.Fragment>
@@ -97,11 +97,12 @@ export default function App() {
 
       {!state.user || state.user === null ? <Redirect to='/login' /> : <Redirect to='/home/activities' />}
 
+      {/* Modals and dialogs */}
       <ChangeAvatar />
       <CreatePost />
       <BlockedUsers />
       <ChangeEmail />
-      <ChangePassword />
+      <ChangePassword />      
     </React.Fragment>
   );
 }
