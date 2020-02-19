@@ -11,7 +11,10 @@ const headerLinksStyle = theme => ({
     listStyle: "none",
     paddingTop: "0",
     paddingBottom: "0",
-    color: "inherit"
+    color: "inherit",
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   listItem: {
     float: "left",

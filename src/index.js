@@ -1,27 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { GlobalStatePovider } from './state';
+import { SnackbarProvider } from 'notistack';
+
+import App from './App';
 
 import "assets/scss/material-kit-react.scss?v=1.8.0";
 import "bootstrap/dist/css/bootstrap.css";
 
-// pages for this product
-import Components from "views/Components/Components.js";
-import LandingPage from "views/LandingPage";
-import ProfilePage from "views/ProfilePage/ProfilePage.js";
-import LoginPage from "views/LoginPage/LoginPage.js";
-
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route path="/" exact component={LandingPage} />
-      <Route path="/profile-page" component={ProfilePage} />
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/components-page" component={Components} />
-    </Switch>
-  </Router>,
+  <SnackbarProvider
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    hideIconVariant={false}
+    autoHideDuration={5000}
+    maxSnack={3}>
+    <Router history={hist}>
+      <GlobalStatePovider>
+        <App />
+      </GlobalStatePovider>
+    </Router>
+  </SnackbarProvider>
+  ,
   document.getElementById("root")
 );

@@ -19,7 +19,6 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/team
 
 import team2 from "assets/img/faces/avatar.jpg";
 import team1 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -39,7 +38,7 @@ export default function TeamSection() {
         Meet our team
     </Typography>
 
-      <GridContainer>
+      <GridContainer justify='space-evenly'>
         <GridItem xs={12} sm={6} md={4}>
           <Card plain>
             <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>

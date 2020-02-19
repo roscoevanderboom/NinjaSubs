@@ -1,24 +1,21 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+// Store
+import store from '../../state';
+// Form validation
+import { validatePassword, handleErrors, validateRegister } from './validation'
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-import Checkbox from "@material-ui/core/Checkbox";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
-import Replay from "@material-ui/icons/Replay";
+
 // core components
-import Header from "components/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+
+// Form components
+import FormHeader from './FormHeader';
+import FormBody from './FormBody';
+import FormFooter from './FormFooter';
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -34,12 +31,14 @@ const initState = {
   terms: false
 }
 
-
-
 export default function LoginPage() {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const [data, setData] = React.useState(initState)
-  const [title, setTitle] = React.useState('Register')
+  const { fb, methods, hist } = useContext(store);
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+  const [data, setData] = useState(initState);
+  const [userNames, setUserNames] = useState([]);
+  const [title, setTitle] = useState('Register');
+  const [errors, setErrors] = useState([]);
+
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
@@ -48,172 +47,89 @@ export default function LoginPage() {
   const handleTitle = () => {
     title === "Login" ? setTitle('Register') : setTitle('Login');
   };
-
+  const resetData = () => {
+    setData(initState)
+  }
   const handleData = (key, value) => {
-    setData({ ...data, [key]: value })
+    setData({ ...data, [key]: value });
+    if (key === 'password' && title === 'Register') {
+      let validate = validatePassword(value);
+      if (validate.length > 0) {
+        handleErrors(validate, setErrors)
+        return;
+      }
+      setErrors([])
+    }
+  }
+  const register = () => {
+    if (!validateRegister(data, methods.feedback, setErrors)) {
+      return;
+    }
+    fb.auth.createUserWithEmailAndPassword(data.email, data.password)
+      .then((res) => {
+        resetData();
+        hist.push('/createProfile-page');
+      })
+      .catch(error => {
+        methods.feedback('error', error.message)
+      })
+  }
+  const login = () => {
+    fb.auth.signInWithEmailAndPassword(data.email, data.password)
+      .then(() => {
+        hist.push('/profile-page');
+      })
+      .catch(error => {
+        methods.feedback('error', error.message);
+      })
   }
   const handleSubmit = (e) => {
-    if (e.key === "Enter" || e.target.textContent === 'Submit') {
-      console.log(data);
-
+    if (e.key === "Enter" || e.target.textContent === 'Submit' || e.target.textContent === 'Sign In') {
+      title === 'Login'
+        ? login()
+        : register();
     }
   }
 
-  React.useEffect(() => {
-    console.log(data);
+  useEffect(() => {
+    fb.userNames.doc('activeUsers').onSnapshot(doc => {
+      setUserNames(doc.data().list);
+    }, function (error) {
+      console.log(error.message);
+    })
+  }, [])
 
-  }, [data])
+  useEffect(() => {    
+    if (userNames.includes(data.username)) {
+      methods.feedback('error', 'That username has already been used.');
+      setData({ ...data, username: '' })
+    }
+  }, [userNames, data.username])
 
   return (
-    <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="NinjaSubs"
-      />
-      <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
-        }}
-      >
-        <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
-              <Card className={classes[cardAnimaton]}>
-                <form onSubmit={handleSubmit} className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>{title}</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardBody>
-                    <CustomInput
-                      labelText="Username.."
-                      id="usernameS"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    {title === "Login" ? null :
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />}
+    <div
+      className={classes.pageHeader}
+      style={{
+        backgroundImage: "url(" + image + ")",
+        backgroundSize: "cover",
+        backgroundPosition: "top center"
+      }}
+    >
+      <div className={classes.container}>
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={4}>
+            <Card className={classes[cardAnimaton]}>
+              <form onKeyPress={handleSubmit} className={classes.form}>
 
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
-                    />
-                    {title === "Login" ? null :
-                      <CustomInput
-                        labelText="Repeat Password"
-                        id="repeat-pass"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Replay className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                          autoComplete: "off"
-                        }}
-                      />}
-                    {title === 'Login' ? null :
-                      <div className='row justify-content-center align-items-center'>
-                        <a href='https://www.termsandconditionsgenerator.com/live.php?token=cUjuC2S5w2vTipxpiAQVx56WBJZReus7'
-                          target='_blank' rel="noopener noreferrer">Terms and Conditions</a>
-                        <Checkbox
-                          color='primary'
-                          onChange={() => handleData('terms', data.terms ? false : true)}
-                          value='terms'
-                          checked={data.terms} />
-                      </div>
-                    }
-                  </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button round
-                      className={classes.btns}>
-                      {title === 'Login' ? 'Sign In' : 'Submit'}
-                    </Button>
-                    <Button round
-                      className={classes.btns}
-                      onClick={handleTitle}
-                      color="primary">
-                      {title === 'Login' ? 'Register' : 'Login'}
-                    </Button>
-                  </CardFooter>
-                </form>
-              </Card>
-            </GridItem>
-          </GridContainer>
-        </div>
-        <Footer whiteFont />
+                <FormHeader props={{ classes, title }} />
+
+                <FormBody props={{ classes, title, data, errors, handleData }} />
+
+                <FormFooter props={{ classes, title, handleSubmit, handleTitle }} />
+              </form>
+            </Card>
+          </GridItem>
+        </GridContainer>
       </div>
     </div>
   );

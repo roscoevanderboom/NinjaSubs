@@ -9,14 +9,13 @@ import {
   roseColor,
   transition,
   boxShadow,
-  drawerWidth,
-  primaryGradient
+  drawerWidth
 } from "assets/jss/material-kit-react.js";
 
-const headerStyle = {
+const headerStyle = theme => ({
   appBar: {
     display: "flex",
-    border: "0",    
+    border: "0",
     padding: "0.625rem 0",
     marginBottom: "20px",
     color: "#555",
@@ -41,7 +40,7 @@ const headerStyle = {
   },
   container: {
     ...container,
-    minHeight: "50px",
+    minHeight: 0,
     flex: "1",
     alignItems: "center",
     justifyContent: "space-between",
@@ -106,7 +105,7 @@ const headerStyle = {
   },
   transparent: {
     backgroundColor: "transparent !important",
-    boxShadow: "none",    
+    boxShadow: "none",
     color: "#FFFFFF"
   },
   dark: {
@@ -145,7 +144,42 @@ const headerStyle = {
     paddingRight: "0px",
     paddingLeft: "0",
     ...transition
+  },
+  navLink: {
+    color: "inherit",
+    position: "relative",
+    padding: "0.9375rem",
+    fontWeight: "400",
+    fontSize: "12px",
+    textTransform: "uppercase",
+    borderRadius: "3px",
+    lineHeight: "20px",
+    textDecoration: "none",
+    margin: "0px",
+    display: "inline-flex",
+    "&:hover,&:focus": {
+      color: "inherit",
+      background: "rgba(200, 200, 200, 0.2)"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "calc(100% - 30px)",
+      marginLeft: "15px",
+      marginBottom: "8px",
+      marginTop: "8px",
+      textAlign: "left",
+      "& > span:first-child": {
+        justifyContent: "flex-start"
+      }
+    }    
+  },
+  dropdownLink: {
+    "&,&:hover,&:focus": {
+      color: "inherit",
+      textDecoration: "none",
+      display: "block",
+      padding: "10px 20px"
+    }
   }
-};
+});
 
 export default headerStyle;

@@ -1,11 +1,11 @@
-import { container, primaryGradient, secondaryGradient } from "assets/jss/material-kit-react.js";
+import { container, primaryGradient, secondaryGradient, title } from "assets/jss/material-kit-react.js";
 
 const signupPageStyle = {
   container: {
     ...container,
     zIndex: "2",
     position: "relative",
-    paddingTop: "20vh",
+    paddingTop: "10vh",
     color: "#FFFFFF"
   },
   cardHidden: {
@@ -89,6 +89,10 @@ const signupPageStyle = {
   btns: {
     color: "white",
     ...secondaryGradient
+  },
+  title: {
+    ...title,
+    color: 'white',
   }
 };
 
