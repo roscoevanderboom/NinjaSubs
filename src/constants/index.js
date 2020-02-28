@@ -48,9 +48,7 @@ export const add_if_not_included = (array, val) => {
     return array;
 }
 export const remove_from_array = (array, value_to_remove) => {
-    let newArray = array;
-    newArray.splice(newArray.indexOf(value_to_remove), 1);
-    return newArray
+    return array.filter(element => element !== value_to_remove)
 }
 export const mapFromNumber = (num) => {
     let arr = [];
@@ -60,38 +58,32 @@ export const mapFromNumber = (num) => {
     return arr
 }
 // Create data objects for account settings
-export const newPost = (profileData) => {
-    const { contact, name, uid, image, location, address, phone } = profileData;
-    return {
-        comments: '',
-        start: '',
-        end: '',
-        rates: '',
-        name: name,
-        contact: contact,
-        location: location,
-        address: address,
-        phone: phone,
-        neg: false,
-        uid: uid,
-        ref: Math.floor(Math.random() * 10000),
-        candidates: [],
-        candidates_uid: [],
-        image: image,
-        type: 'Part-time'
-    }
-}
-export const newJobApplicationData = (profileData) => {
-    const { name, bio, image, history, rating, uid } = profileData;
-    return {
-        name: name,
-        bio: bio,
-        image: image,
-        history: history,
-        rating: rating,
-        uid: uid
-    }
-}
+export const newPost = ({ contact, name, uid, image, location, address, phone }) => ({
+    comments: '',
+    start: '',
+    end: '',
+    rates: '',
+    name,
+    contact,
+    location,
+    address,
+    phone,
+    neg: false,
+    uid,
+    ref: Math.floor(Math.random() * 10000),
+    candidates: [],
+    candidates_uid: [],
+    image,
+    type: 'Part-time'
+})
+export const newJobApplicationData = ({ name, bio, image, history, rating, uid }) => ({
+    name,
+    bio,
+    image,
+    history,
+    rating,
+    uid
+})
 export const newChat = (profileData, chatee) => ({
     participants: [profileData.uid, chatee.uid],
     user1_Name: profileData.name,
@@ -123,7 +115,7 @@ export const chatPost = (profileData, newPost) => ({
     time: new Date(),
     read: false
 })
-export const newUser = (user) => ({    
+export const newUser = user => ({    
     image: noUserImage,       
     rating: [],
     blackList: [],
@@ -148,39 +140,24 @@ export const newEmployerData = {
     phone: '',
     posts: []
 }
-export const newSubBoardListing = (profileData) => ({
-    uid: profileData.uid,
-    rating: profileData.rating,
-    name: profileData.name,
-    image: profileData.image,
-    bio: profileData.bio,
+export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, available }) => ({
+    uid,
+    rating,
+    name,
+    image,
+    bio,
     likes: [],
-    locations: profileData.locations,
-    available: profileData.available ? false : true
+    locations,
+    available: !available
 })
 
 // General
-export const isEven = (value) => {
-    if (value % 2 == 0)
-        return true;
-    else
-        return false;
-}
-export const isNewPostAllowed = (array, profileData) => {
-    let activePosts = array.filter(post => post.uid === profileData.uid);
-    if (activePosts.length > 3) {
-        return false;
-    }
-    return true
-}
-export const isArrayEqual = (array1, array2) => {
-    if (array1.length === array2.length
-        && array1.every(x => array2.includes(x))) {
-        return true
-    }
-    return false
-}
-
+export const isEven = value => value % 2 === 0
+export const isNewPostAllowed = (array, profileData) => 
+    !(array.filter(post => post.uid === profileData.uid).length > 3)
+export const isArrayEqual = (array1, array2) => 
+    array1.length === array2.length &&
+    array1.every(x => array2.includes(x))
 
 // TODO checks for mobile devices
 export const mobileSpecs = /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
