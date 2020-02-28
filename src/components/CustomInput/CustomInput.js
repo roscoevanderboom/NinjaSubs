@@ -21,6 +21,7 @@ export default function CustomInput(props) {
     id,
     labelProps,
     inputProps,
+    placeholder,
     error,
     white,
     inputRootCustomClasses,
@@ -59,8 +60,7 @@ export default function CustomInput(props) {
         <InputLabel
           className={classes.labelRoot + " " + labelClasses}
           htmlFor={id}
-          {...labelProps}
-        >
+          {...labelProps} >
           {labelText}
         </InputLabel>
       ) : null}
@@ -72,6 +72,7 @@ export default function CustomInput(props) {
           underline: underlineClasses
         }}
         id={id}
+        placeholder={placeholder}
         {...inputProps}
       />
     </FormControl>

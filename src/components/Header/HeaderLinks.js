@@ -14,39 +14,46 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 // styles
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import FormBody from "views/LoginPage/FormBody";
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+export default function HeaderLinks() {
   const classes = useStyles();
-  const { fb } = useContext(store);
+  const { hist, fb } = useContext(store);
 
   const handleSignOut = () => {
-    if (window.confirm('Are you sure you want to leave?')) {
-      fb.auth.signOut()
-    }
+    fb.handleSignOut(hist)
   }
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Components"
+          buttonText="Menu"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
           }}
           buttonIcon={Apps}
           dropdownList={[
-            <Link to="/components-page" className={classes.dropdownLink}>
-              All components
+            <Link to="/noticeboard" className={classes.dropdownLink}>
+              Noticeboard
             </Link>,
-            <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
-              target="_blank"
-              className={classes.dropdownLink}
-            >
-              Documentation
-            </a>
+            <Link to="/availableSubs" className={classes.dropdownLink}>
+              Available subs
+            </Link>,
+            <Link to="/activities" className={classes.dropdownLink}>
+              Activities
+            </Link>,
+            <Link to="/contacts" className={classes.dropdownLink}>
+              Inbox
+            </Link>,
+            <Link to="/profile-page" className={classes.dropdownLink}>
+              Profile
+            </Link>,
+            <Link to="/settings" className={classes.dropdownLink}>
+              Settings
+            </Link>,
           ]}
         />
       </ListItem>

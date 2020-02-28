@@ -1,0 +1,48 @@
+import React, { useContext, useEffect, useState } from "react";
+// Store
+import store from 'state';
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+// Custom components
+import Card from 'components/AvailableSubcard/SubCard';
+// core components
+import Header from "components/Header/Header.js";
+// Menu Links
+import HeaderLinks from "components/Header/HeaderLinks.js";
+// Styles
+import { body, bodyContainer } from "assets/jss/material-kit-react";
+const useStyles = makeStyles({
+  body:{
+    ...body
+  }
+});
+
+export default () => {
+  const { state, filters, setState } = useContext(store);
+  const { profileData, availableSubs, searchList } = state;
+  const classes = useStyles();
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    if (profileData && availableSubs) {
+      setList(filters.filterAvailableSubs(availableSubs, profileData));
+    }
+    // eslint-disable-next-line     
+}, [availableSubs, profileData])
+
+  return (
+    <div>
+      <Header
+        brand="NinjaSubs"
+        rightLinks={<HeaderLinks />}
+        fixed
+        color="dark"
+      />
+      <div className={classes.body}>
+        <div className={bodyContainer}>
+          {list.map((sub, i) => <Card key={i} sub={sub} />)}
+        </div>
+      </div>
+    </div>
+  );
+}

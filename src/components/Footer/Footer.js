@@ -20,14 +20,14 @@ export default function Footer(props) {
   const { whiteFont } = props;
   const footerClasses = classNames({
     [classes.footer]: true,
-    [classes.footerWhiteFont]: whiteFont
+    [classes.footerWhiteFont]: whiteFont    
   });
   const aClasses = classNames({
     [classes.a]: true,
     [classes.footerWhiteFont]: whiteFont
   });
   return (
-    <footer className={footerClasses}>
+    <footer className={footerClasses + 'fixed-bottom'}>
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>

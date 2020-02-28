@@ -35,7 +35,7 @@ export default function ProductSection() {
               title="Private Chat"
               description="Chat messages are protected by strict security rules created for Google Firebase Cloud Firestore"
               icon={Chat}
-              iconColor="info"
+              iconColor="primary"
               vertical
             />
           </GridItem>
@@ -45,7 +45,7 @@ export default function ProductSection() {
               description="Only verified users can create content. Email verification will be sent to a new user within a  minute
                ( connetion depending ) after registering."
               icon={VerifiedUser}
-              iconColor="success"
+              iconColor="danger"
               vertical
             />
           </GridItem>
@@ -54,7 +54,7 @@ export default function ProductSection() {
               title="Content Filters"
               description="Both employers and subtitutes can filter noticeboards and personal activities lists in custom ways."
               icon={Fingerprint}
-              iconColor="danger"
+              iconColor="warning"
               vertical
             />
           </GridItem>

@@ -20,7 +20,7 @@ const headerLinksStyle = theme => ({
     float: "left",
     color: "inherit",
     position: "relative",
-    display: "block",
+    display: "flex",
     width: "auto",
     margin: "0",
     padding: "0",
@@ -42,7 +42,6 @@ const headerLinksStyle = theme => ({
   navLink: {
     color: "inherit",
     position: "relative",
-    padding: "0.9375rem",
     fontWeight: "400",
     fontSize: "12px",
     textTransform: "uppercase",

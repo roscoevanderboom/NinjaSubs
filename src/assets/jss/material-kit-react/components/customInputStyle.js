@@ -47,7 +47,8 @@ const customInputStyle = {
     letterSpacing: "unset",
     "& + $underline": {
       marginTop: "0px"
-    }
+    },
+    marginBottom: 3
   },
   labelRootError: {
     color: dangerColor + " !important"

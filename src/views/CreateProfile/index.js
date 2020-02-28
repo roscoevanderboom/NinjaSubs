@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
 // State
 import store from 'state';
 // @material-ui/core components
@@ -58,28 +57,25 @@ const useStyles = makeStyles({
 
 export default function CreateProfile() {
     const classes = useStyles();
-    const { state, methods, fb } = useContext(store);
-
+    const { state, methods, fb, constants, hist } = useContext(store);
 
     const createNewUserProfile = userPath => () => {
-        console.log(userPath);
+        let data = constants.newUser(state.user);
+        userPath === "substitute"
+            ? data = { ...data, ...constants.newSubData }
+            : data = { ...data, ...constants.newEmployerData };
+            console.log();
+            
 
-        // let data = newUser(user);
-        // sub
-        //     ? data = { ...data, ...newSubData }
-        //     : data = { ...data, ...newEmployerData };
-
-        // if (user.uid !== undefined) {
-        //     fb.users.doc(user.uid).set({ ...data })
-        //         .then(() => {                   
-        //             setCreateUserProfile(false);
-        //             hist.push('/home/userProfile')
-        //         })
-        //         .catch(err => {
-        //             feedback('error', err.message)
-        //         });
-        //     return;
-        // }
+        if (state.user.uid !== undefined) {
+            fb.users.doc(state.user.uid).update({ ...data })
+                .then(() => {
+                    hist.push('/profile-page')
+                })
+                .catch(err => {
+                    methods.feedback('error', err.message)
+                });
+        }
     }
 
     return (
@@ -102,7 +98,7 @@ export default function CreateProfile() {
                         variant='subtitle1'
                         className='p-2'
                         align='center'>
-                       or
+                        or
                     </Typography>
 
                     <Button

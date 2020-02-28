@@ -34,11 +34,7 @@ const containerFluid = {
 const container = {
   ...containerFluid,
   "@media (max-width: 570px)": {
-    maxWidth: "560px",
-    paddingRight: 0,
-    paddingLeft: 0,
-    marginRight: 0,
-    marginLeft: 0,
+    maxWidth: "560px"
   },
   "@media (min-width: 576px)": {
     maxWidth: "540px"
@@ -69,6 +65,19 @@ const card = {
   color: "rgba(0, 0, 0, 0.87)",
   background: "#fff"
 };
+
+const body = {
+  minHeight: '100vh',
+  width: '100%',
+  backgroundColor: 'slategrey',
+  margin: '56px 0px 0px 0px',
+  padding: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+};
+
+const bodyContainer = 'd-flex flex-column align-items-center col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5';
 
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -193,6 +202,7 @@ const secondaryGradient = {
   background: 'linear-gradient(90deg, #d53369 0%, #daae51 100%)'
 }
 
+
 export {
   //variables
   drawerWidth,
@@ -201,6 +211,8 @@ export {
   containerFluid,
   boxShadow,
   card,
+  body,
+  bodyContainer,
   defaultFont,
   primaryColor,
   warningColor,

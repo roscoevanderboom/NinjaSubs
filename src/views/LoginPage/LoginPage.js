@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 // Store
-import store from '../../state';
+import store from 'state';
 // Form validation
 import { validatePassword, handleErrors, validateRegister } from './validation'
 
@@ -35,7 +35,6 @@ export default function LoginPage() {
   const { fb, methods, hist } = useContext(store);
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [data, setData] = useState(initState);
-  const [userNames, setUserNames] = useState([]);
   const [title, setTitle] = useState('Register');
   const [errors, setErrors] = useState([]);
 
@@ -49,7 +48,7 @@ export default function LoginPage() {
   };
   const resetData = () => {
     setData(initState)
-  }
+  };
   const handleData = (key, value) => {
     setData({ ...data, [key]: value });
     if (key === 'password' && title === 'Register') {
@@ -60,51 +59,46 @@ export default function LoginPage() {
       }
       setErrors([])
     }
-  }
+  };
   const register = () => {
     if (!validateRegister(data, methods.feedback, setErrors)) {
       return;
     }
     fb.auth.createUserWithEmailAndPassword(data.email, data.password)
-      .then((res) => {
+      .then(res => {
+        fb.users.doc(res.user.uid).set({
+          name: data.username,
+          email: res.user.email,
+          uid: res.user.uid
+        });
         resetData();
+      })
+      .then(() => {
         hist.push('/createProfile-page');
       })
       .catch(error => {
         methods.feedback('error', error.message)
       })
-  }
+  };
   const login = () => {
     fb.auth.signInWithEmailAndPassword(data.email, data.password)
+      .then(() => {
+        resetData();
+      })
       .then(() => {
         hist.push('/profile-page');
       })
       .catch(error => {
         methods.feedback('error', error.message);
       })
-  }
+  };
   const handleSubmit = (e) => {
     if (e.key === "Enter" || e.target.textContent === 'Submit' || e.target.textContent === 'Sign In') {
       title === 'Login'
         ? login()
         : register();
     }
-  }
-
-  useEffect(() => {
-    fb.userNames.doc('activeUsers').onSnapshot(doc => {
-      setUserNames(doc.data().list);
-    }, function (error) {
-      console.log(error.message);
-    })
-  }, [])
-
-  useEffect(() => {    
-    if (userNames.includes(data.username)) {
-      methods.feedback('error', 'That username has already been used.');
-      setData({ ...data, username: '' })
-    }
-  }, [userNames, data.username])
+  };
 
   return (
     <div

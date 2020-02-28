@@ -21,7 +21,7 @@ export const GlobalStatePovider = (props) => {
 
   // Hanndle Auth / new user state
   const [loading, setLoading] = useState(true);
-  const [logged, setLogged] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [createUserProfile, setCreateUserProfile] = useState(false);
 
   // Get auth user data / firestore profileData
@@ -44,10 +44,12 @@ export const GlobalStatePovider = (props) => {
   const [selectedChat, setSelectedChat] = useState(false);
 
   // Modals
-  const [modals, setModals] = useState({
-    LoginForm: false,
+  const [modals, setModals] = useState({   
     ChangeAvatar: false,
-    CreatePost: false,
+    JobPostModal: false,
+    BlockedUsers: false,
+    ChangeEmail: false,
+    ChangePassword: false,
     BlockedUsers: false,
     ChangeEmail: false,
     ChangePassword: false
@@ -82,10 +84,10 @@ export const GlobalStatePovider = (props) => {
 
   // Functions for gathering user data
   const handleAuthState = () => {
-    fb.handleAuthState(setUser, setLoading, setLogged)
+    fb.handleAuthState(setUser, setLoading, setLoggedIn)
   };
   const handleProfileData = () => {
-    fb.handleProfileData(user.uid, setProfileData, setLoading, setCreateUserProfile);
+    fb.handleProfileData(user.uid, setProfileData, setLoading, hist);
   };
   const updateProfileData = (data) => {
     return new Promise((resolve, reject) => {
@@ -110,9 +112,9 @@ export const GlobalStatePovider = (props) => {
     fb.deleteUser(user, profileData, feedback);
   };
   const searchInbox = (chatee) => {
-    if (!isUserVerfied()) {
-      return;
-    }
+    // if (!isUserVerfied()) {
+    //   return;
+    // }
     fb.searchInbox(inbox, profileData, chatee, hist, setSelectedChat, handleModals);
   }
   const deleteChatroom = (id) => {
@@ -136,12 +138,12 @@ export const GlobalStatePovider = (props) => {
   }
 
   const state = {
-    loading, logged, user, modals, profileData, noticeboardQuery,
+    loading, loggedIn, user, modals, profileData, noticeboardQuery,
     availableSubs, inbox, createUserProfile, post_to_edit, selectedChat,
     searchList, currentList
   };
   const setState = {
-    setLoading, setLogged, setUser, setCreateUserProfile,
+    setLoading, setLoggedIn, setUser, setCreateUserProfile,
     setProfileData, setAvailableSubs, setNoticeboardQuery,
     setInbox, set_post_to_edit, setSelectedChat,
     setSearchList, setCurrentList

@@ -12,6 +12,22 @@ export const Taipei = [
     'Neihu', 'Shilin', 'Songshan', 'Wanhua',
     'Wenshen', 'Xinyi', 'Zhongshan', 'Zhongzheng'
 ];
+export const newTaipei = [
+    'Banqiao', `Xinzhuang`, 'Zhonghe', 'Yonghe',
+    'Tucheng', 'Shulin', 'Sanxia', 'Yingge',
+    'Sanchong', 'Luzhou', 'Wugu', 'Taishan',
+    'Linkou', 'Bali', 'Tamsui', 'Sanzhi',
+    'Shimen', 'Jinshan', 'Wanli', 'Xizhi',
+    'Ruifang', 'Gongliao', 'Pingxi', 'Shuangxi', 
+    'Xindian', 'Shenkeng', 'Shiding', 'Pinglin',
+    'Wulai'
+];
+export const Taoyuan = [
+    'Taoyuan', `Zhongli`, 'Daxi', 'Yangmei',
+    'Luzhu', 'Dayuan', 'Guishan', 'Bade',
+    'Longtan', 'Pingzhen', 'Xinwu', 'Guanyin',
+    'Fuxing'
+];
 
 export const creativeCommons = {
     href: "http://creativecommons.org/licenses/by/4.0/",
@@ -107,22 +123,20 @@ export const chatPost = (profileData, newPost) => ({
     time: new Date(),
     read: false
 })
-export const newUser = (user) => ({
-    name: user.displayName,
-    image: noUserImage,
-    uid: user.uid,
-    email: user.email,
+export const newUser = (user) => ({    
+    image: noUserImage,       
     rating: [],
     blackList: [],
-    emailSent: user.emailVerified ? true : false
+    emailSent: false,
+    verified: user.emailVerified
 })
 export const newSubData = {
     type: 'Substitute',
     history: [],
     available: false,
     bio: '',
-    resume: '',
-    lessonPlan: '',
+    cv: '',
+    lessonPlans: [],
     locations: [],
     ignoreList: [],
 }
@@ -131,7 +145,8 @@ export const newEmployerData = {
     contact: '',
     location: '',
     address: '',
-    phone: ''
+    phone: '',
+    posts: []
 }
 export const newSubBoardListing = (profileData) => ({
     uid: profileData.uid,
