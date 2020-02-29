@@ -43,7 +43,7 @@ export default () => {
     }
 
     useEffect(() => {
-        if (profileData && availableSubs) {
+        if (profileData.blackList !== undefined && availableSubs) {
             setList(filters.filterBlockedUsers(availableSubs, profileData));
         }
         // eslint-disable-next-line

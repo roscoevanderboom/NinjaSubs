@@ -37,20 +37,18 @@ export default ({ props }) => {
         fb.auth.signInWithPopup(provider).then(function (result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
-            console.log(token);
             // The signed-in user info.
             var user = result.user;
-            console.log(user);
-            let data = constants.newUser(user);
-            data = {
-                ...data,
+
+            let data = {
                 name: user.displayName,
                 email: user.email,
                 uid: user.uid
             }
-            title === 'Register'
-                ? fb.createProfileData(user, data)
-                : hist.push('profile-page');
+            fb.users.doc(user.uid).update(data)
+                .catch((err) => {
+                    fb.createProfileData(user, data)
+                })
 
         }).catch(function (error) {
             // Handle Errors here.

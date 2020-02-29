@@ -63,19 +63,15 @@ export default function LoginPage() {
   const register = () => {
     if (!validateRegister(data, methods.feedback, setErrors)) {
       return;
-    }
+    }    
     fb.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then(res => {
-        let data = {
+        let newUserData = {
           name: data.username,
           email: res.user.email,
           uid: res.user.uid
-        }
-        fb.createProfileData(res.user, data);       
-        resetData();
-      })
-      .then(() => {
-        hist.push('/createProfile-page');
+        };        
+        fb.createProfileData(res.user, newUserData);
       })
       .catch(error => {
         methods.feedback('error', error.message)

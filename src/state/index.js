@@ -94,7 +94,7 @@ export const GlobalStatePovider = (props) => {
   };
   const updateProfileData = (data) => {
     return new Promise((resolve, reject) => {
-      fb.updateProfileData(user, profileData, data)
+      fb.updateProfileData(user, data)
         .then(() => { resolve(true) })
         .catch((err) => { reject(err.message) })
     })

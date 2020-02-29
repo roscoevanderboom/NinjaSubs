@@ -61,8 +61,8 @@ export const handleProfileData = (uid, setProfileData, setLoading, hist) => {
         setLoading(false);
     });
 };
-export const updateProfileData = (user, profileData, data) => {
-    if (user === null || !profileData) {
+export const updateProfileData = (user, data) => {
+    if (user === null) {
         console.log('fail')
         return;
     }
