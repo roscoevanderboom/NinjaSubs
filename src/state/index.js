@@ -10,6 +10,7 @@ import * as filters from '../constants/filters';
 // Components
 import { createFeedback } from '../components/Feedback/index';
 
+
 const GlobalState = createContext();
 export const GlobalStatePovider = (props) => {
   // *******************************************************

@@ -66,11 +66,12 @@ export default function LoginPage() {
     }
     fb.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then(res => {
-        fb.users.doc(res.user.uid).set({
+        let data = {
           name: data.username,
           email: res.user.email,
           uid: res.user.uid
-        });
+        }
+        fb.createProfileData(res.user, data);       
         resetData();
       })
       .then(() => {

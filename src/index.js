@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import { Router } from "react-router-dom";
 import { GlobalStatePovider } from './state';
 import { SnackbarProvider } from 'notistack';
+import * as serviceWorker from './serviceWorker';
 
 import App from './App';
 
@@ -30,3 +31,5 @@ ReactDOM.render(
   ,
   document.getElementById("root")
 );
+
+serviceWorker.unregister();

@@ -63,9 +63,7 @@ export default function CreateProfile() {
         let data = constants.newUser(state.user);
         userPath === "substitute"
             ? data = { ...data, ...constants.newSubData }
-            : data = { ...data, ...constants.newEmployerData };
-            console.log();
-            
+            : data = { ...data, ...constants.newEmployerData };  
 
         if (state.user.uid !== undefined) {
             fb.users.doc(state.user.uid).update({ ...data })

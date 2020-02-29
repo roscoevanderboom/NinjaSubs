@@ -19,6 +19,11 @@ import Chatroom from 'views/Inbox/ChatArea';
 import Modals from 'views/Modals';
 import Notifications from 'views/Notifications';
 
+// Get notification permission from user
+Notification.requestPermission(function (status) {
+    console.log('Notification permission status:', status);
+});
+
 export default function App() {
     const { state, methods } = useContext(GlobalState);
 
@@ -51,7 +56,7 @@ export default function App() {
                 <Route path="/contacts" component={Inbox} />
                 <Route path="/settings" component={Settings} />
                 <Route path="/chatroom" component={Chatroom} />
-            </Switch>          
+            </Switch>
             {!state.loggedIn ? <Redirect to="/" /> : null}
             <Modals />
             <Notifications />

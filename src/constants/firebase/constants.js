@@ -16,7 +16,7 @@ export const privateChats = db.collection('chats');
 // export const messaging = Firebase.messaging();
 
 // // OAuth providers
-// export const googleOAuth = Firebase.auth().GoogleAuthProvider();
+// export const googleOAuth = new Firebase.auth.GoogleAuthProvider();
 
 // File Storage
 export const storage = Firebase.storage();

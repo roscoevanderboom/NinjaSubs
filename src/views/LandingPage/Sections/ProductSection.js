@@ -52,7 +52,9 @@ export default function ProductSection() {
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Content Filters"
-              description="Both employers and subtitutes can filter noticeboards and personal activities lists in custom ways."
+              description="As an employer, you only view substitutes that are currently available in your district. As a substitute, 
+              you only view job posts for the districts that you have tagged yourself in. This way, NinjaSubs helps to show you only the content
+              that is relevant to you."
               icon={Fingerprint}
               iconColor="warning"
               vertical
