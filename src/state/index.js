@@ -55,6 +55,8 @@ export const GlobalStatePovider = (props) => {
     ChangePassword: false
   });
 
+  // Notifications
+  const [notificationList, setNotificationList] = useState([]);
 
   // *******************************************************
   // ******************** Methods **************************
@@ -137,22 +139,36 @@ export const GlobalStatePovider = (props) => {
     setSearchList(currentList.filter(item => item.name.toLowerCase().includes(value.toLowerCase())));
   }
 
+  // handle notifications
+  const addNotification = ({ message, color, close, icon}) => {
+    setNotificationList([
+      ...notificationList,
+      {
+        id: notificationList.length,
+        message,
+        color,
+        close,
+        icon
+      }
+    ])
+  }
+
   const state = {
     loading, loggedIn, user, modals, profileData, noticeboardQuery,
     availableSubs, inbox, createUserProfile, post_to_edit, selectedChat,
-    searchList, currentList
+    searchList, currentList, notificationList
   };
   const setState = {
     setLoading, setLoggedIn, setUser, setCreateUserProfile,
     setProfileData, setAvailableSubs, setNoticeboardQuery,
     setInbox, set_post_to_edit, setSelectedChat,
-    setSearchList, setCurrentList
+    setSearchList, setCurrentList, setNotificationList
   };
   const methods = {
     feedback, handleModals, handleAuthState, handleProfileData,
     queryNoticeboard, queryAvailableSubs, handleInbox,
     updateProfileData, deleteUser, searchInbox, deleteChatroom,
-    search, isUserVerfied
+    search, isUserVerfied, addNotification
   };
 
   // Create provider

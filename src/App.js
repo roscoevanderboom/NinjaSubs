@@ -17,6 +17,7 @@ import Settings from 'views/Settings';
 import Chatroom from 'views/Inbox/ChatArea';
 // Modals
 import Modals from 'views/Modals';
+import Notifications from 'views/Notifications';
 
 export default function App() {
     const { state, methods } = useContext(GlobalState);
@@ -53,6 +54,7 @@ export default function App() {
             </Switch>          
             {!state.loggedIn ? <Redirect to="/" /> : null}
             <Modals />
+            <Notifications />
         </React.Fragment>
 
     )
