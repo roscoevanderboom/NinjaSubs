@@ -19,13 +19,13 @@ const useStyles = makeStyles(styles);
 export default function ProductSection() {
   const classes = useStyles();
 
-  const Firebase_A = () => (
+  const FirebaseAnchor = () => (
     <Anchor text='Firebase' href='https://firebase.google.com/' />
   )
-  const MaterialUI_A = () => (
+  const MaterialUIAnchor = () => (
     <Anchor text='MaterialUI' href='https://material-ui.com/' />
   )
-  const CreativeTim_A = () => (
+  const CreativeTimAnchor = () => (
     <Anchor text='CreativeTim' href='https://www.creative-tim.com/' />
   )
   return (
@@ -78,8 +78,8 @@ export default function ProductSection() {
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>Always free</h2>
           <h6 className={classes.description}>
-            Since Google offers their database service, <Firebase_A /> for free, and all of the design elements are also free,
-            thanks to <MaterialUI_A /> and <CreativeTim_A />, NinjaSubs will always be a free service without any advertising. 
+            Since Google offers their database service, <FirebaseAnchor /> for free, and all of the design elements are also free,
+            thanks to <MaterialUIAnchor /> and <CreativeTimAnchor />, NinjaSubs will always be a free service without any advertising. 
           </h6>
           <br />          
         </GridItem>

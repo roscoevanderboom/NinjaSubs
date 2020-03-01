@@ -31,25 +31,25 @@ export default function TeamSection() {
     classes.imgFluid
   );
 
-  const React_A = () => (
+  const ReactAnchor = () => (
     <Anchor text='React' href='https://reactjs.org/' />
   )
-  const MaterialUI_A = () => (
+  const MaterialUIAnchor = () => (
     <Anchor text='MaterialUI' href='https://material-ui.com/' />
   )
-  const Multichain_A = () => (
+  const MultichainAnchor = () => (
     <Anchor text='Multichain' href='https://www.multichain.com/' />
   )
-  const Firebase_A = () => (
+  const FirebaseAnchor = () => (
     <Anchor text='Firebase' href='https://firebase.google.com/' />
   )
-  const Electron_A = () => (
+  const ElectronAnchor = () => (
     <Anchor text='Electron' href='https://www.electronjs.org/' />
   )
-  const IPFS_A = () => (
+  const IPFSAnchor = () => (
     <Anchor text='IPFS' href='https://ipfs.io/' />
   )
-  const DAT_A = () => (
+  const DATAnchor = () => (
     <Anchor text='DAT' href='https://dat.foundation/' />
   )
   return (
@@ -74,9 +74,9 @@ export default function TeamSection() {
             </h4>
             <CardBody>
               <p className={classes.description}>
-                Based in South Africa, I develop web apps with <React_A />, <Firebase_A /> and <MaterialUI_A />. I also
-                develop desktop apps using <Electron_A />, <React_A /> and <Multichain_A />. I am very passionate about decentralized
-                technologies such as blockchain, <IPFS_A /> and <DAT_A />. My dream is to be a digital nomad and educate people
+                Based in South Africa, I develop web apps with <ReactAnchor />, <FirebaseAnchor /> and <MaterialUIAnchor />. I also
+                develop desktop apps using <ElectronAnchor />, <ReactAnchor /> and <MultichainAnchor />. I am very passionate about decentralized
+                technologies such as blockchain, <IPFSAnchor /> and <DATAnchor />. My dream is to be a digital nomad and educate people
                 in remote coommunities about the internet and the joys of coding.
               </p>
             </CardBody>

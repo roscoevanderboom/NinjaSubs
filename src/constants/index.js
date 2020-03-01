@@ -18,7 +18,7 @@ export const newTaipei = [
     'Sanchong', 'Luzhou', 'Wugu', 'Taishan',
     'Linkou', 'Bali', 'Tamsui', 'Sanzhi',
     'Shimen', 'Jinshan', 'Wanli', 'Xizhi',
-    'Ruifang', 'Gongliao', 'Pingxi', 'Shuangxi', 
+    'Ruifang', 'Gongliao', 'Pingxi', 'Shuangxi',
     'Xindian', 'Shenkeng', 'Shiding', 'Pinglin',
     'Wulai'
 ];
@@ -104,7 +104,7 @@ export const newChatRoom = (profileData, chatee) => ({
         uid: chatee.uid,
         name: chatee.name,
         image: chatee.image,
-    },   
+    },
     messages: [],
     room_id: Math.floor(Math.random() * 10000)
 })
@@ -115,11 +115,11 @@ export const chatPost = (profileData, newPost) => ({
     time: new Date(),
     read: false
 })
-export const newUser = user => ({    
-    image: noUserImage,       
+export const newUser = user => ({
+    image: user.photoURL === null ? noUserImage : user.photoURL,
     rating: [],
     blackList: [],
-    emailSent: false,
+    emailSent: user.emailVerified ? true : false,
     verified: user.emailVerified
 })
 export const newSubData = {
@@ -153,9 +153,9 @@ export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, a
 
 // General
 export const isEven = value => value % 2 === 0
-export const isNewPostAllowed = (array, profileData) => 
+export const isNewPostAllowed = (array, profileData) =>
     !(array.filter(post => post.uid === profileData.uid).length > 3)
-export const isArrayEqual = (array1, array2) => 
+export const isArrayEqual = (array1, array2) =>
     array1.length === array2.length &&
     array1.every(x => array2.includes(x))
 

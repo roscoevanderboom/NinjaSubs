@@ -18,7 +18,8 @@ export default ({ props }) => {
 
             // The signed-in user info.
             var user = result.user;
-
+            console.log(user);
+            
             let data = {
                 name: user.displayName,
                 email: user.email,
@@ -48,6 +49,10 @@ export default ({ props }) => {
         var provider = new firebase_.auth.GoogleAuthProvider();
         popUp(provider);
     };
+    const facebookSignIn = () => {
+        var provider = new firebase_.auth.FacebookAuthProvider();
+        popUp(provider);
+    };
 
     return (
         <CardHeader color="primary" className={classes.cardHeader}>
@@ -58,6 +63,12 @@ export default ({ props }) => {
                     color="transparent"
                     onClick={googleSignIn} >
                     <i className={"fab fa-google"} />
+                </Button>
+                <Button
+                    justIcon
+                    color="transparent"
+                    onClick={facebookSignIn} >
+                    <i className={"fab fa-facebook"} />
                 </Button>
             </div>
         </CardHeader>
