@@ -14,13 +14,13 @@ import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-
+import Anchor from 'components/Anchors';
+// Team images
+import asriel from "assets/img/faces/asriel.jpg";
+import roscoe from "assets/img/faces/roscoevanderboom.jpg";
+import bethany from "assets/img/faces/bethanyLin.jpg";
+// Styles
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
-
-import asriel from "assets/img/faces/marc.jpg";
-import roscoe from "assets/img/faces/christian.jpg";
-import bethany from "assets/img/faces/kendall.jpg";
-
 const useStyles = makeStyles(styles);
 
 export default function TeamSection() {
@@ -30,6 +30,28 @@ export default function TeamSection() {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+
+  const React_A = () => (
+    <Anchor text='React' href='https://reactjs.org/' />
+  )
+  const MaterialUI_A = () => (
+    <Anchor text='MaterialUI' href='https://material-ui.com/' />
+  )
+  const Multichain_A = () => (
+    <Anchor text='Multichain' href='https://www.multichain.com/' />
+  )
+  const Firebase_A = () => (
+    <Anchor text='Firebase' href='https://firebase.google.com/' />
+  )
+  const Electron_A = () => (
+    <Anchor text='Electron' href='https://www.electronjs.org/' />
+  )
+  const IPFS_A = () => (
+    <Anchor text='IPFS' href='https://ipfs.io/' />
+  )
+  const DAT_A = () => (
+    <Anchor text='DAT' href='https://dat.foundation/' />
+  )
   return (
     <div className='col-12 text-center bg-light pt-2'>
       <Typography
@@ -52,23 +74,20 @@ export default function TeamSection() {
             </h4>
             <CardBody>
               <p className={classes.description}>
-                Hi. I'm the chief designer of this web service. I like to climb trees,
-                play games and design useless webapps.
+                Based in South Africa, I develop web apps with <React_A />, <Firebase_A /> and <MaterialUI_A />. I also
+                develop desktop apps using <Electron_A />, <React_A /> and <Multichain_A />. I am very passionate about decentralized
+                technologies such as blockchain, <IPFS_A /> and <DAT_A />. My dream is to be a digital nomad and educate people
+                in remote coommunities about the internet and the joys of coding.
               </p>
             </CardBody>
             <CardFooter className={classes.justifyCenter}>
-              <Button
-                justIcon
-                color="transparent"
-                className={classes.margin5} >
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/roscoevanderboom">
-                  <i className={classes.socials + " fab fa-github"} />
-                </a>
+              <Anchor
+                href="https://github.com/roscoevanderboom"
+                text={<i className={classes.socials + " m-3 fab fa-github"}></i>} />
+              <Anchor
+                href="https://roscoe-vanderboom.firebaseapp.com/"
+                text={<i className={classes.socials + " m-3 fas fa-home"}></i>} />
 
-              </Button>
             </CardFooter>
           </Card>
         </GridItem>
