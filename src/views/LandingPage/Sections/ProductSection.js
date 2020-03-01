@@ -33,7 +33,8 @@ export default function ProductSection() {
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Private Chat"
-              description="Chat messages are protected by strict security rules created for Google Firebase Cloud Firestore"
+              description="Stealh is a ninja's greatest weapon. Here at NinjaSubs we take privacy very seriously.
+              Chat messages are protected by strict security rules created for Google Firebase Cloud Firestore."
               icon={Chat}
               iconColor="primary"
               vertical
@@ -42,8 +43,8 @@ export default function ProductSection() {
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Verified Users"
-              description="Only verified users can create content. Email verification will be sent to a new user within a  minute
-               ( connetion depending ) after registering."
+              description="Only verified users can create content. Email verification will be sent to a new user within a minute
+               ( connetion depending ) after registering. Registering with your Google account will automatically verify your account."
               icon={VerifiedUser}
               iconColor="danger"
               vertical

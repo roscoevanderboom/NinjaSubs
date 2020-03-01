@@ -1,10 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
-// Store
-import store from 'state';
+import React, { useState } from 'react';
 // @material-ui/core
 import {
     Dialog, DialogTitle, DialogContent,
-    DialogActions, Chip, Avatar, Badge,
+    DialogActions, Badge,
 } from '@material-ui/core';
 // @material-ui/icons
 import People from '@material-ui/icons/People';
@@ -27,8 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 
 export default ({ post }) => {
-    const classes = useStyles()
-    const { state, methods, fb, constants, setState } = useContext(store);
+    const classes = useStyles()    
     const [open, setOpen] = useState(false);
 
     const handleModal = () => {

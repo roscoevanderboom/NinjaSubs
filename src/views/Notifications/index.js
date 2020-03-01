@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
 // Store
 import store from 'state';
-// @material-ui/icons
-import Check from "@material-ui/icons/Check";
-import Warning from "@material-ui/icons/Warning";
 // core components
 import SnackbarContent from "components/Snackbar/SnackbarContent";
 import Clearfix from "components/Clearfix/Clearfix";

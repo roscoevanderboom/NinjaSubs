@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 // State
 import store from 'state';
 // @material-ui/core components
@@ -10,7 +10,7 @@ import {
 
 import bg from 'assets/img/bg.jpg'
 
-import { boxShadow, card, defaultFont, title } from 'assets/jss/material-kit-react';
+import { boxShadow, card, defaultFont } from 'assets/jss/material-kit-react';
 
 const useStyles = makeStyles({
     container: {

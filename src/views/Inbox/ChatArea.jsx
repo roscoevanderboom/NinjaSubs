@@ -16,7 +16,6 @@ import { ChevronLeft, Close, VoiceOverOff } from '@material-ui/icons';
 
 import MessageList from './MessageList';
 import Footer from './Footer';
-import { bodyContainer } from "assets/jss/material-kit-react";
 // Styles
 import { useStyles } from './styles';
 

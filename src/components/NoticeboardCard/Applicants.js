@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-    Chip, Collapse, Avatar, Button,
+    Collapse, Button,
     ListItemIcon, ListItemText, ListItem
 } from '@material-ui/core';
 

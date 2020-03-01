@@ -11,7 +11,7 @@ import Header from "components/Header/Header.js";
 // Menu Links
 import HeaderLinks from "components/Header/HeaderLinks.js";
 // Styles
-import { body, bodyContainer } from "assets/jss/material-kit-react";
+import { body } from "assets/jss/material-kit-react";
 const useStyles = makeStyles({
   body: {
     ...body
@@ -20,8 +20,8 @@ const useStyles = makeStyles({
 
 
 export default () => {
-  const { state, filters, setState } = useContext(store);
-  const { inbox, profileData, searchList } = state;
+  const { state, filters } = useContext(store);
+  const { inbox, profileData } = state;
   const [list, setList] = useState([])
   const classes = useStyles();
 
@@ -29,7 +29,8 @@ export default () => {
     if (profileData) {
       setList(filters.filterInbox(inbox, profileData));
     }
-  }, [inbox])
+    // eslint-disable-next-line
+  }, [inbox, profileData])
   return (
     <div>
       <Header

@@ -37,7 +37,7 @@ export default function App() {
             methods.handleProfileData();
             methods.queryNoticeboard();
             methods.queryAvailableSubs();
-            methods.handleInbox();
+            methods.handleInbox(); 
         }
         // eslint-disable-next-line
     }, [state.user])

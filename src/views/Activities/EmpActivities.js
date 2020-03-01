@@ -37,7 +37,7 @@ import CreatePost from '@material-ui/core/Button';
 
 const ActivitiesCard = () => {
     const { state, methods, constants, setState, fb, filters } = useContext(store);
-    const { profileData, noticeboardQuery, searchList } = state;
+    const { profileData, noticeboardQuery } = state;
     const { handleModals, feedback, isUserVerfied } = methods;
     const [list, setList] = useState([])
 

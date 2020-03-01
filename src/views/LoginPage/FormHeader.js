@@ -8,35 +8,14 @@ import CardHeader from "components/Card/CardHeader.js";
 
 export default ({ props }) => {
     const { classes, title } = props;
-    const { fb, hist, constants } = useContext(store);
+    const { fb } = useContext(store);
     const firebase_ = fb.firebase.firebase_.apps[0].firebase_;
 
-    const handleOAuth = (value) => {
-        console.log(value);
-        switch (value) {
-            case 'google':
-                googleSignIn();
-                break;
-            case 'facebook':
-                facebookSignIn();
-                break;
-            default:
-                break;
-        }
-
-    }
-    const googleSignIn = () => {
-        var provider = new firebase_.auth.GoogleAuthProvider();
-        popUp(provider);
-    };
-    const facebookSignIn = () => {
-        var provider = new firebase_.auth.FacebookAuthProvider();
-        popUp(provider);
-    };
     const popUp = (provider) => {
         fb.auth.signInWithPopup(provider).then(function (result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
+            // var token = result.credential.accessToken;
+
             // The signed-in user info.
             var user = result.user;
 
@@ -52,7 +31,8 @@ export default ({ props }) => {
 
         }).catch(function (error) {
             // Handle Errors here.
-            var errorCode = error.code;
+            // var errorCode = error.code;
+            
             var errorMessage = error.message;
             console.log(errorMessage);
             // The email of the user's account used.
@@ -64,6 +44,10 @@ export default ({ props }) => {
             // ...
         });
     };
+    const googleSignIn = () => {
+        var provider = new firebase_.auth.GoogleAuthProvider();
+        popUp(provider);
+    };
 
     return (
         <CardHeader color="primary" className={classes.cardHeader}>
@@ -72,13 +56,7 @@ export default ({ props }) => {
                 <Button
                     justIcon
                     color="transparent"
-                    onClick={() => handleOAuth('facebook')} >
-                    <i className={"fab fa-facebook"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    onClick={() => handleOAuth('google')} >
+                    onClick={googleSignIn} >
                     <i className={"fab fa-google"} />
                 </Button>
             </div>

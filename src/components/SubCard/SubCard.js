@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 // State
-import GlobalState from 'state';
+import store from 'state';
 
 import {
     Dialog, DialogActions, DialogContent, DialogTitle,
@@ -11,7 +11,7 @@ import { useStyles } from './styles';
 
 export default function SubCard({ sub }) {
     const classes = useStyles();
-    const { state, methods } = useContext(GlobalState);
+    const { methods } = useContext(store);
     const { searchInbox, isUserVerfied } = methods;
 
     const [open, setOpen] = useState(false)
@@ -26,8 +26,6 @@ export default function SubCard({ sub }) {
         // }       
         searchInbox(sub)
     }
-
-
 
     return (
         <div>

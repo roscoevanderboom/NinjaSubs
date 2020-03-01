@@ -89,6 +89,8 @@ export default function ProfilePage({ props }) {
   }
 
   useEffect(() => {
+    console.log('TODO -- finish rating function');
+    
     if (profileData.rating !== undefined) {
       setRating();
     }

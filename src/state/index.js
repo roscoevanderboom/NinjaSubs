@@ -50,10 +50,7 @@ export const GlobalStatePovider = (props) => {
     JobPostModal: false,
     BlockedUsers: false,
     ChangeEmail: false,
-    ChangePassword: false,
-    BlockedUsers: false,
-    ChangeEmail: false,
-    ChangePassword: false
+    ChangePassword: false   
   });
 
   // Notifications

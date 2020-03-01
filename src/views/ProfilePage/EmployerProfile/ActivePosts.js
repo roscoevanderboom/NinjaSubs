@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import GlobalState from 'state';
 // @material-ui/core components
 import {
-    ListItem, ListItemText, Container,  Typography
+    ListItem, ListItemText, Container, Typography
 } from "@material-ui/core";
 // custom components
 import Candidates from './Candidates';
@@ -26,8 +26,8 @@ export default () => {
         <React.Fragment>
             {list.map((post, i) =>
                 <div key={i}
-                className='d-flex justify-content-between align-items-center'>
-                    <ListItem button 
+                    className='d-flex justify-content-between align-items-center'>
+                    <ListItem button
                         className={classes.listItem}
                         onClick={() => editPost(post)} >
                         <ListItemText className={classes.listItemText}
@@ -54,9 +54,9 @@ export default () => {
 
     useEffect(() => {
         if (state.noticeboardQuery) {
-            setList(filterEmpActivities(state.noticeboardQuery, state.profileData))
-            // setList(state.noticeboardQuery)
+            setList(filterEmpActivities(state.noticeboardQuery, state.profileData));
         }
+        // eslint-disable-next-line
     }, [state.noticeboardQuery, state.profileData])
 
     return (

@@ -16,8 +16,8 @@ import PostBody from 'components/NoticeboardCard/PostBody';
 import ListHeader from 'components/EmptyListHeader';
 
 const ActivitiesCard = () => {
-    const { state, methods, fb, filters, setState } = useContext(store);
-    const { profileData, noticeboardQuery, searchList } = state;
+    const { state, methods, fb, filters } = useContext(store);
+    const { profileData, noticeboardQuery } = state;
     const { feedback } = methods;
     const [list, setList] = useState([])
 

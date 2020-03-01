@@ -5,8 +5,7 @@ import store from 'state';
 import classNames from "classnames";
 // @material-ui Components
 import {
-    Dialog, DialogTitle, DialogContent,
-    DialogActions, Avatar, Tooltip
+    Dialog, DialogTitle, DialogContent, Avatar, Tooltip
 } from '@material-ui/core';
 // Core components
 import Button from "components/CustomButtons/Button.js";
@@ -61,7 +60,7 @@ export default () => {
     const classes = useStyles()
     const { state, methods, fb, constants, setState } = useContext(store);
     const { setLoading } = setState;
-    const { profileData, loading } = state;
+    const { profileData } = state;
     const { handleModals, feedback, updateProfileData } = methods;
     const [url, setUrl] = useState('');
     const [open, setOpen] = useState(false);
@@ -73,7 +72,7 @@ export default () => {
     const handleModal = () => {
         open ? setOpen(false) : setOpen(true)
     }
-    const handleSubmit = () => {       
+    const handleSubmit = () => {
         updateProfileData({ image: url });
         handleModals('ChangeAvatar', false)
     }
@@ -94,6 +93,8 @@ export default () => {
     }
 
     useEffect(() => {
+        console.log('TODO -- re-apply original profile image if user cancels upload process');
+        
         if (profileData.image !== undefined) {
             setUrl(profileData.image)
         }

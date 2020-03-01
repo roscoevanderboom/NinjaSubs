@@ -7,8 +7,6 @@ import classNames from "classnames";
 import {
   Typography, Container
 } from "@material-ui/core";
-// @material-ui/icons
-import { Add } from "@material-ui/icons";
 // core components
 import Button from "components/CustomButtons/Button.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -60,6 +58,8 @@ export default function ProfilePage({ props }) {
   }
 
   useEffect(() => {
+    console.log('TODO -- finish rating function');
+    
     if (profileData.rating !== undefined) {
       setRating();
     }

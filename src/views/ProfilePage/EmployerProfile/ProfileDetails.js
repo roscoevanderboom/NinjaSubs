@@ -1,6 +1,4 @@
 import React from "react";
-// State
-import GlobalState from 'state';
 // @material-ui/core components
 import { InputAdornment, Tooltip } from "@material-ui/core";
 // @material-ui/icons
@@ -12,14 +10,12 @@ import {
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CustomInput from "components/CustomInput/CustomInput";
-import CustomSelect from "components/CustomSelect/CustomSelect";
 // Custom components
 import DistrictSelect from './DistrictSelect'
 // Styles
 import useStyles from '../styles';
 
 export default function ProfilePage({ props }) {
-    const { constants } = React.useContext(GlobalState);
     const { formData, handleData } = props;
     const classes = useStyles();
 

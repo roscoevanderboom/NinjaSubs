@@ -6,7 +6,6 @@ import classNames from "classnames";
 // @material-ui/core components
 // core components
 import Header from "components/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Parallax from "components/Parallax/Parallax.js";

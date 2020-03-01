@@ -18,8 +18,8 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const { state, filters, setState } = useContext(store);
-  const { profileData, availableSubs, searchList } = state;
+  const { state, filters } = useContext(store);
+  const { profileData, availableSubs } = state;
   const classes = useStyles();
   const [list, setList] = useState([])
 

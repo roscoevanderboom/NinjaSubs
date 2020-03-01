@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 // Store
 import store from 'state';
 // @material-ui/core components
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 // Custom components
 import Card from 'components/NoticeboardCard/Card';
 import ListHeader from 'components/EmptyListHeader';
@@ -19,8 +19,8 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const { state, filters, setState } = useContext(store);
-  const { profileData, noticeboardQuery, searchList } = state;
+  const { state, filters } = useContext(store);
+  const { profileData, noticeboardQuery } = state;
   const classes = useStyles();
   const [list, setList] = useState([])
 
@@ -32,12 +32,6 @@ export default () => {
     }
     // eslint-disable-next-line
   }, [noticeboardQuery, profileData])
-
-  // useEffect(() => {
-  //   if (noticeboardQuery) {
-  //     setList(noticeboardQuery);
-  //   }
-  // }, [noticeboardQuery])
 
   return (
     <div>
