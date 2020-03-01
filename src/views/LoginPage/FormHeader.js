@@ -17,9 +17,7 @@ export default ({ props }) => {
             // var token = result.credential.accessToken;
 
             // The signed-in user info.
-            var user = result.user;
-            console.log(user);
-            
+            var user = result.user;            
             let data = {
                 name: user.displayName,
                 email: user.email,

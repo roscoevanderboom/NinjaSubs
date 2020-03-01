@@ -12,11 +12,6 @@ export const availableSubs = db.collection('availableSubs');
 export const users = db.collection('users');
 export const userNames = db.collection('userNames');
 export const privateChats = db.collection('chats');
-// Messaging
-// export const messaging = Firebase.messaging();
-
-// // OAuth providers
-// export const googleOAuth = new Firebase.auth.GoogleAuthProvider();
 
 // File Storage
 export const storage = Firebase.storage();

@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 import * as constants from '../constants';
 import * as fb from '../constants/firebase/constants';
 import * as filters from '../constants/filters';
+import pushNotifications from 'constants/firebase/pushNotification';
 
 // Components
 import { createFeedback } from '../components/Feedback/index';
