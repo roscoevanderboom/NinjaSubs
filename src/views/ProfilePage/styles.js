@@ -7,7 +7,6 @@ import {
 } from "assets/jss/material-kit-react";
 import profileStyles from "assets/jss/material-kit-react/views/profilePage.js";
 import inputStyles from "assets/jss/material-kit-react/components/customInputStyle";
-import gridStyles from "assets/jss/material-kit-react/components/customInputStyle";
 import basicStyles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle";
 
 const title = {
@@ -51,11 +50,13 @@ export default makeStyles({
     padding: 12
   },
   gridItem: {
-    ...gridStyles.grid,
     ...boxShadow,
     borderRadius: 6,
     backgroundColor: 'white',
     margin: '15px 12px',
+    "@media (max-width: 570px)": {
+      margin: '15px 0px'
+    },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

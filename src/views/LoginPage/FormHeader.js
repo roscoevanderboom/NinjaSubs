@@ -8,7 +8,7 @@ import CardHeader from "components/Card/CardHeader.js";
 
 export default ({ props }) => {
     const { classes, title } = props;
-    const { fb } = useContext(store);
+    const { fb, hist } = useContext(store);
     const firebase_ = fb.firebase.firebase_.apps[0].firebase_;
 
     const popUp = (provider) => {
@@ -17,21 +17,25 @@ export default ({ props }) => {
             // var token = result.credential.accessToken;
 
             // The signed-in user info.
-            var user = result.user;            
+            var user = result.user;
             let data = {
                 name: user.displayName,
                 email: user.email,
                 uid: user.uid
             }
             fb.users.doc(user.uid).update(data)
+                .then(() => {
+                    hist.push('/profile-page');
+                })
                 .catch((err) => {
-                    fb.createProfileData(user, data)
+                    fb.createProfileData(user, data);
+                    hist.push('/createProfile-page');
                 })
 
         }).catch(function (error) {
             // Handle Errors here.
             // var errorCode = error.code;
-            
+
             var errorMessage = error.message;
             console.log(errorMessage);
             // The email of the user's account used.

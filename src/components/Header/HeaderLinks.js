@@ -1,4 +1,4 @@
-/*eslint-disable*/
+
 import React, { useContext } from "react";
 // State
 import store from '../../state';
@@ -6,7 +6,7 @@ import store from '../../state';
 import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { List, ListItem, Tooltip } from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 // @material-ui/icons
 import { Apps } from "@material-ui/icons";
 // core components
@@ -14,7 +14,6 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 // styles
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-import FormBody from "views/LoginPage/FormBody";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks() {

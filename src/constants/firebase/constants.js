@@ -12,6 +12,7 @@ export const availableSubs = db.collection('availableSubs');
 export const users = db.collection('users');
 export const userNames = db.collection('userNames');
 export const privateChats = db.collection('chats');
+export const mailbox = db.collection('mailbox');
 
 // File Storage
 export const storage = Firebase.storage();
@@ -40,13 +41,13 @@ export const handleProfileData = (uid, setProfileData, setLoading, hist) => {
         if (doc.exists && doc.data().type !== undefined) {
             setProfileData(doc.data());
             setLoading(false);
-            hist.push('/profile-page')
+            // hist.push('/profile-page')
             return;
         }
         if (doc.exists && doc.data().type === undefined) {
             setProfileData(doc.data());
             setLoading(false);
-            hist.push('/createProfile-page')
+            // hist.push('/createProfile-page')
             return;
         }
 

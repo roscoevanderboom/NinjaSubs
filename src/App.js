@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 // State
 import GlobalState from 'state';
 
@@ -20,9 +20,9 @@ import Modals from 'views/Modals';
 import Notifications from 'views/Notifications';
 
 // Get notification permission from user
-Notification.requestPermission(function (status) {
-    console.log('Notification permission status:', status);
-});
+// Notification.requestPermission(function (status) {
+//     console.log('Notification permission status:', status);
+// });
 
 export default function App() {
     const { state, methods } = useContext(GlobalState);
@@ -57,7 +57,6 @@ export default function App() {
                 <Route path="/settings" component={Settings} />
                 <Route path="/chatroom" component={Chatroom} />
             </Switch>
-            {!state.loggedIn ? <Redirect to="/" /> : null}
             <Modals />
             <Notifications />
         </React.Fragment>

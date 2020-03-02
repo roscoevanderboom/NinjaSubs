@@ -50,8 +50,8 @@ const headerStyle = theme => ({
   flex: {
     flex: 1
   },
-  title: {
-    ...defaultFont,
+  title: {   
+    ...defaultFont, 
     lineHeight: "30px",
     fontSize: "18px",
     borderRadius: "3px",
@@ -59,6 +59,7 @@ const headerStyle = theme => ({
     color: "inherit",
     padding: "8px 16px",
     letterSpacing: "unset",
+    textDecoration:'none',
     "&:hover,&:focus": {
       color: "inherit",
       background: "transparent"
@@ -178,6 +179,10 @@ const headerStyle = theme => ({
       display: "block",
       padding: "10px 20px"
     }
+  },
+  brand:{
+    textDecoration: 'none',
+    color: 'inherit'
   }
 });
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 // Store
 import store from 'state';
 // nodejs library that concatenates classes
@@ -8,12 +8,12 @@ import {
   Typography, Container
 } from "@material-ui/core";
 // core components
-import Button from "components/CustomButtons/Button.js";
 import GridItem from "components/Grid/GridItem.js";
 // Custom components
 import ChangeAvatar from '../ChangeAvatar';
 import ProfileDetails from './ProfileDetails';
 import ActivePosts from './ActivePosts';
+import Footer from '../ProfileFooter';
 // Styles
 import useStyles from '../styles';
 
@@ -21,11 +21,8 @@ export default function ProfilePage({ props }) {
   const { formData, handleData,
     handleSubmit, handleCancel } = props;
 
-  const { state, constants, methods } = useContext(store);
-  const { user, profileData } = state;
-  const { isArrayEqual } = constants;
-  const { updateProfileData } = methods;
-  const [stars, setStars] = useState([]);
+  const { state, constants } = useContext(store);
+  const { profileData } = state;
 
   const classes = useStyles();
   const imageClasses = classNames(
@@ -33,38 +30,6 @@ export default function ProfilePage({ props }) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-
-  const setRating = () => {
-    let count = []
-    if (profileData.name !== null) {
-      count.push('name');
-    }
-    if (profileData.image !== constants.noUserImage) {
-      count.push('image');
-    }
-    if (profileData.bio !== '') {
-      count.push('bio');
-    }
-    if (user.emailVerified) {
-      count.push('verified');
-    }
-    setStars(count);
-    if (isArrayEqual(count, profileData.rating)) {
-      return;
-    }
-    if (count !== profileData.rating) {
-      updateProfileData({ rating: count })
-    }
-  }
-
-  useEffect(() => {
-    console.log('TODO -- finish rating function');
-    
-    if (profileData.rating !== undefined) {
-      setRating();
-    }
-    // eslint-disable-next-line
-  }, [profileData.rating])
 
   return (
     <React.Fragment>
@@ -107,20 +72,9 @@ export default function ProfilePage({ props }) {
 
 
         {formData === profileData ? null :
-          <Container className='row justify-content-around'>
-            <Button
-              size='lg'
-              color='info'
-              onClick={handleSubmit}>
-              Update
-            </Button>
-            <Button
-              size='lg'
-              color='danger'
-              onClick={handleCancel}>
-              Cancel
-            </Button>
-          </Container>
+          <Footer
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel} />
         }
       </GridItem>
     </React.Fragment>

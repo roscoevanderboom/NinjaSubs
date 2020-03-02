@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 // Store
 import store from 'state';
 // Form validation
@@ -32,7 +32,7 @@ const initState = {
 }
 
 export default function LoginPage() {
-  const { fb, methods, hist } = useContext(store);
+  const { fb, methods, hist, state } = useContext(store);
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [data, setData] = useState(initState);
   const [title, setTitle] = useState('Register');
@@ -63,14 +63,14 @@ export default function LoginPage() {
   const register = () => {
     if (!validateRegister(data, methods.feedback, setErrors)) {
       return;
-    }    
+    }
     fb.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then(res => {
         let newUserData = {
           name: data.username,
           email: res.user.email,
           uid: res.user.uid
-        };        
+        };
         fb.createProfileData(res.user, newUserData);
       })
       .catch(error => {
@@ -96,6 +96,13 @@ export default function LoginPage() {
         : register();
     }
   };
+
+  useEffect(() => {
+    if (state.user) {
+      hist.push('/profile-page');
+    }
+    // eslint-disable-next-line   
+  }, [state.user])
 
   return (
     <div

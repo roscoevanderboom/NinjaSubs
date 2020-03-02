@@ -40,7 +40,7 @@ export default () => {
         if (!selectedChat) {
             return;
         }
-        if (!confirm(`Delete chatroom?\nChatroom will be deleted for both users.`)) {
+        if (!window.confirm(`Delete chatroom?\nChatroom will be deleted for both users.`)) {
             return;
         }
         deleteChatroom(selectedChat.room_id);
@@ -49,7 +49,7 @@ export default () => {
         if (!selectedChat) {
             return;
         }
-        if (!confirm(`Block ${recipient.name}?\nYou can unblock user\nfrom Settings page.`)) {
+        if (!window.confirm(`Block ${recipient.name}?\nYou can unblock user\nfrom Settings page.`)) {
             return;
         }
         let badUser = selectedChat.participants.filter(uid => uid !== profileData.uid)

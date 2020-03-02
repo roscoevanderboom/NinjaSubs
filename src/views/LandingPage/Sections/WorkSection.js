@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+// Store
+import store from 'state';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -16,6 +18,27 @@ const useStyles = makeStyles(styles);
 
 export default function WorkSection() {
   const classes = useStyles();
+  const { fb, methods } = useContext(store);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+
+  const handleData = (key, value) => {
+    setFormData({ ...formData, [key]: value });
+  }
+
+  const handleSubmit = () => {
+    fb.mailbox.doc().set(formData)
+      .then(() => {
+        methods.feedback('success', 'Your message has been sent!');
+      })
+      .catch((err) => {
+        methods.feedback('error', err.message);
+      })
+  }
+
   return (
     <div className='col-12 text-center bg-white pt-2'>
       <GridContainer justify="center">
@@ -33,6 +56,10 @@ export default function WorkSection() {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  inputProps={{
+                    value: formData.name,
+                    onChange: (e) => handleData('name', e.target.value)
+                  }}
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={6}>
@@ -41,6 +68,10 @@ export default function WorkSection() {
                   id="email"
                   formControlProps={{
                     fullWidth: true
+                  }}
+                  inputProps={{
+                    value: formData.email,
+                    onChange: (e) => handleData('email', e.target.value)
                   }}
                 />
               </GridItem>
@@ -53,12 +84,15 @@ export default function WorkSection() {
                 }}
                 inputProps={{
                   multiline: true,
-                  rows: 5
+                  rows: 5,
+                  value: formData.message,
+                  onChange: (e) => handleData('message', e.target.value)
                 }}
               />
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
-                  <Button color="primary">Send Message</Button>
+                  <Button color="primary"
+                    onClick={handleSubmit}>Send Message</Button>
                 </GridItem>
               </GridContainer>
             </GridContainer>

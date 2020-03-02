@@ -1,4 +1,4 @@
-/*eslint-disable */
+
 import React from 'react';
 import store from 'state';
 
@@ -7,6 +7,7 @@ import {
     Collapse, Avatar, IconButton, Typography, Badge
 } from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import SubCardMenu from './Menu'
 
 import { Favorite, ExpandMore, ChatBubble } from '@material-ui/icons';
 
@@ -57,7 +58,7 @@ export default ({ sub }) => {
                 ? setLiked(true)
                 : setLiked(false);
         }
-    }, [sub])
+    }, [sub, profileData.uid])
 
     return (sub.rating !== undefined &&
         <Card className={classes.card}>
@@ -69,32 +70,32 @@ export default ({ sub }) => {
                         onClick={showProfilePicture}
                         className={classes.avatar}
                         src={`${sub.image}`} alt='avatar image' />}
-                title={<h3>{sub.name}</h3>}
+                title={
+                    <Typography component='header' variant='h6'>
+                        {sub.name}
+                    </Typography>}
                 action={
-                    <React.Fragment>
-                        {sub.rating.map((val, i) =>
-                            <Avatar key={i}
-                                src={ninjaStar} alt={val} />
-                        )}
-                    </React.Fragment>
+                    <SubCardMenu sub={sub} />
                 }
             />
 
             <CardActions
-                className={classes.collapse}
-                disableSpacing>
-                <Badge
-                    classes={{
-                        root: classes.badge
-                    }}
-                    badgeContent={sub.likes !== undefined ? sub.likes.length : 0}>
-                    <IconButton
-                        className={liked ? classes.liked : ''}
-                        onClick={handleLike}
-                        aria-label="like">
-                        <Favorite />
-                    </IconButton>
-                </Badge>
+                disableSpacing
+                className={classes.collapse} >
+                <IconButton
+                    onClick={handleLike}
+                    aria-label="like">
+                    <Badge
+                        badgeContent={sub.likes !== undefined ? sub.likes.length : 0}>
+                        <Favorite className={liked ? classes.liked : classes.iconBtn} />
+                    </Badge>
+                </IconButton>
+
+                <IconButton>
+                    <Badge badgeContent={sub.rating.length}>
+                        <img src={ninjaStar} className={classes.iconBtn} alt='ninjaStar' />
+                    </Badge>
+                </IconButton>
 
                 <IconButton
                     onClick={handleStartChat}

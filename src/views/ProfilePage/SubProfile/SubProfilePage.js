@@ -11,13 +11,13 @@ import {
 // @material-ui/icons
 import { Email, AccountBox } from "@material-ui/icons";
 // core components
-import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CustomInput from "components/CustomInput/CustomInput";
 // Custom components
 import DistrictCollapse from './DistrictCollapse';
 import ChangeAvatar from '../ChangeAvatar';
+import Footer from '../ProfileFooter';
 // Styles
 import useStyles from '../styles';
 
@@ -27,7 +27,7 @@ export default function ProfilePage({ props }) {
 
   const { state, constants, methods, fb } = useContext(store);
   const { user, profileData, availableSubs } = state;
-  const { newSubBoardListing, isArrayEqual } = constants;
+  const { newSubBoardListing, isArrayEqual, noUserImage, ninjaStar } = constants;
   const { updateProfileData, feedback, isUserVerfied } = methods;
 
   const [likes, setLikes] = useState(0);
@@ -70,7 +70,7 @@ export default function ProfilePage({ props }) {
     if (profileData.name !== null) {
       count.push('name');
     }
-    if (profileData.image !== constants.noUserImage) {
+    if (profileData.image !== noUserImage) {
       count.push('image');
     }
     if (profileData.bio !== '') {
@@ -79,6 +79,11 @@ export default function ProfilePage({ props }) {
     if (user.emailVerified) {
       count.push('verified');
     }
+    if (profileData.locations.length > 0) {
+      count.push('locations');
+    }
+    console.log(count);
+
     setStars(count);
     if (isArrayEqual(count, profileData.rating)) {
       return;
@@ -90,7 +95,7 @@ export default function ProfilePage({ props }) {
 
   useEffect(() => {
     console.log('TODO -- finish rating function');
-    
+
     if (profileData.rating !== undefined) {
       setRating();
     }
@@ -115,36 +120,46 @@ export default function ProfilePage({ props }) {
         xs={12} sm={12} md={5}>
         <div className={classes.profile}>
           <div>
-            <img style={{ marginRight: '-32px' }} src={formData ? formData.image : constants.noImage} alt="..." className={imageClasses} />
+            <img style={{ marginRight: '-32px' }}
+              src={formData ? formData.image : constants.noImage}
+              alt="..." className={imageClasses} />
             <ChangeAvatar />
           </div>
           <div className={classes.name}>
             <h3 className={classes.title}>{formData ? formData.name : ''}</h3>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={profileData.available}
-                  onChange={handleAvailable}
-                  value="availability"
-                  classes={{
-                    switchBase: classes.switchBase,
-                    checked: classes.switchChecked,
-                    thumb: classes.switchIcon,
-                    track: classes.switchBar
-                  }}
-                />
-              }
-              classes={{
-                label: classes.label
-              }}
-              label="Availability" />
-            <Tooltip placement='right'
-              title='Likes'>
-              <Badge badgeContent={likes}>
-                <i className={heartIcon} />
-              </Badge>
-            </Tooltip>
           </div>
+        </div>
+        <div className='d-flex align-items-center justify-content-around w-100 mt-2 mb-3'>
+          <Tooltip placement='right'
+            title='Likes'>
+            <Badge badgeContent={likes}>
+              <i className={heartIcon} />
+            </Badge>
+          </Tooltip>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={profileData.available}
+                onChange={handleAvailable}
+                value="availability"
+                classes={{
+                  switchBase: classes.switchBase,
+                  checked: classes.switchChecked,
+                  thumb: classes.switchIcon,
+                  track: classes.switchBar
+                }}
+              />
+            }
+            classes={{
+              label: classes.label
+            }}
+            label="Availability" />
+          <Tooltip placement='left'
+            title='Profile Rating'>
+            <Badge badgeContent={stars.length}>
+              <img src={ninjaStar} width='30' height='30' alt='ninjaStar' />
+            </Badge>
+          </Tooltip>
         </div>
         <Typography
           className={classes.districtTitle}
@@ -219,20 +234,9 @@ export default function ProfilePage({ props }) {
           </textarea>
         </Container>
         {formData === profileData ? null :
-          <Container className='row justify-content-around'>
-            <Button
-              size='lg'
-              color='info'
-              onClick={handleSubmit}>
-              Update
-            </Button>
-            <Button
-              size='lg'
-              color='danger'
-              onClick={handleCancel}>
-              Cancel
-            </Button>
-          </Container>
+          <Footer
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel} />
         }
       </GridItem>
     </React.Fragment>

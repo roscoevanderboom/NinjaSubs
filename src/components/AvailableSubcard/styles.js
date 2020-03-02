@@ -1,5 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { boxShadow } from 'assets/jss/material-kit-react';
+
+const iconBtn = {
+    margin: 5,
+    width: 25,
+    height: 25
+}
 export const useStyles = makeStyles(theme => ({
     card: {
         width: '100%',
@@ -24,7 +30,11 @@ export const useStyles = makeStyles(theme => ({
     header: {
         padding: 8
     },
+    iconBtn: {
+        ...iconBtn
+    },
     liked: {
+        ...iconBtn,
         color: 'red'
     },
     badge: {
