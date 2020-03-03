@@ -110,7 +110,7 @@ export const GlobalStatePovider = (props) => {
 
   // User actions
   const deleteUser = () => {
-    fb.deleteUser(user, profileData, feedback);
+    fb.deleteUser(user, profileData, feedback, hist);
   };
   const searchInbox = (chatee) => {
     // if (!isUserVerfied()) {

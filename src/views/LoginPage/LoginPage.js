@@ -98,7 +98,7 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    if (state.user) {
+    if (state.user && state.profileData.type !== undefined) {
       hist.push('/profile-page');
     }
     // eslint-disable-next-line   
@@ -119,7 +119,7 @@ export default function LoginPage() {
             <Card className={classes[cardAnimaton]}>
               <form onKeyPress={handleSubmit} className={classes.form}>
 
-                <FormHeader props={{ classes, title }} />
+                <FormHeader props={{ classes, title, data }} />
 
                 <FormBody props={{ classes, title, data, errors, handleData }} />
 

@@ -48,8 +48,8 @@ export default function App() {
             <Switch>
                 <Route path="/" exact component={LandingPage} />
                 <Route path="/login-page" component={LoginPage} />
-                <Route path="/profile-page" component={ProfilePage} />
                 <Route path="/createProfile-page" component={CreateProfile} />
+                <Route path="/profile-page" component={ProfilePage} />                
                 <Route path="/noticeboard" component={Noticeboard} />
                 <Route path="/activities" component={Activities} />
                 <Route path="/availableSubs" component={AvailableSubs} />

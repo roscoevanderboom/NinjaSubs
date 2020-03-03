@@ -65,7 +65,7 @@ export default function Header(props) {
         <Button
           className={classes.title}
           color='transparent'>
-          <Link className={classes.brand} to='/profile-page'>
+          <Link className={classes.brand} to='/'>
             {brand}
           </Link>
         </Button>

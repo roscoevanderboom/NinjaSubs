@@ -27,7 +27,7 @@ export default ({ sub }) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const like = () => {
+    const like = () => {      
         fb.availableSubs.doc(sub.uid).update({
             likes: add_if_not_included(sub.likes, profileData.uid),
         }).then(() => { setLiked(true) })
@@ -38,12 +38,18 @@ export default ({ sub }) => {
         }).then(() => { setLiked(false) })
     }
     const handleLike = () => {
+        // if (!isUserVerfied()) {
+        //     return;
+        // }
         if (sub.uid === profileData.uid) {
             return;
         }
         sub.likes.includes(profileData.uid) ? unlike() : like();
     };
     const handleStartChat = () => {
+        if (!isUserVerfied()) {
+            return;
+        }
         searchInbox(sub)
     }
 

@@ -53,9 +53,9 @@ export default function ProfilePage({ props }) {
       })
   }
   const handleAvailable = () => {
-    // if (!isUserVerfied()) {
-    //   return;
-    // }
+    if (!isUserVerfied()) {
+      return;
+    }
     fb.availableSubs.doc(user.uid)
       .update(newSubBoardListing(profileData))
       .then(() => {

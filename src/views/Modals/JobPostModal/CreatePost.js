@@ -1,12 +1,9 @@
-/*eslint-disable */
+
 import React, { useContext, useEffect, useState } from 'react';
 import GlobalState from 'state';
 import moment from 'moment';
 
 import { verifyData } from './verifyData';
-
-// import { Col, Row, Label,Input } from 'reactstrap';
-
 // Components
 import {
     Dialog, DialogTitle, DialogContent,
@@ -67,7 +64,7 @@ export default () => {
     const classes = useStyles();
     const { state, methods, constants, fb } = useContext(GlobalState);
     const { profileData, modals, post_to_edit, noticeboardQuery } = state;
-    const { handleModals, feedback, isUserVerfied, queryNoticeboard } = methods;
+    const { handleModals, feedback } = methods;
     const { examplePost, newPost } = constants;
     const [post, setPost] = useState(newPost(profileData));
     const [stars, setStars] = useState(5);
@@ -126,10 +123,12 @@ export default () => {
         if (profileData) {
             setPost(newPost(profileData))
         }
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         !post_to_edit ? setPost(newPost(profileData)) : setPost(post_to_edit);
+        // eslint-disable-next-line
     }, [post_to_edit]);
 
     return (profileData &&
@@ -166,10 +165,10 @@ export default () => {
 
                     <div className='col-6'>
                         <FormControl fullWidth>
-                            <InputLabel  htmlFor="job-type-select">
+                            <InputLabel htmlFor="job-type-select">
                                 Position Type
                             </InputLabel>
-                            <Select                                
+                            <Select
                                 native
                                 name="jobType"
                                 id="jobType"

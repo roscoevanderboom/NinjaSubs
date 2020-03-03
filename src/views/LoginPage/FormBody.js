@@ -6,6 +6,7 @@ import { Email, People, Replay } from "@material-ui/icons"
 // core components
 import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import Anchor from 'components/Anchors';
 
 import PasswordInput from './Password';
 
@@ -78,15 +79,20 @@ export default ({ props }) => {
                 />}
 
             {title === 'Login' ? null :
-                <div className='row justify-content-center align-items-center'>
-                    <a href='https://www.termsandconditionsgenerator.com/live.php?token=cUjuC2S5w2vTipxpiAQVx56WBJZReus7'
-                        target='_blank' rel="noopener noreferrer">Terms and Conditions</a>
-                    <Checkbox
-                        color='primary'
-                        onChange={() => handleData('terms', data.terms ? false : true)}
-                        value='terms'
-                        checked={data.terms} />
+                <div className='d-flex flex-column align-items-center'>
+                    <Anchor text='Privacy Policy'
+                        href='https://www.privacypolicytemplate.net/live.php?token=G1ODSTh6D6xdPVL2vUrNtMLouRykOV2O' />
+                    <div className='row justify-content-center align-items-center'>
+                        <Anchor text='Terms and Conditions'
+                            href='https://www.termsandconditionsgenerator.com/live.php?token=cUjuC2S5w2vTipxpiAQVx56WBJZReus7' />
+                        <Checkbox
+                            color='primary'
+                            onChange={() => handleData('terms', data.terms ? false : true)}
+                            value='terms'
+                            checked={data.terms} />
+                    </div>
                 </div>
+
             }
         </CardBody>
     );

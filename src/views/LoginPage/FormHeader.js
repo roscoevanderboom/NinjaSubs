@@ -7,11 +7,15 @@ import Button from "components/CustomButtons/Button.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 export default ({ props }) => {
-    const { classes, title } = props;
-    const { fb, hist } = useContext(store);
+    const { classes, title, data } = props;
+    const { fb, hist, methods } = useContext(store);
     const firebase_ = fb.firebase.firebase_.apps[0].firebase_;
 
     const popUp = (provider) => {
+        if (title === 'Register' && !data.terms) {
+            methods.feedback('info', `Please accept terms and conditions.`);
+            return;
+        }
         fb.auth.signInWithPopup(provider).then(function (result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             // var token = result.credential.accessToken;
@@ -25,6 +29,8 @@ export default ({ props }) => {
             }
             fb.users.doc(user.uid).update(data)
                 .then(() => {
+                    console.log('update success');
+                    
                     hist.push('/profile-page');
                 })
                 .catch((err) => {
