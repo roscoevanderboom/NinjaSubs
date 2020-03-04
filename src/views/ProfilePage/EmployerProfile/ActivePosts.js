@@ -60,8 +60,17 @@ export default () => {
     }, [state.noticeboardQuery, state.profileData])
 
     return (
-        <Container className='mt-2 mb-3 p-0 w-100'>
-            {list.length === 0 ? <NoPosts /> : <List />}
+        <Container className={classes.activePostsContainer}>
+            <Typography
+                className={classes.districtTitle}
+                align='center'
+                variant='h6'>
+                Active Posts
+            </Typography>
+            <Container className='mt-2 mb-3 p-0 w-100'>
+                {list.length === 0 ? <NoPosts /> : <List />}
+            </Container>
         </Container>
+
     );
 }

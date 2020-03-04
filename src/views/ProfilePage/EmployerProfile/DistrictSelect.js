@@ -69,10 +69,6 @@ export default function DistrictSelect(props) {
         formControlClasses = classes.formControl;
     }
 
-    React.useEffect(() => {
-        console.log(props);
-
-    }, [props])
     return (
         <FormControl fullWidth className={formControlClasses}>
             <InputLabel htmlFor="location-select"
