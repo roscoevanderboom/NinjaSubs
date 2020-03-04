@@ -5,11 +5,12 @@ import store from 'state';
 import classNames from "classnames";
 // @material-ui Components
 import {
-    Dialog, DialogTitle, DialogContent, Avatar, Tooltip
+    Dialog, DialogTitle, DialogContent, Tooltip
 } from '@material-ui/core';
 // Core components
 import Button from "components/CustomButtons/Button.js";
-
+// Styles
+import { primaryColor } from "assets/jss/material-kit-react";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -42,13 +43,14 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     avatar: {
-        width: 100,
-        height: 100,
-        marginBottom: 20
+        maxWidth: 160,
+        marginBottom: 20,
+        borderRadius: 6
     },
     cameraIcon: {
         cursor: 'pointer',
-        fontSize: '1.2em'
+        fontSize: '1.2em',
+        color: primaryColor
     },
     paperWidthSm: {
         margin: 5
@@ -94,7 +96,7 @@ export default () => {
 
     useEffect(() => {
         console.log('TODO -- re-apply original profile image if user cancels upload process');
-        
+
         if (profileData.image !== undefined) {
             setUrl(profileData.image)
         }
@@ -117,10 +119,8 @@ export default () => {
                 <DialogTitle children={'Change avatar image'} />
                 <DialogContent
                     className={classes.dialogContent}>
-                    <Avatar
+                    <img
                         className={classes.avatar}
-                        sizes='width: 200px height 200px'
-                        variant='rounded'
                         src={url === '' ? constants.noUserImage : url}
                         alt='avatar' />
                     <div className='d-flex justify-content-center'>

@@ -80,5 +80,9 @@ export default makeStyles({
     paddingTop: '24vh',
     display: 'flex',
     justifyContent: 'center'
+  },
+  image: {
+    ...boxShadow,
+    borderRadius: 6
   }
 });

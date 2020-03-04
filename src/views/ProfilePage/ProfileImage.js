@@ -13,9 +13,7 @@ export default function ProfileImage({ formData }) {
 
     const classes = useStyles();
     const imageClasses = classNames(
-        classes.imgRaised,
-        classes.imgRoundedCircle,
-        classes.imgFluid
+        classes.imgRaised        
     );
 
     return (
@@ -23,8 +21,8 @@ export default function ProfileImage({ formData }) {
             <div>
                 <img alt="..."
                     style={{ marginRight: '-32px' }}
-                    src={formData ? formData.image : constants.noImage}
-                    className={imageClasses} />
+                    className={classes.image}
+                    src={formData ? formData.image : constants.noImage} />
                 <ChangeAvatar />
             </div>
             <div className={classes.name}>
