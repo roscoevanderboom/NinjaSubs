@@ -7,8 +7,8 @@ import classNames from "classnames";
 import {
   Typography, Container
 } from "@material-ui/core";
-// core components
-import GridItem from "components/Grid/GridItem.js";
+// Reactstrap components
+import { Row, Col } from 'reactstrap';
 // Custom components
 import ChangeAvatar from '../ChangeAvatar';
 import ProfileDetails from './ProfileDetails';
@@ -32,51 +32,48 @@ export default function ProfilePage({ props }) {
   );
 
   return (
-    <React.Fragment>
-      <GridItem
-        className={classes.gridItem}
-        xs={12} sm={12} md={5}>
-        <div className={classes.profile}>
-          <div>
-            <img alt="..."
-              style={{ marginRight: '-32px' }}
-              src={formData ? formData.image : constants.noImage}
-              className={imageClasses} />
-            <ChangeAvatar />
+    <Col xs='12' sm='10' lg='8'>
+      <Row className='justify-content-around'>
+        <Col xs='11' md='7' lg='4'
+          className={classes.gridItem}>
+          <div className={classes.profile}>
+            <div>
+              <img alt="..."
+                style={{ marginRight: '-32px' }}
+                src={formData ? formData.image : constants.noImage}
+                className={imageClasses} />
+              <ChangeAvatar />
+            </div>
+            <div className={classes.name}>
+              <h3 className={classes.title}>{formData ? formData.name : ''}</h3>
+            </div>
           </div>
-          <div className={classes.name}>
-            <h3 className={classes.title}>{formData ? formData.name : ''}</h3>
-          </div>
-        </div>
-        <Container className={classes.activePostsContainer}>
+          <Container className={classes.activePostsContainer}>
+            <Typography
+              className={classes.districtTitle}
+              align='center'
+              variant='h6'>
+              Active Posts
+          </Typography>
+            <ActivePosts />
+          </Container>
+        </Col>
+        <Col xs='11' md='7' lg='6'
+          className={classes.gridItem}>
           <Typography
-            className={classes.districtTitle}
+            className={classes.detailsTitle}
             align='center'
             variant='h6'>
-            Active Posts
-          </Typography>
-          <ActivePosts />
-        </Container>
-      </GridItem>
-
-      <GridItem
-        className={classes.gridItem}
-        xs={12} sm={12} md={6}>
-        <Typography
-          className={classes.detailsTitle}
-          align='center'
-          variant='h6'>
-          Profile details
+            Profile details
         </Typography>
-        <ProfileDetails props={{ formData, handleData }} />
-
-
-        {formData === profileData ? null :
-          <Footer
-            handleSubmit={handleSubmit}
-            handleCancel={handleCancel} />
-        }
-      </GridItem>
-    </React.Fragment>
+          <ProfileDetails props={{ formData, handleData }} />
+          {formData === profileData ? null :
+            <Footer
+              handleSubmit={handleSubmit}
+              handleCancel={handleCancel} />
+          }
+        </Col>
+      </Row>
+    </Col>
   );
 }

@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 // @material-ui/icons
 import { Email, AccountBox } from "@material-ui/icons";
+// Reactstrap components
+import { Row, Col } from 'reactstrap';
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -114,131 +116,131 @@ export default function ProfilePage({ props }) {
   }, [availableSubs])
 
   return (
-    <React.Fragment>
-      <GridItem
-        className={classes.gridItem}
-        xs={12} sm={12} md={5}>
-        <div className={classes.profile}>
-          <div>
-            <img style={{ marginRight: '-32px' }}
-              src={formData ? formData.image : constants.noImage}
-              alt="..." className={imageClasses} />
-            <ChangeAvatar />
+    <Col xs='12' sm='10' lg='8'>
+      <Row className='justify-content-around'>
+        <Col xs='11' md='7' lg='4'
+          className={classes.gridItem}>
+          <div className={classes.profile}>
+            <div>
+              <img style={{ marginRight: '-32px' }}
+                src={formData ? formData.image : constants.noImage}
+                alt="..." className={imageClasses} />
+              <ChangeAvatar />
+            </div>
+            <div className={classes.name}>
+              <h3 className={classes.title}>{formData ? formData.name : ''}</h3>
+            </div>
           </div>
-          <div className={classes.name}>
-            <h3 className={classes.title}>{formData ? formData.name : ''}</h3>
+          <div className='d-flex align-items-center justify-content-around w-100 mt-2 mb-3'>
+            <Tooltip placement='right'
+              title='Likes'>
+              <Badge badgeContent={likes}>
+                <i className={heartIcon} />
+              </Badge>
+            </Tooltip>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={profileData.available}
+                  onChange={handleAvailable}
+                  value="availability"
+                  classes={{
+                    switchBase: classes.switchBase,
+                    checked: classes.switchChecked,
+                    thumb: classes.switchIcon,
+                    track: classes.switchBar
+                  }}
+                />
+              }
+              classes={{
+                label: classes.label
+              }}
+              label="Availability" />
+            <Tooltip placement='left'
+              title='Profile Rating'>
+              <Badge badgeContent={stars.length}>
+                <img src={ninjaStar} width='30' height='30' alt='ninjaStar' />
+              </Badge>
+            </Tooltip>
           </div>
-        </div>
-        <div className='d-flex align-items-center justify-content-around w-100 mt-2 mb-3'>
-          <Tooltip placement='right'
-            title='Likes'>
-            <Badge badgeContent={likes}>
-              <i className={heartIcon} />
-            </Badge>
-          </Tooltip>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={profileData.available}
-                onChange={handleAvailable}
-                value="availability"
-                classes={{
-                  switchBase: classes.switchBase,
-                  checked: classes.switchChecked,
-                  thumb: classes.switchIcon,
-                  track: classes.switchBar
+          <Typography
+            className={classes.districtTitle}
+            align='center'
+            variant='h6'>
+            Districts
+        </Typography>
+          <DistrictCollapse style={classes.districtTitle} />
+        </Col>
+        <Col xs='11' md='7' lg='6'
+          className={classes.gridItem}>
+          <Typography
+            className={classes.detailsTitle}
+            align='center'
+            variant='h6'>
+            Profile details
+        </Typography>
+          <GridContainer>
+            <GridItem xs={12} sm={6}>
+              <CustomInput
+                formControlProps={{
+                  fullWidth: true,
+                  className: 'mt-3'
                 }}
-              />
-            }
-            classes={{
-              label: classes.label
-            }}
-            label="Availability" />
-          <Tooltip placement='left'
-            title='Profile Rating'>
-            <Badge badgeContent={stars.length}>
-              <img src={ninjaStar} width='30' height='30' alt='ninjaStar' />
-            </Badge>
-          </Tooltip>
-        </div>
-        <Typography
-          className={classes.districtTitle}
-          align='center'
-          variant='h6'>
-          Districts
-        </Typography>
-        <DistrictCollapse style={classes.districtTitle} />
-      </GridItem>
-      <GridItem
-        className={classes.gridItem}
-        xs={12} sm={12} md={6}>
-        <Typography
-          className={classes.detailsTitle}
-          align='center'
-          variant='h6'>
-          Profile details
-        </Typography>
-        <GridContainer>
-          <GridItem xs={12} sm={6}>
-            <CustomInput
-              formControlProps={{
-                fullWidth: true,
-                className: 'mt-3'
-              }}
-              labelText='Username'
-              id='username'
-              inputProps={{
-                type: 'text',
-                value: formData ? formData.name : '',
-                onChange: (e) => handleData('name', e.target.value),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <AccountBox className={classes.inputIconsColor} />
-                  </InputAdornment>
-                )
-              }} />
-          </GridItem>
-          <GridItem xs={12} sm={6}>
-            <CustomInput
-              formControlProps={{
-                fullWidth: true,
-                className: 'mt-3'
-              }}
-              labelText='Email'
-              id='email'
-              inputProps={{
-                type: 'email',
-                value: formData ? formData.email : '',
-                onChange: (e) => handleData('email', e.target.value),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Email className={classes.inputIconsColor} />
-                  </InputAdornment>
-                )
-              }} />
-          </GridItem>
-        </GridContainer>
+                labelText='Username'
+                id='username'
+                inputProps={{
+                  type: 'text',
+                  value: formData ? formData.name : '',
+                  onChange: (e) => handleData('name', e.target.value),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <AccountBox className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  )
+                }} />
+            </GridItem>
+            <GridItem xs={12} sm={6}>
+              <CustomInput
+                formControlProps={{
+                  fullWidth: true,
+                  className: 'mt-3'
+                }}
+                labelText='Email'
+                id='email'
+                inputProps={{
+                  type: 'email',
+                  value: formData ? formData.email : '',
+                  onChange: (e) => handleData('email', e.target.value),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Email className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  )
+                }} />
+            </GridItem>
+          </GridContainer>
 
-        <Typography
-          className={classes.districtTitle}
-          align='center'
-          variant='h6'>
-          About me
+          <Typography
+            className={classes.districtTitle}
+            align='center'
+            variant='h6'>
+            About me
         </Typography>
-        <Container className='mb-3'>
-          <textarea
-            onChange={(e) => handleData('bio', e.target.value)}
-            value={formData ? formData.bio : ''}
-            className={classes.textarea}
-            placeholder='Introduce yourself...'>
-          </textarea>
-        </Container>
-        {formData === profileData ? null :
-          <Footer
-            handleSubmit={handleSubmit}
-            handleCancel={handleCancel} />
-        }
-      </GridItem>
-    </React.Fragment>
+          <Container className='mb-3'>
+            <textarea
+              onChange={(e) => handleData('bio', e.target.value)}
+              value={formData ? formData.bio : ''}
+              className={classes.textarea}
+              placeholder='Introduce yourself...'>
+            </textarea>
+          </Container>
+          {formData === profileData ? null :
+            <Footer
+              handleSubmit={handleSubmit}
+              handleCancel={handleCancel} />
+          }
+        </Col>
+      </Row>
+    </Col>
   );
 }
