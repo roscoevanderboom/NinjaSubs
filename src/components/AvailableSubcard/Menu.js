@@ -26,7 +26,7 @@ export default function SubCardMenu({ sub }) {
   };
 
   const handleIgnoreUser = () => {
-    if (window.confirm(`Block ${sub.name}?\nYou can unblock user\nfrom Settings page.`)) {
+    if (window.confirm(`Block ${sub.name}?\nYou can unblock user from Settings page.`)) {
       methods.updateProfileData({
         blackList: constants.add_if_not_included(state.profileData.blackList, sub.uid)
       })
