@@ -16,7 +16,7 @@ export default function ProfilePage() {
     const classes = useStyles();
     const { state, methods } = useContext(store);
     const { user, profileData } = state;
-    const { updateProfileData, feedback } = methods;
+    const { updateProfileData, feedback, isUserSignedIn } = methods;
     const [formData, setFormData] = useState(false);
 
     const handleData = (key, value) => {
@@ -25,6 +25,9 @@ export default function ProfilePage() {
         });
     }
     const handleSubmit = () => {
+        if (!isUserSignedIn()) {
+            return;
+        }
         let res = validate(profileData, formData, user, feedback);
         if (res) {
             updateProfileData(formData);

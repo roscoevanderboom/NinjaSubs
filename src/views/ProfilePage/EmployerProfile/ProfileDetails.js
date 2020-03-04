@@ -107,7 +107,7 @@ export default function ProfilePage({ props }) {
                             <Map className={classes.inputIconsColor} />
                         </InputAdornment>
                     }
-                    value={formData ? formData.location : ''}
+                    value={!formData ? '' : formData.location}
                     handleData={handleData} />
             </GridItem>
             {/* Address */}

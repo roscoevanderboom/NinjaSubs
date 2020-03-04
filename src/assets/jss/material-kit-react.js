@@ -70,7 +70,7 @@ const body = {
   minHeight: '100vh',
   width: '100%',
   backgroundColor: 'slategrey',
-  margin: '56px 0px 0px 0px',
+  paddingTop: 56,
   padding: 0,
   display: 'flex',
   flexDirection: 'column',

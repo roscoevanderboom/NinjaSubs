@@ -18,7 +18,7 @@ export default () => {
     const handleEmail = (e) => {
         setEmail(e.target.value);
     }
-    const handleSubmit = () => {
+    const handleSubmit = () => {       
         user.updateEmail(email).then(function () {
             updateProfileData({ email: email });
             handleModals('ChangeEmail', false);            

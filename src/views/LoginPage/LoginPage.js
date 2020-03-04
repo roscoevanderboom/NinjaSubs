@@ -72,6 +72,7 @@ export default function LoginPage() {
           uid: res.user.uid
         };
         fb.createProfileData(res.user, newUserData);
+        hist.push('/createProfile-page');
       })
       .catch(error => {
         methods.feedback('error', error.message)

@@ -68,6 +68,11 @@ export default function DistrictSelect(props) {
     } else {
         formControlClasses = classes.formControl;
     }
+
+    React.useEffect(() => {
+        console.log(props);
+
+    }, [props])
     return (
         <FormControl fullWidth className={formControlClasses}>
             <InputLabel htmlFor="location-select"
@@ -94,6 +99,7 @@ export default function DistrictSelect(props) {
                         }}
                         id="location-select" />
                 }>
+                <option>{value}</option>
                 {selectOptions.map((group, i) =>
                     <optgroup key={i} label={group.header}>
                         {group.values.map(dist => <option key={dist} value={dist}>{dist}</option>)}

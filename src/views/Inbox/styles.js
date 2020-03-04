@@ -40,7 +40,8 @@ export const useStyles = makeStyles(theme => ({
         color: 'white'
     },
     navlink: {
-        color: 'white'
+        color: 'white',
+        fontSize: '1rem'
     },
     contactBtn: {
         display: 'flex',

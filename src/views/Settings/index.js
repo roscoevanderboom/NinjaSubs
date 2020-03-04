@@ -62,7 +62,8 @@ export default () => {
   const { state, methods, fb } = useContext(store);
   const classes = useStyles();
   const { user, profileData, noticeboardQuery } = state;
-  const { feedback, handleModals, updateProfileData, deleteUser } = methods;
+  const { feedback, handleModals, updateProfileData, 
+    deleteUser, isUserSignedIn } = methods;
 
   const [listOfSetting, setListOfSettings] = useState([]);
   const [listOfClicks, setListOfClicks] = useState([]);
@@ -76,6 +77,9 @@ export default () => {
     return true
   }
   const handleDelete = async () => {
+    if (!isUserSignedIn()) {
+      return;
+    }
     if (profileData.type === 'Employer') {
       if (!checkActivePosts()) {
         return;
@@ -86,15 +90,27 @@ export default () => {
     }
   }
   const handleChangeEmail = () => {
+    if (!isUserSignedIn()) {
+      return;
+    }
     handleModals('ChangeEmail', true)
   }
   const handleChangePassword = () => {
+    if (!isUserSignedIn()) {
+      return;
+    }
     handleModals('ChangePassword', true)
   }
   const clearBlockedUserList = () => {
+    if (!isUserSignedIn()) {
+      return;
+    }
     handleModals('BlockedUsers', true)
   }
   const handleResendEmail = () => {
+    if (!isUserSignedIn()) {
+      return;
+    }
     if (user.emailVerified) {
       feedback('error', 'You are already verified');
       return;
@@ -106,6 +122,9 @@ export default () => {
     updateProfileData({ emailSent: true })
   }
   const clearIgnoreList = () => {
+    if (!isUserSignedIn()) {
+      return;
+  }
     updateProfileData({ ignoreList: [] })
       .then(() => {
         feedback('success', 'List cleared')

@@ -46,12 +46,12 @@ export const GlobalStatePovider = (props) => {
   const [selectedChat, setSelectedChat] = useState(false);
 
   // Modals
-  const [modals, setModals] = useState({   
+  const [modals, setModals] = useState({
     ChangeAvatar: false,
     JobPostModal: false,
     BlockedUsers: false,
     ChangeEmail: false,
-    ChangePassword: false   
+    ChangePassword: false
   });
 
   // Notifications
@@ -66,6 +66,14 @@ export const GlobalStatePovider = (props) => {
     let currentUser = fb.auth.currentUser;
     if (!currentUser.emailVerified) {
       feedback('error', 'Only verified users can use this feature');
+      return false;
+    }
+    return true
+  }
+  // Check if user is signed in
+  const isUserSignedIn = () => {
+    if (!user || user === null) {
+      feedback('error', 'Looks like you are not signed in!\nClick "NinjaSubs" at the top of the page to go to the landing page.');
       return false;
     }
     return true
@@ -91,6 +99,9 @@ export const GlobalStatePovider = (props) => {
     fb.handleProfileData(user.uid, setProfileData, setLoading, hist);
   };
   const updateProfileData = (data) => {
+    if (!isUserSignedIn()) {
+      return;
+    }
     return new Promise((resolve, reject) => {
       fb.updateProfileData(user, data)
         .then(() => { resolve(true) })
@@ -139,7 +150,7 @@ export const GlobalStatePovider = (props) => {
   }
 
   // handle notifications
-  const addNotification = ({ message, color, close, icon}) => {
+  const addNotification = ({ message, color, close, icon }) => {
     setNotificationList([
       ...notificationList,
       {
@@ -167,7 +178,7 @@ export const GlobalStatePovider = (props) => {
     feedback, handleModals, handleAuthState, handleProfileData,
     queryNoticeboard, queryAvailableSubs, handleInbox,
     updateProfileData, deleteUser, searchInbox, deleteChatroom,
-    search, isUserVerfied, addNotification
+    search, isUserVerfied, addNotification, isUserSignedIn
   };
 
   // Create provider

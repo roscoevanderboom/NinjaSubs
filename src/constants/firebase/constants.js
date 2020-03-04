@@ -190,7 +190,7 @@ export const removeJobApplication = (post, profileData, feedback) => {
             feedback('error', err.message)
         })
 }
-export const deleteUser = async (user, profileData, feedback) => {
+export const deleteUser = async (user, profileData, feedback, hist) => {
     if (profileData.type === 'Substitute') {
         await availableSubs.doc(profileData.uid).delete()
             .catch(error => feedback('error', error.message))
@@ -209,6 +209,7 @@ export const deleteUser = async (user, profileData, feedback) => {
     await users.doc(profileData.uid).delete()
         .catch(error => feedback('error', error.message))
     await user.delete()
+        .then(() => { hist.push('/') })
         .catch(error => feedback('logout', error.message))
 }
 
