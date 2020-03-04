@@ -55,9 +55,9 @@ export default function ProfilePage({ props }) {
       })
   }
   const handleAvailable = () => {
-    if (!isUserVerfied()) {
-      return;
-    }
+    // if (!isUserVerfied()) {
+    //   return;
+    // }
     fb.availableSubs.doc(user.uid)
       .update(newSubBoardListing(profileData))
       .then(() => {
@@ -84,7 +84,6 @@ export default function ProfilePage({ props }) {
     if (profileData.locations.length > 0) {
       count.push('locations');
     }
-    console.log(count);
 
     setStars(count);
     if (isArrayEqual(count, profileData.rating)) {

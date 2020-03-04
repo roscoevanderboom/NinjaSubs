@@ -30,7 +30,7 @@ export default function DistrictSelect(props) {
 
     const selectOptions = [
         {
-            header: 'Tapei',
+            header: 'Taipei',
             values: constants.Taipei
         },
         {

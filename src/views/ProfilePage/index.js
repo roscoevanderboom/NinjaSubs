@@ -1,14 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 // Store
 import store from 'state';
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// @material-ui/core components
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import Parallax from "components/Parallax/Parallax.js";
 // Custom components
 import SubProfile from './SubProfile/SubProfilePage';
 import EmpProfile from './EmployerProfile/EmpProfilePage';
@@ -58,24 +53,17 @@ export default function ProfilePage() {
                     color: "white"
                 }}
             />
-            <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-            <div className='d-flex justify-content-center'>
-                <div className={classNames(classes.main, classes.mainRaised)}>
-                    <div>
-                        <div className={classes.container}>
-                            <GridContainer justify="space-between">
-                                {profileData.type === 'Substitute'
-                                    ? <SubProfile props={{
-                                        formData, handleData,
-                                        handleSubmit, handleCancel
-                                    }} />
-                                    : <EmpProfile props={{
-                                        formData, handleData,
-                                        handleSubmit, handleCancel
-                                    }} />}
-                            </GridContainer>
-                        </div>
-                    </div>
+            <div className={classes.body}>
+                <div className={classes.profileContainer}>
+                    {profileData.type === 'Substitute'
+                        ? <SubProfile props={{
+                            formData, handleData,
+                            handleSubmit, handleCancel
+                        }} />
+                        : <EmpProfile props={{
+                            formData, handleData,
+                            handleSubmit, handleCancel
+                        }} />}
                 </div>
             </div>
         </div>

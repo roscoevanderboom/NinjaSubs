@@ -8,6 +8,7 @@ import {
 import profileStyles from "assets/jss/material-kit-react/views/profilePage.js";
 import inputStyles from "assets/jss/material-kit-react/components/customInputStyle";
 import basicStyles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle";
+import bg from "assets/img/bg2.jpg";
 
 const title = {
   ...boxShadow,
@@ -25,18 +26,7 @@ const title = {
 export default makeStyles({
   ...profileStyles,
   ...inputStyles,
-  ...basicStyles,
-  mainRaised: {
-    ...profileStyles.mainRaised,
-    width: '75%',
-    "@media (max-width: 570px)": {
-      margin: "-30vh 5px 0px",
-      width: '100%',
-    },
-    borderRadius: 0,
-    boxShadow: 'none',
-    backgroundColor: '#d3d3d300'
-  },
+  ...basicStyles,  
   heartIcon: {
     fontSize: '1.8rem',
     color: roseColor
@@ -53,14 +43,11 @@ export default makeStyles({
     ...boxShadow,
     borderRadius: 6,
     backgroundColor: 'white',
-    margin: '15px 12px',
-    "@media (max-width: 570px)": {
-      margin: '15px 0px'
-    },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: 'fit-content'
+    height: 'fit-content',
+    margin: '40px 0px'
   },
   detailsTitle: {
     ...title,
@@ -81,5 +68,17 @@ export default makeStyles({
   },
   listItemText: {
     ...defaultFont
+  },
+  body:{
+    backgroundImage: `url(${bg})`,
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    height: '100vh',
+
+  },
+  profileContainer:{
+    paddingTop: '24vh',
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
