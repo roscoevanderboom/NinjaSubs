@@ -99,7 +99,7 @@ export default () => {
         setPost({ ...post, [key]: e.target.value })
     }
     const handleNegRates = () => {
-        setPost({ ...post, neg: post.Neg ? false : true })
+        setPost({ ...post, neg: post.neg ? false : true })
     }
     const handleSubmit = () => {
         if (!constants.isNewPostAllowed(noticeboardQuery, profileData)) {
