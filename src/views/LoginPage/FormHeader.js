@@ -29,8 +29,6 @@ export default ({ props }) => {
             }
             fb.users.doc(user.uid).update(data)
                 .then(() => {
-                    console.log('update success');
-                    
                     hist.push('/profile-page');
                 })
                 .catch((err) => {
@@ -43,7 +41,7 @@ export default ({ props }) => {
             // var errorCode = error.code;
 
             var errorMessage = error.message;
-            console.log(errorMessage);
+            methods.feedback('error',errorMessage);
             // The email of the user's account used.
             var email = error.email;
             console.log(email);

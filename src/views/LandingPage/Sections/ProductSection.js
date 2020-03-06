@@ -30,7 +30,7 @@ export default function ProductSection() {
   )
   return (
     <div className={classes.section}>
-      <GridContainer justify="center">
+      {/* <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>Available Internationally</h2>
           <h5 className={classes.description}>
@@ -38,7 +38,7 @@ export default function ProductSection() {
           </h5>
           <br />          
         </GridItem>
-      </GridContainer>
+      </GridContainer> */}
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -87,7 +87,8 @@ export default function ProductSection() {
           <h2 className={classes.title}>Community built</h2>
           <h6 className={classes.description}>
            NinjaSubs is maintained by a community of up-and-coming web developers. I learned a lot by creating this project and I want to 
-           offer other developers the chance to contribute to a live project.
+           offer other developers the chance to contribute to a live project. If you would like to contribute to this project, you are 
+           more than welcome to contact us with suggestions. Anyone who adds content, will become a team member. 
           </h6>
           <br />          
         </GridItem>
