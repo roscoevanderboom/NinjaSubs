@@ -42,13 +42,13 @@ export default () => {
             case 'start':
                 res = moment(userDate).isSameOrAfter(moment(), 'day');
                 if (!res) {
-                    feedback('error', 'Date is earlier than current date');
+                    feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.DATE_IS_EARLIER_THAN_CURRENT_DATE);
                 }
                 break;
             default:
                 res = moment(userDate).isSameOrAfter(post.start);
                 if (!res) {
-                    feedback('error', 'Select a date later than the start date');
+                    feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.SELECT_A_DATE_LATER_THAN_THE_START_DATE);
                 }
                 break;
         }
@@ -69,11 +69,11 @@ export default () => {
     }
     const handleSubmit = () => {
         if (!constants.isNewPostAllowed(noticeboardQuery, profileData)) {
-            feedback('error', 'Only 4 posts allowed');
+            feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.ONLY_4_POSTS_ALLOWED);
             return;
         }
         if (stars < 2) {
-            feedback('warning', `You haven't provided enough information.`);
+            feedback(FEEDBACK.TYPE.WARNING, FEEDBACK.MESSAGE.YOU_HAVENT_PROVIDED_ENOUGH_INFORMATION);
             return;
         }
         fb.newJobPost(post, stars, handleModals, feedback)
