@@ -32,7 +32,7 @@ export default function WorkSection() {
   const handleSubmit = () => {
     fb.mailbox.doc().set(formData)
       .then(() => {
-        methods.feedback('success', 'Your message has been sent!');
+        methods.feedback(FEEDBACK.TYPE.SUCCESS, FEEDBACK.MESSAGE.YOUR_MESSAGE_HAS_BEEN_SENT);
       })
       .catch((err) => {
         methods.feedback('error', err.message);

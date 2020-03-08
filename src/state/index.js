@@ -65,7 +65,7 @@ export const GlobalStatePovider = (props) => {
   const isUserVerfied = () => {
     let currentUser = fb.auth.currentUser;
     if (!currentUser.emailVerified) {
-      feedback('error', 'Only verified users can use this feature');
+      feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.ONLY_VERIFIED_USERS_CAN_USE_THIS_FEATURE);
       return false;
     }
     return true
@@ -73,7 +73,7 @@ export const GlobalStatePovider = (props) => {
   // Check if user is signed in
   const isUserSignedIn = () => {
     if (!user || user === null) {
-      feedback('error', 'Looks like you are not signed in!\nClick "NinjaSubs" at the top of the page to go to the landing page.');
+      feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.LOOKS_LIKE_YOU_ARE_NOT_SIGNED_IN_CLICK_NINJASUBS_AT_THE_TOP_OF_THE_PAGE_TO_GO_TO_THE_LANDING_PAGE);
       return false;
     }
     return true

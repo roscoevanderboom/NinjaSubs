@@ -13,7 +13,7 @@ export default ({ props }) => {
 
     const popUp = (provider) => {
         if (title === 'Register' && !data.terms) {
-            methods.feedback('info', `Please accept terms and conditions.`);
+            methods.feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PLEASE_ACCEPT_TERMS_AND_CONDITIONS);
             return;
         }
         fb.auth.signInWithPopup(provider).then(function (result) {

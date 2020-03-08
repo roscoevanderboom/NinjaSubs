@@ -46,7 +46,7 @@ const ActivitiesCard = () => {
         //     return;
         // }
         if (!constants.isNewPostAllowed(noticeboardQuery, profileData)) {
-            feedback('error', 'Only 4 posts allowed');
+            feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.ONLY_4_POSTS_ALLOWED);
             return;
         }
         setState.set_post_to_edit(constants.newPost(profileData));
