@@ -1,5 +1,8 @@
 // 
-import * as constants from '../';
+import {
+    FEEDBACK, newChatRoom, newJobApplicationData,
+    add_if_not_included, remove_from_array
+} from '../';
 // App
 import Firebase from './index';
 export const firebase = Firebase;
@@ -25,11 +28,11 @@ export const handleAuthState = (setUser, setLoading, hist) => {
     setLoading(true);
     auth.onAuthStateChanged(async (currentUser) => {
         if (currentUser === null) {
-            setUser(currentUser);           
+            setUser(currentUser);
             setLoading(false);
             hist.push('/login-page');
             return;
-        }       
+        }
         setUser(currentUser);
     }, function (error) {
         console.log(error.message);
@@ -128,7 +131,7 @@ export const handleInbox = (user, setInbox) => {
         })
 };
 export const startChat = (profileData, chatee, history, setSelectedChat) => {
-    let newChat = constants.newChatRoom(profileData, chatee)
+    let newChat = newChatRoom(profileData, chatee)
     privateChats.doc(`${newChat.room_id}`).set(newChat)
         .then(() => {
             followChat(newChat.room_id, history, setSelectedChat)
@@ -173,10 +176,10 @@ export const deleteChatroom = (id, setSelectedChat, hist) => {
         })
 }
 export const applyToJobPost = async (post, profileData, feedback) => {
-    let details = constants.newJobApplicationData(profileData);
+    let details = newJobApplicationData(profileData);
     noticeboard.doc(`${post.ref}`).update({
-        candidates: constants.add_if_not_included(post.candidates, details),
-        candidates_uid: constants.add_if_not_included(post.candidates_uid, profileData.uid)
+        candidates: add_if_not_included(post.candidates, details),
+        candidates_uid: add_if_not_included(post.candidates_uid, profileData.uid)
     })
         .catch((err) => {
             feedback('error', err.message)
@@ -190,8 +193,7 @@ export const removeJobApplication = (post, profileData, feedback) => {
         }
     });
     noticeboard.doc(`${post.ref}`).update({
-        candidates: constants.remove_from_array(post.candidates, details),
-        // candidates_uid: constants.remove_from_array(post.candidates_uid, profileData.uid)
+        candidates: remove_from_array(post.candidates, details),
         candidates_uid: post.candidates_uid.filter(uid => uid !== profileData.uid)
     })
         .catch((err) => {

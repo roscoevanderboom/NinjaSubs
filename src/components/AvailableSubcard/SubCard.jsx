@@ -38,9 +38,9 @@ export default ({ sub }) => {
         }).then(() => { setLiked(false) })
     }
     const handleLike = () => {
-        // if (!isUserVerfied()) {
-        //     return;
-        // }
+        if (!isUserVerfied()) {
+            return;
+        }
         if (sub.uid === profileData.uid) {
             return;
         }
@@ -57,8 +57,7 @@ export default ({ sub }) => {
         console.log(sub.image)
     }
 
-    React.useEffect(() => {
-        console.log('TODO -- create imagebox')
+    React.useEffect(() => {       
         if (sub.likes !== undefined) {
             sub.likes.includes(profileData.uid)
                 ? setLiked(true)

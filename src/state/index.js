@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 import * as constants from '../constants';
+import FEEDBACK from "constants/feedback";
 import * as fb from '../constants/firebase/constants';
 import * as filters from '../constants/filters';
 // import pushNotifications from 'constants/firebase/pushNotification';
@@ -50,10 +51,7 @@ export const GlobalStatePovider = (props) => {
   // Modals
   const [modals, setModals] = useState({
     ChangeAvatar: false,
-    JobPostModal: false,
-    BlockedUsers: false,
-    ChangeEmail: false,
-    ChangePassword: false
+    JobPostModal: false    
   });
 
   // Notifications
@@ -126,9 +124,9 @@ export const GlobalStatePovider = (props) => {
     fb.deleteUser(user, profileData, feedback, hist);
   };
   const searchInbox = (chatee) => {
-    // if (!isUserVerfied()) {
-    //   return;
-    // }
+    if (!isUserVerfied()) {
+      return;
+    }
     fb.searchInbox(inbox, profileData, chatee, hist, setSelectedChat, handleModals);
   }
   const deleteChatroom = (id) => {

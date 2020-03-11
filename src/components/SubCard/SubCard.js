@@ -21,9 +21,9 @@ export default function SubCard({ sub }) {
     }
 
     const handleStartChat = () => {
-        // if (!isUserVerfied()) {
-        //     return;
-        // }       
+        if (!isUserVerfied()) {
+            return;
+        }       
         searchInbox(sub)
     }
 

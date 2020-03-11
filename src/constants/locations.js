@@ -20,8 +20,13 @@ export const taiwan = {
         'Longtan', 'Pingzhen', 'Xinwu', 'Guanyin',
         'Fuxing'
     ],
-    Taichung: [
-        'Xitun'
+    Taichung: [      
+        'Beitun','Central', 'Daan', 'Dadu',
+        'Dajia', 'Dali', 'Daya', 'Dongshi',
+        'Fengyuan', 'Heping', 'Houli', 'Longjing',
+        'Nantun', 'Qingshui', 'Shalu', 'Shengang', 
+        'Taiping', 'Tanzi', 'Waipu', 'Wufeng', 
+        'Wuqi', 'Wuri', 'Xinshe', 'Xitun'
     ],
     Kaoshiung:[
         'Xitun'

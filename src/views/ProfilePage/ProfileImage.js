@@ -1,14 +1,10 @@
-import React, { useContext } from "react";
-// Store
-import store from 'state';
+import React from "react";
 // Custom components
 import ChangeAvatar from './ChangeAvatar';
 // Styles
 import useStyles from './styles';
 
-export default function ProfileImage({ formData }) {    
-    const { constants } = useContext(store);
-
+export default function ProfileImage({ formData }) {  
     const classes = useStyles();
 
     return (
@@ -17,7 +13,7 @@ export default function ProfileImage({ formData }) {
                 <img alt="..."
                     style={{ marginRight: '-32px' }}
                     className={classes.image}
-                    src={formData ? formData.image : constants.noImage} />
+                    src={formData ? formData.image : ''} />
                 <ChangeAvatar />
             </div>
             <div className={classes.name}>

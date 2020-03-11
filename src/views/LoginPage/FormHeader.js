@@ -8,7 +8,8 @@ import CardHeader from "components/Card/CardHeader.js";
 
 export default ({ props }) => {
     const { classes, title, data } = props;
-    const { fb, hist, methods } = useContext(store);
+    const { fb, hist, methods, constants } = useContext(store);
+    const { FEEDBACK } = constants;
     const firebase_ = fb.firebase.firebase_.apps[0].firebase_;
 
     const popUp = (provider) => {
@@ -41,7 +42,7 @@ export default ({ props }) => {
             // var errorCode = error.code;
 
             var errorMessage = error.message;
-            methods.feedback('error',errorMessage);
+            methods.feedback('error', errorMessage);
             // The email of the user's account used.
             var email = error.email;
             console.log(email);

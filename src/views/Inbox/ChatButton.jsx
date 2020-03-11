@@ -17,9 +17,9 @@ export default ({ chat }) => {
   const [recipient, setRecipient] = useState({ name: '', image: '' });
 
   const selectChat = () => {
-    // if (!isUserVerfied()) {
-    //   return;
-    // }
+    if (!isUserVerfied()) {
+      return;
+    }
     fb.followChat(chat.room_id, hist, setSelectedChat);
   }
 

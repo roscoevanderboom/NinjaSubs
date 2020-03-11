@@ -38,18 +38,19 @@ import CreatePost from '@material-ui/core/Button';
 const ActivitiesCard = () => {
     const { state, methods, constants, setState, fb, filters } = useContext(store);
     const { profileData, noticeboardQuery } = state;
+    const { FEEDBACK, isNewPostAllowed, newPost } = constants;
     const { handleModals, feedback, isUserVerfied } = methods;
     const [list, setList] = useState([])
 
     const createPost = () => {
-        // if (!isUserVerfied()) {
-        //     return;
-        // }
-        if (!constants.isNewPostAllowed(noticeboardQuery, profileData)) {
+        if (!isUserVerfied()) {
+            return;
+        }
+        if (!isNewPostAllowed(noticeboardQuery, profileData)) {
             feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.ONLY_4_POSTS_ALLOWED);
             return;
         }
-        setState.set_post_to_edit(constants.newPost(profileData));
+        setState.set_post_to_edit(newPost(profileData));
         handleModals('JobPostModal', true);
     }
     const editPost = (post) => {

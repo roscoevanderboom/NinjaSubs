@@ -2,8 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { Route, Switch } from "react-router-dom";
 // State
 import GlobalState from 'state';
-// API settings
-import { ninjasubs_test, ninjaSubs_taipei } from 'constants/firebase';
 
 // pages for this product
 import LoginPage from "views/LoginPage/LoginPage";
@@ -26,16 +24,7 @@ import Notifications from 'views/Notifications';
 // });
 
 export default function App() {
-    const { state, methods, hist } = useContext(GlobalState);
-
-    useEffect(() => {
-        console.log(state.firebase);
-        console.log(ninjasubs_test);
-        console.log(ninjaSubs_taipei);
-        console.log(window.location.href);
-
-
-    }, [state.firebase])
+    const { state, methods } = useContext(GlobalState);
 
     useEffect(() => {
         methods.handleAuthState();
@@ -56,6 +45,7 @@ export default function App() {
         <React.Fragment>
             <Loader />
             <Switch>
+                <Route exact path="/" component={LoginPage} />
                 <Route exact path="/login-page" component={LoginPage} />
                 <Route exact path="/createProfile-page" component={CreateProfile} />
                 <Route exact path="/profile-page" component={ProfilePage} />

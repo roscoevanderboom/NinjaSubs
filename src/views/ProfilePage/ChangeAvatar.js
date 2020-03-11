@@ -62,8 +62,8 @@ export default () => {
     const classes = useStyles()
     const { state, methods, fb, constants, setState } = useContext(store);
     const { setLoading } = setState;
-    const { profileData } = state;
-    const { handleModals, feedback, updateProfileData } = methods;
+    const { profileData, user } = state;
+    const { feedback, updateProfileData } = methods;
     const [url, setUrl] = useState('');
     const [open, setOpen] = useState(false);
 
@@ -75,12 +75,21 @@ export default () => {
         open ? setOpen(false) : setOpen(true)
     }
     const handleSubmit = () => {
-        updateProfileData({ image: url });
-        handleModals('ChangeAvatar', false)
+        user.updateProfile({
+            photoURL: url
+        })
+            .then((res) => {
+                updateProfileData({ image: url });
+                setOpen(false);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
     const handleFileSelect = (e) => {
         setLoading(true);
-        var imagesRef = fb.storageRef.child(profileData.uid);
+        var imagesRef = fb.storageRef.child(`${profileData.uid}/temp`);
+
         imagesRef.put(e.target.files[0])
             .then(function (snapshot) {
                 snapshot.ref.getDownloadURL()
@@ -95,12 +104,10 @@ export default () => {
     }
 
     useEffect(() => {
-        console.log('TODO -- re-apply original profile image if user cancels upload process');
-
         if (profileData.image !== undefined) {
             setUrl(profileData.image)
         }
-    }, [profileData])
+    }, [profileData, user])
 
     return (
         <React.Fragment>

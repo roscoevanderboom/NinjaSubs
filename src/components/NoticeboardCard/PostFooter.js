@@ -33,9 +33,9 @@ const PostFooter = ({ post }) => {
     const { profileData } = state;
 
     const apply = () => {
-        // if (!isUserVerfied()) {
-        //     return;
-        // }
+        if (!isUserVerfied()) {
+            return;
+        }
         fb.applyToJobPost(post, profileData, feedback);
     }
     const ignore = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-// State
-import GlobalState from 'state';
+// Locations array
+import { taiwan } from 'constants/locations';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -25,21 +25,20 @@ export default function DistrictSelect(props) {
         success,
         endAdornment
     } = props;
-    const { constants } = React.useContext(GlobalState);
     const classes = useStyles();
 
     const selectOptions = [
         {
             header: 'Taipei',
-            values: constants.Taipei
+            values: taiwan.Taipei
         },
         {
             header: 'New Taipei',
-            values: constants.newTaipei
+            values: taiwan.newTaipei
         },
         {
             header: 'Taoyuan',
-            values: constants.Taoyuan
+            values: taiwan.Taoyuan
         },
     ]
     const labelClasses = classNames({
