@@ -52,7 +52,7 @@ export const handleErrors = (validate, setErrors) => {
 export const validateRegister = (data, feedback, setErrors) => {
     const { email, password, repeatPass, terms } = data;
     if (email === '') {
-        feedback('info', `Please enter your email.`);
+        feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PLEASE_ENTER_YOUR_EMAIL);
         return false;
     }
     let validate = validatePassword(password);
@@ -61,11 +61,11 @@ export const validateRegister = (data, feedback, setErrors) => {
         return false;
     }
     if (password !== repeatPass) {
-        feedback('info', `Passwords don't match.`);
+        feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PASSWORDS_DONT_MATCH);
         return false;
     }
     if (!terms) {
-        feedback('info', `Please accept terms and conditions.`);
+        feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PLEASE_ACCEPT_TERMS_AND_CONDITIONS);
         return false;
     }
    return true

@@ -234,7 +234,7 @@ export const handleSignOut = (hist) => {
 export const handleVerification = (user, feedback) => {
     user.sendEmailVerification()
         .then(function () {
-            feedback('success', 'Verification email has sent')
+            feedback(FEEDBACK.TYPE.SUCCESS, FEEDBACK.MESSAGE.EMAIL_SENT)
         }).catch(function (error) {
             feedback('error', error.message)
         });
@@ -263,7 +263,7 @@ export const newJobPost = (post, stars, handleModals, feedback) => {
 export const deleteJobPost = (post, feedback) => {
     noticeboard.doc(`${post.ref}`).delete()
         .then(() => {
-            feedback('success', 'Post deleted');
+            feedback(FEEDBACK.TYPE.SUCCESS, FEEDBACK.MESSAGE.POST_DELETED);
         })
         .catch((err) => {
             feedback('error', err.message);

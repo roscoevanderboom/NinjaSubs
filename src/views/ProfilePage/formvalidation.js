@@ -7,14 +7,14 @@ export default (profileData, formData,user, feedback) => {
     switch (profileData.type) {
         case 'Substitute':
             if (formData.locations.length === 0) {
-                feedback('error', 'Please add a few districts');
+                feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.PLEASE_ADD_A_FEW_DISTRICTS);
                 res = false;
                 return;
             }
             break;
         default:
             if (formData.location === '') {
-                feedback('error', 'Please select a district');
+                feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.PLEASE_SELECT_A_DISTRICT);
                 res = false
                 return;
             }
@@ -26,7 +26,7 @@ export default (profileData, formData,user, feedback) => {
     if (formData.email !== profileData.email) {
         user.updateEmail(formData.email)
             .catch((err) => {
-                feedback('logout', err.message);
+                feedback(FEEDBACK.TYPE.LOGOUT, err.message);
                 res = false;
             })
     }
