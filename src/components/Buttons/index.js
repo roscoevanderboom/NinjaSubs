@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as fb from '../../constants/firebase/constants';
+import { handleSignOut } from '../../constants/firebase/constants';
 // Components
 import { Button } from '@material-ui/core';
 import { Close, ExitToApp } from '@material-ui/icons';
@@ -22,11 +22,11 @@ export const AcceptBtn = ({ onClick }) => (
     </Button>
 )
 export const LogoutBtn = ({ props }) => {
-    const { key, closeSnackbar, hist } = props;   
+    const { key, closeSnackbar, hist } = props;
     return (
         <Button
             onClick={() => {
-                fb.handleSignOut(hist)
+                handleSignOut(hist)
                 closeSnackbar(key)
             }}>
             <ExitToApp />

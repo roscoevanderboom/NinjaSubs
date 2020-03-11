@@ -15,7 +15,7 @@ export default ({ list }) => {
             {list.map((item, i) =>
                 <div
                     key={i}
-                    className={item.sender_name === profileData.name
+                    className={item.sender_uid === profileData.uid
                         ? 'text-dark mt-2 row p-0 m-0 justify-content-end'
                         : 'text-dark mt-2 row p-0 m-0 justify-content-start'}>
                     <ListItem
@@ -24,11 +24,11 @@ export default ({ list }) => {
                             <ListItemText
                                 inset={true}
                                 classes={{
-                                    primary: item.sender_name === profileData.name
+                                    primary: item.sender_uid === profileData.uid
                                         ? classes.listItemRight
                                         : classes.listItemLeft
                                 }}
-                                className={item.sender_name === profileData.name
+                                className={item.sender_uid === profileData.uid
                                     ? 'row p-0 m-0 justify-content-end'
                                     : 'row p-0 m-0 justify-content-start'}
                                 primary={item.post} />

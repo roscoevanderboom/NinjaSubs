@@ -5,6 +5,7 @@ export const noUserImage = noImage;
 import ninjastar from '../assets/img/ninjastar.png';
 export const ninjaStar = ninjastar;
 export const terms = 'https://www.termsandconditionsgenerator.com/live.php?token=cUjuC2S5w2vTipxpiAQVx56WBJZReus7';
+export const privacy_policy = 'https://www.privacypolicytemplate.net/live.php?token=G1ODSTh6D6xdPVL2vUrNtMLouRykOV2O';
 // 
 // Locations
 export const Taipei = [

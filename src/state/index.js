@@ -20,6 +20,8 @@ export const GlobalStatePovider = (props) => {
 
   // Router history
   const hist = useHistory();
+    // API
+    const [firebase, setFirebase] = useState(false);
 
   // Hanndle Auth / new user state
   const [loading, setLoading] = useState(true);
@@ -93,10 +95,10 @@ export const GlobalStatePovider = (props) => {
 
   // Functions for gathering user data
   const handleAuthState = () => {
-    fb.handleAuthState(setUser, setLoading, setLoggedIn)
+    fb.handleAuthState(setUser, setLoading, hist)
   };
   const handleProfileData = () => {
-    fb.handleProfileData(user.uid, setProfileData, setLoading, hist);
+    fb.handleProfileData(user, setProfileData, setLoading, hist);
   };
   const updateProfileData = (data) => {
     if (!isUserSignedIn()) {
@@ -164,12 +166,12 @@ export const GlobalStatePovider = (props) => {
   }
 
   const state = {
-    loading, loggedIn, user, modals, profileData, noticeboardQuery,
+    firebase, loading, loggedIn, user, modals, profileData, noticeboardQuery,
     availableSubs, inbox, createUserProfile, post_to_edit, selectedChat,
     searchList, currentList, notificationList
   };
   const setState = {
-    setLoading, setLoggedIn, setUser, setCreateUserProfile,
+    setFirebase, setLoading, setLoggedIn, setUser, setCreateUserProfile,
     setProfileData, setAvailableSubs, setNoticeboardQuery,
     setInbox, set_post_to_edit, setSelectedChat,
     setSearchList, setCurrentList, setNotificationList

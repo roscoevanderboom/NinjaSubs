@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import { Route, Switch } from "react-router-dom";
 // State
 import GlobalState from 'state';
+// API settings
+import { ninjasubs_test, ninjaSubs_taipei } from 'constants/firebase';
 
 // pages for this product
-import LandingPage from "views/LandingPage";
 import LoginPage from "views/LoginPage/LoginPage";
 import Loader from 'components/Loader';
 import AvailableSubs from "views/AvailableSubs";
@@ -25,7 +26,16 @@ import Notifications from 'views/Notifications';
 // });
 
 export default function App() {
-    const { state, methods } = useContext(GlobalState);
+    const { state, methods, hist } = useContext(GlobalState);
+
+    useEffect(() => {
+        console.log(state.firebase);
+        console.log(ninjasubs_test);
+        console.log(ninjaSubs_taipei);
+        console.log(window.location.href);
+
+
+    }, [state.firebase])
 
     useEffect(() => {
         methods.handleAuthState();
@@ -37,7 +47,7 @@ export default function App() {
             methods.handleProfileData();
             methods.queryNoticeboard();
             methods.queryAvailableSubs();
-            methods.handleInbox(); 
+            methods.handleInbox();
         }
         // eslint-disable-next-line
     }, [state.user])
@@ -46,16 +56,15 @@ export default function App() {
         <React.Fragment>
             <Loader />
             <Switch>
-                <Route path="/" exact component={LandingPage} />
-                <Route path="/login-page" component={LoginPage} />
-                <Route path="/createProfile-page" component={CreateProfile} />
-                <Route path="/profile-page" component={ProfilePage} />                
-                <Route path="/noticeboard" component={Noticeboard} />
-                <Route path="/activities" component={Activities} />
-                <Route path="/availableSubs" component={AvailableSubs} />
-                <Route path="/contacts" component={Inbox} />
-                <Route path="/settings" component={Settings} />
-                <Route path="/chatroom" component={Chatroom} />
+                <Route exact path="/login-page" component={LoginPage} />
+                <Route exact path="/createProfile-page" component={CreateProfile} />
+                <Route exact path="/profile-page" component={ProfilePage} />
+                <Route exact path="/noticeboard" component={Noticeboard} />
+                <Route exact path="/activities" component={Activities} />
+                <Route exact path="/availableSubs" component={AvailableSubs} />
+                <Route exact path="/contacts" component={Inbox} />
+                <Route exact path="/settings" component={Settings} />
+                <Route exact path="/chatroom" component={Chatroom} />
             </Switch>
             <Modals />
             <Notifications />

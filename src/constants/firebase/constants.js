@@ -21,36 +21,44 @@ export const storageRef = storage.ref();
 // ******************************************************
 //  Functions that are called from global state provider
 // ******************************************************
-export const handleAuthState = (setUser, setLoading, setLoggedIn) => {
+export const handleAuthState = (setUser, setLoading, hist) => {
     setLoading(true);
     auth.onAuthStateChanged(async (currentUser) => {
         if (currentUser === null) {
-            setUser(currentUser);
-            setLoggedIn(false)
+            setUser(currentUser);           
             setLoading(false);
+            hist.push('/login-page');
             return;
-        }
-        setLoggedIn(true)
+        }       
         setUser(currentUser);
     }, function (error) {
         console.log(error.message);
     })
 };
-export const handleProfileData = (uid, setProfileData, setLoading, hist) => {
-    users.doc(uid).onSnapshot(function (doc) {
+export const handleProfileData = (user, setProfileData, setLoading, hist) => {
+    users.doc(user.uid).onSnapshot(function (doc) {
         if (doc.exists && doc.data().type !== undefined) {
             setProfileData(doc.data());
             setLoading(false);
-            // hist.push('/profile-page')
             return;
         }
         if (doc.exists && doc.data().type === undefined) {
             setProfileData(doc.data());
             setLoading(false);
-            // hist.push('/createProfile-page')
+            hist.push('/createProfile-page')
             return;
         }
-
+        let data = {
+            name: user.displayName,
+            email: user.email,
+            uid: user.uid
+        }
+        users.doc(user.uid).set(data)
+            .then(() => {
+                hist.push('/createProfile-page')
+            }).catch((err) => {
+                console.log(err.message);
+            })
     }, function (error) {
         console.log(error.message);
         setProfileData(false);
@@ -226,9 +234,9 @@ export const handleSignOut = (hist) => {
 export const handleVerification = (user, feedback) => {
     user.sendEmailVerification()
         .then(function () {
-            feedback('success', 'Email sent')
+            feedback('success', 'Verification email has sent')
         }).catch(function (error) {
-            feedback('error', 'error.message')
+            feedback('error', error.message)
         });
 };
 export const createProfileData = (user, data) => {

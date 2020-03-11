@@ -80,10 +80,10 @@ export default function LoginPage() {
   };
   const login = () => {
     fb.auth.signInWithEmailAndPassword(data.email, data.password)
-      .then(() => {
+      .then((res) => {        
         resetData();
       })
-      .then(() => {
+      .then((res) => {        
         hist.push('/profile-page');
       })
       .catch(error => {

@@ -63,11 +63,10 @@ export default function Header(props) {
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
         <Button
+          href='https://ninja-subs.web.app/'
           className={classes.title}
           color='transparent'>
-          <Link className={classes.brand} to='/'>
-            {brand}
-          </Link>
+          {brand}
         </Button>
         {rightLinks}
       </Toolbar>

@@ -4,18 +4,25 @@ import React from 'react';
 import {
     ListItem, ListItemText, Button, Divider
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+const styles = makeStyles({   
+    listItem: {
+        padding: '5px 5px 5px 12px'
+    },
+})
 
-export default ({ props }) => {
-    const { i, item, listOfClicks, classes } = props;
+export default (props) => {
+    const classes = styles();
+    const { text, icon, onClick } = props;
     return (
         <ListItem button
             className={classes.listItem}
-            onClick={() => listOfClicks[i]()}>
+            onClick={onClick}>
             <ListItemText>
-                {item.text}
+                {text}
             </ListItemText>
             <Button >
-                {item.icon}
+                {icon}
             </Button>
             <Divider />
         </ListItem>
