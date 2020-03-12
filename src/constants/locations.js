@@ -28,9 +28,26 @@ export const taiwan = {
         'Taiping', 'Tanzi', 'Waipu', 'Wufeng', 
         'Wuqi', 'Wuri', 'Xinshe', 'Xitun'
     ],
-    Kaoshiung:[
-        'Xitun'
-    ],
+    Kaoshiung:{
+        Kaoshiung: [
+            'Yancheng', 'Gushan', 'Zuoying', 'Nanzih',
+            'Sanmin', 'Sinsing', 'Cianjin', 'Lingya',
+            'Cianjhen', 'Cijin', 'Siaogang'
+        ],
+        Fengshan: [
+            'Fengshan', 'Linyuan', 'Daliao', 'Dashu',
+            'Dashe', 'Renwu', 'Niaosong'
+        ],
+        Gangshan: [
+            'Gangshan', 'Ciaotou', 'Yanchao', 'Tianliao',
+            'Alian', 'Lujhu', 'Hunei', 'Cieding', 
+            'Yongan', 'Mituo', 'Zihguan'
+        ],
+        Cishan: [
+            'Cishan', 'Meinong', 'Liouguei', 'Jiansian',
+            'Shanlin', 'Neimen'
+        ]
+    },
     Tainan: [
         ''
     ]
