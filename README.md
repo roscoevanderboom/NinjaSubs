@@ -7,12 +7,22 @@ Here is  the test server.
 
 https://ninjasubs-test.firebaseapp.com/
 
-
-I have allowed access to unverified user to edit profiles, create chatrooms, create job posts and also apply to job posts.
-
-Once testing is complete, Firebase security rules will lock all access to the main features of the app. After that email verification will be needed to use the main features.
-
-
-TODO:
-
-**Improve README!!
+<h4>Features:</h4>
+Substitutes can: 
+<ul>
+  <li>add an introduction to their profile</li>
+  <li>switch "Availablility" status</li>
+  <li>tag multiple districts in a city to filter the noticeboard</li>
+  <li>apply to / ignore job posts</li>
+  <li>start a private chat</li>
+  <li>block oter others</li>
+</ul>
+Employers can: 
+<ul>
+  <li>create / edit up to 4 job posts</li>
+  <li>view candidates that have applied to the posts</li>
+  <li>view the "Available Subs" noticeboard to see who is available in same district as the school</li>
+  <li>contact substitutes directly</li>
+  <li>start a private chat</li>
+  <li>block oter others</li>
+</ul>
