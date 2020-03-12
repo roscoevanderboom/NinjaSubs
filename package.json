@@ -2,7 +2,7 @@
   "name": "ninjasubs",
   "version": "1.8.0",
   "description": "A service for schools and substitute teachers to connect.",
-  "homepage" : "https://ninjasubs-test.web.app/",
+  "homepage" : "https://ninja-subs.web.app/",
   "private": true,
   "main": "dist/index.js",
   "dependencies": {
