@@ -56,9 +56,9 @@ export const taiwan = {
             'Anping', 'Annan'
         ],
         river_South: [
-            // Yongkang, Gueiren , Sinhua, Zuojhen,
-            // Yujing, Nansi, Nanhua, Rende,  Guanmiao,
-            // Longci, Shanhua, Shanshang, 
+            'Yongkang', 'Gueiren' , 'Sinhua', 'Zuojhen',
+            'Yujing', 'Nansi', 'Nanhua', 'Rende',  'Guanmiao',
+            'Longci', 'Shanhua', 'Shanshang', 
         ]
     }
 }
