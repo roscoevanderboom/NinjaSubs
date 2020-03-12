@@ -15,6 +15,7 @@ import styles from "assets/jss/material-kit-react/components/customInputStyle.js
 const useStyles = makeStyles(styles);
 
 export default function DistrictSelect(props) {
+    const { Taipei, Taoyuan, newTaipei } = taiwan.Taipei;
     const {
         handleData,
         formControlProps,
@@ -30,15 +31,15 @@ export default function DistrictSelect(props) {
     const selectOptions = [
         {
             header: 'Taipei',
-            values: taiwan.Taipei
+            values: Taipei
         },
         {
             header: 'New Taipei',
-            values: taiwan.newTaipei
+            values: newTaipei
         },
         {
             header: 'Taoyuan',
-            values: taiwan.Taoyuan
+            values: Taoyuan
         },
     ]
     const labelClasses = classNames({

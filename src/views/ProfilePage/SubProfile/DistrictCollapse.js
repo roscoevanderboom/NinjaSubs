@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 // Store
 import store from 'state';
+// Locations array
+import { taiwan } from 'constants/locations';
 // @material-ui/core components
 import {
     Chip, Container, Collapse, ListItem,
@@ -10,10 +12,10 @@ import {
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 
 export default () => {   
-    const { constants, state, methods } = useContext(store);
+    const { state, methods } = useContext(store);
     const { profileData } = state;
     const { updateProfileData } = methods;
-    const { Taipei, Taoyuan, newTaipei } = constants;
+    const { Taipei, Taoyuan, newTaipei } = taiwan.Taipei;
     // Component State
     const [taipeiChips, setTaipeiChips] = useState([]);
     const [newTaipeiChips, setNewTaipeiChips] = useState([]);
@@ -95,7 +97,7 @@ export default () => {
         )
     }
 
-    useEffect(() => {
+    useEffect(() => {        
         if (profileData.locations !== undefined) {
             let zones = [newTaipei, Taipei, Taoyuan]
             let keys = ['newTaipei', 'taipei', 'taoyuan']
