@@ -100,6 +100,7 @@ export default () => {
             })
             .catch(error => {
                 feedback('error', error.message);
+                setLoading(false);
             })
     }
 
