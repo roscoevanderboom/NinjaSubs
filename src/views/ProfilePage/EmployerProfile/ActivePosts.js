@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 // State
 import GlobalState from 'state';
+// Filters
+import { filterEmpActivities } from '../../../constants/filters';
 // @material-ui/core components
 import {
     ListItem, ListItemText, Container, Typography
@@ -12,14 +14,20 @@ import Candidates from './Candidates';
 import useStyles from '../styles';
 
 export default () => {
-    const { state, methods, setState, filters } = useContext(GlobalState);
-    const { filterEmpActivities } = filters;
+    const { state, dispatch } = useContext(GlobalState);
+
     const classes = useStyles();
     const [list, setList] = useState([])
 
     const editPost = (post) => {
-        setState.set_post_to_edit(post);
-        methods.handleModals('JobPostModal', true)
+        dispatch({
+            type: 'SET_POST_TO_EDIT',
+            data: post
+        });
+        dispatch({
+            type: 'SET_MODAL',
+            modal: 'JobPostModal'
+        });
     }
 
     const List = () => (

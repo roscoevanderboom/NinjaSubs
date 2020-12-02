@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import GlobalState from 'state';
 
 // Components
+import { SubmitBtn } from '../../components/Buttons';
 import {
-    Dialog, DialogTitle, DialogActions, Button,
-    TextField, DialogContent
+    Dialog, DialogTitle, DialogActions, TextField, DialogContent
 } from '@material-ui/core';
 // Icons
 import { Security } from '@material-ui/icons';
@@ -13,9 +13,8 @@ import SettingsItem from './SettingsItem';
 
 export default () => {
 
-    const { state, methods } = useContext(GlobalState);
+    const { state, feedback } = useContext(GlobalState);
     const { user } = state;
-    const { feedback } = methods;
 
     const [password, setPassword] = useState('');
     const [open, setOpen] = useState(false);
@@ -55,7 +54,7 @@ export default () => {
                         placeholder='Enter new password' />
                 </DialogContent>
                 <DialogActions children={
-                    <Button children={`Submit`} variant='outlined' onClick={handleSubmit} />
+                    <SubmitBtn onClick={handleSubmit} children={`Submit`} />
                 } />
             </Dialog>
         </React.Fragment>

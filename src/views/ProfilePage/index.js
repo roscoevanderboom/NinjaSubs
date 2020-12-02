@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 // Store
 import store from 'state';
+// Actions
+import { handleProfileData } from '../../actions/user';
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -14,9 +16,8 @@ import validate from './formvalidation';
 
 export default function ProfilePage() {
     const classes = useStyles();
-    const { state, methods } = useContext(store);
+    const { state, feedback } = useContext(store);
     const { user, profileData } = state;
-    const { updateProfileData, feedback, isUserSignedIn } = methods;
     const [formData, setFormData] = useState(false);
 
     const handleData = (key, value) => {
@@ -25,12 +26,14 @@ export default function ProfilePage() {
         });
     }
     const handleSubmit = () => {
-        if (!isUserSignedIn()) {
+        if (user === null) {
             return;
         }
         let res = validate(profileData, formData, user, feedback);
         if (res) {
-            updateProfileData(formData);
+            handleProfileData({ action: 'update', user, data: formData })
+                .then(() => feedback('success', 'Profile has been updated'))
+                .catch(err => feedback('error', err))
         }
     }
     const handleCancel = () => {
@@ -66,7 +69,8 @@ export default function ProfilePage() {
                         : <EmpProfile props={{
                             formData, handleData,
                             handleSubmit, handleCancel
-                        }} />}
+                        }} />
+                    }
                 </div>
             </div>
         </div>

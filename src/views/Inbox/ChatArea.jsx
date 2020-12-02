@@ -2,7 +2,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 // Store
 import store from 'state';
-
+// Constants
+import { FieldValue } from '../../constants/firebase';
+// Actions
+import { handleProfileData } from '../../actions/user';
+import { deleteChatroom } from '../../actions/privatechat';
 import {
     Toolbar, IconButton, Container,
     Typography, Tooltip
@@ -21,9 +25,8 @@ import { useStyles } from './styles';
 
 export default () => {
     const classes = useStyles();
-    const { methods, state, constants, hist } = useContext(store);
-    const { updateProfileData, deleteChatroom } = methods;
-    const { selectedChat, profileData } = state;
+    const { state, hist } = useContext(store);
+    const { selectedChat, profileData, user } = state;
     const [list, setList] = useState([]);
     const [recipient, setRecipient] = useState({ name: '', image: '' });
 
@@ -53,15 +56,17 @@ export default () => {
             return;
         }
         let badUser = selectedChat.participants.filter(uid => uid !== profileData.uid)
-        updateProfileData({
-            blackList: constants.add_if_not_included(profileData.blackList, badUser[0])
+        handleProfileData({
+            action: 'update',
+            user,
+            data: { blackList: FieldValue.arrayUnion(badUser[0]) }
         })
             .then(() => {
                 deleteChat();
             })
     }
     const goBack = () => {
-        hist.push('/contacts');
+        hist.push('/inbox');
     }
 
     useEffect(() => {

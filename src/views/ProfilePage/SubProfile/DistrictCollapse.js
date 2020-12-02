@@ -3,6 +3,8 @@ import React, { useContext, useState, useEffect } from "react";
 import store from 'state';
 // Locations array
 import { taiwan } from 'constants/locations';
+// Actions
+import { handleProfileData } from '../../../actions/user';
 // @material-ui/core components
 import {
     Chip, Container, Collapse, ListItem,
@@ -11,10 +13,9 @@ import {
 // @material-ui/icons
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 
-export default () => {   
-    const { state, methods } = useContext(store);
-    const { profileData } = state;
-    const { updateProfileData } = methods;
+export default () => {
+    const { state } = useContext(store);
+    const { profileData, user } = state;
     const { Taipei, Taoyuan, newTaipei } = taiwan.Taipei;
     // Component State
     const [taipeiChips, setTaipeiChips] = useState([]);
@@ -26,13 +27,25 @@ export default () => {
         taipei: false,
         taoyuan: false
     })
-    const handleLocations = location => () => {
-        if (profileData.locations.includes(location)) {
-            updateProfileData({ locations: profileData.locations.filter(dist => dist !== location) })
-            return;
+
+    const locationSwitch = (key, location) => {
+        switch (key) {
+            case 'remove':
+                return { locations: profileData.locations.filter(dist => dist !== location) };
+            case 'add':
+                return { locations: profileData.locations.concat(location) };
+            default:
+                break;
         }
-        profileData.locations.push(location);
-        updateProfileData({ locations: profileData.locations })
+    }
+    const handleLocations = location => () => {
+        handleProfileData({
+            action: 'update',
+            user,
+            data: profileData.locations.includes(location)
+                ? locationSwitch('remove', location)
+                : locationSwitch('add', location)
+        })
     }
     const filterChips = (array, key) => {
         let newArray = []
@@ -97,7 +110,7 @@ export default () => {
         )
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         if (profileData.locations !== undefined) {
             let zones = [newTaipei, Taipei, Taoyuan]
             let keys = ['newTaipei', 'taipei', 'taoyuan']
@@ -106,9 +119,9 @@ export default () => {
         // eslint-disable-next-line
     }, [profileData.locations])
 
-    
+
     return (
-        <Container className='mt-3 mb-3'>         
+        <Container className='mt-3 mb-3'>
             <CustomCollapse
                 stateKey='taipei'
                 title='Taipei'

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 // Store
 import store from 'state';
+// Constants
+import { filterAvailableSubs } from '../../constants/filters';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // Custom components
@@ -19,14 +21,14 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const { state, filters } = useContext(store);
+  const { state } = useContext(store);
   const { profileData, availableSubs } = state;
   const classes = useStyles();
   const [list, setList] = useState([])
 
   useEffect(() => {
     if (profileData && availableSubs) {
-      setList(filters.filterAvailableSubs(availableSubs, profileData));
+      setList(filterAvailableSubs(availableSubs, profileData));
     }
     // eslint-disable-next-line     
   }, [availableSubs, profileData])

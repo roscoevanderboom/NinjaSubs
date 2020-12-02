@@ -1,19 +1,28 @@
+import noUserImage from '../assets/img/ninja.png'
+
+export const newProfile = user => ({
+    uid: user.uid,
+    emailSent: true,
+    email: user.email
+})
+
 export const newUser = user => ({
-    image: user.photoURL === null ? noUserImage : user.photoURL,
-    rating: [],
+    image: noUserImage,
     blackList: [],
-    emailSent: user.emailVerified ? true : false,
-    verified: user.emailVerified
+    ignoreList: [],
+    email: user.email
 })
 export const newSubData = {
+    name: '',
     type: 'Substitute',
     history: [],
+    rating: [],
     available: false,
     bio: '',
     cv: '',
     lessonPlans: [],
     locations: [],
-    ignoreList: [],
+
 }
 export const newEmployerData = {
     type: 'Employer',
@@ -21,7 +30,8 @@ export const newEmployerData = {
     location: '',
     address: '',
     phone: '',
-    posts: []
+    posts: [],
+    name: '',
 }
 export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, available }) => ({
     uid,

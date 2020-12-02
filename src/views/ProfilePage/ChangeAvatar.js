@@ -1,6 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 // Store
 import store from 'state';
+// Constants
+import { noUserImage } from '../../constants';
+import { storageRef } from '../../constants/firebase/storage';
+// Actions
+import setLoading from "../../actions/loading";
+import { handleProfileData } from "../../actions/user";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui Components
@@ -60,10 +66,8 @@ const useStyles = makeStyles(theme => ({
 
 export default () => {
     const classes = useStyles()
-    const { state, methods, fb, constants, setState } = useContext(store);
-    const { setLoading } = setState;
+    const { state, feedback, dispatch } = useContext(store);
     const { profileData, user } = state;
-    const { feedback, updateProfileData } = methods;
     const [url, setUrl] = useState('');
     const [open, setOpen] = useState(false);
 
@@ -79,7 +83,7 @@ export default () => {
             photoURL: url
         })
             .then((res) => {
-                updateProfileData({ image: url });
+                handleProfileData({ action: 'update', user, data: { ...profileData, image: url } });
                 setOpen(false);
             })
             .catch((err) => {
@@ -87,20 +91,20 @@ export default () => {
             })
     }
     const handleFileSelect = (e) => {
-        setLoading(true);
-        var imagesRef = fb.storageRef.child(`${profileData.uid}/temp`);
+        setLoading(dispatch, true);
+        var imagesRef = storageRef.child(`${profileData.uid}/temp`);
 
         imagesRef.put(e.target.files[0])
             .then(function (snapshot) {
                 snapshot.ref.getDownloadURL()
                     .then((url) => {
                         setUrl(url);
-                        setLoading(false);
+                        setLoading(dispatch, false);
                     })
             })
             .catch(error => {
                 feedback('error', error.message);
-                setLoading(false);
+                setLoading(dispatch, false);
             })
     }
 
@@ -129,7 +133,7 @@ export default () => {
                     className={classes.dialogContent}>
                     <img
                         className={classes.avatar}
-                        src={url === '' ? constants.noUserImage : url}
+                        src={url === '' ? noUserImage : url}
                         alt='avatar' />
                     <div className='d-flex justify-content-center'>
                         <input

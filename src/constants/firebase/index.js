@@ -3,12 +3,9 @@ import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
+import config from './config';
 
-const config = {
-  
-};
-
+// Export to work with Firebase arrays
 export const FieldValue = app.firestore.FieldValue;
-export const firebase = app;
-
+// Export app
 export default app.initializeApp(config);

@@ -1,7 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import GlobalState from 'state';
-
+// Constants
+import * as constants from '../../constants';
+import * as filters from 'constants/filters';
+// Actions
+import { handleProfileData } from '../../actions/user';
 // Components
+import { SubmitBtn } from '../../components/Buttons';
 import {
     Dialog, DialogTitle, DialogActions, Button,
     List, ListItem, ListItemText, Avatar, ListItemAvatar
@@ -28,27 +33,27 @@ const styles = makeStyles({
 
 export default () => {
     const classes = styles();
-    const { state, methods, constants, filters } = useContext(GlobalState);
-    const { profileData, availableSubs } = state;
-    const { updateProfileData, isUserSignedIn } = methods;
+    const { state } = useContext(GlobalState);
+    const { profileData, availableSubs, user } = state;
     const [list, setList] = useState([]);
     const [open, setOpen] = useState(false);
 
     const handleOpen = (value) => {
-        if (!isUserSignedIn()) {
+        if (user === null) {
             return;
         }
-        setOpen(value)
+        setOpen(value);
     }
 
-    const unblockUser = uid => () => {
-        updateProfileData({
-            blackList: constants.remove_from_array(profileData.blackList, uid)
+    const unblock = uid => ({ blackList: constants.remove_from_array(profileData.blackList, uid) });
+    const clear = () => ({ blackList: [] })
+
+    const handleList = (key, uid) => {
+        handleProfileData({
+            action: 'update',
+            user,
+            data: key === 'unblock' ? unblock(uid) : clear()
         })
-    }
-    const clearList = () => {
-        updateProfileData({ blackList: [] });
-        setOpen(false)
     }
 
     useEffect(() => {
@@ -78,14 +83,14 @@ export default () => {
                             <ListItemText>
                                 {user.name}
                             </ListItemText>
-                            <Button onClick={unblockUser(user.uid)}>
+                            <Button onClick={() => handleList("unblock", user.uid)}>
                                 <Undo />
                             </Button>
                         </ListItem>
                     )}
                 </List>
                 <DialogActions children={
-                    <Button children={`Clear list`} variant='outlined' onClick={clearList} />
+                    <SubmitBtn children={`Clear list`} onClick={handleList} />
                 } />
             </Dialog >
         </React.Fragment>

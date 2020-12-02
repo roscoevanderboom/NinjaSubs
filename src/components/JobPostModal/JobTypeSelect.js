@@ -1,6 +1,6 @@
 import React from 'react';
-// Locations array
-import { taiwan } from 'constants/locations';
+// State
+import GlobalState from 'state';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -14,8 +14,7 @@ import styles from "assets/jss/material-kit-react/components/customInputStyle.js
 
 const useStyles = makeStyles(styles);
 
-export default function DistrictSelect(props) {
-    const { Taipei, Taoyuan, newTaipei } = taiwan.Taipei;
+export default function JobTypeSelect(props) {
     const {
         handleData,
         formControlProps,
@@ -26,20 +25,21 @@ export default function DistrictSelect(props) {
         success,
         endAdornment
     } = props;
+    const { constants } = React.useContext(GlobalState);
     const classes = useStyles();
 
     const selectOptions = [
         {
-            header: 'Taipei',
-            values: Taipei
+            header: 'Tapei',
+            values: constants.Taipei
         },
         {
             header: 'New Taipei',
-            values: newTaipei
+            values: constants.newTaipei
         },
         {
             header: 'Taoyuan',
-            values: Taoyuan
+            values: constants.Taoyuan
         },
     ]
     const labelClasses = classNames({
@@ -68,10 +68,8 @@ export default function DistrictSelect(props) {
     } else {
         formControlClasses = classes.formControl;
     }
-
     return (
-        <FormControl fullWidth className={formControlClasses}
-            error={value === '' ? true : false }>
+        <FormControl fullWidth className={formControlClasses}>
             <InputLabel htmlFor="location-select"
                 className={classes.labelRoot + " " + labelClasses}>
                 District
@@ -86,17 +84,7 @@ export default function DistrictSelect(props) {
                 value={value}
                 onChange={(e) => handleData('location', e.target.value)}
                 endAdornment={endAdornment}
-                input={
-                    <Input
-                        classes={{
-                            input: inputClasses,
-                            root: marginTop,
-                            disabled: classes.disabled,
-                            underline: underlineClasses
-                        }}
-                        id="location-select" />
-                }>
-                <option>{value}</option>
+                input={<Input id="location-select" />}>
                 {selectOptions.map((group, i) =>
                     <optgroup key={i} label={group.header}>
                         {group.values.map(dist => <option key={dist} value={dist}>{dist}</option>)}

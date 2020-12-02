@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 // Store
 import store from 'state';
 // Form validation
-import { validatePassword, handleErrors, validateRegister } from './validation'
-
+import { validatePassword, handleErrors, validateRegister } from './validation';
+// Firebase auth
+import { createUserWithEmailAndPassword, signIn } from '../../actions/auth';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -32,7 +33,7 @@ const initState = {
 }
 
 export default function LoginPage() {
-  const { fb, methods, hist, state } = useContext(store);
+  const { hist, feedback } = useContext(store);
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [data, setData] = useState(initState);
   const [title, setTitle] = useState('Register');
@@ -46,9 +47,7 @@ export default function LoginPage() {
   const handleTitle = () => {
     title === "Login" ? setTitle('Register') : setTitle('Login');
   };
-  const resetData = () => {
-    setData(initState)
-  };
+
   const handleData = (key, value) => {
     setData({ ...data, [key]: value });
     if (key === 'password' && title === 'Register') {
@@ -61,35 +60,15 @@ export default function LoginPage() {
     }
   };
   const register = () => {
-    if (!validateRegister(data, methods.feedback, setErrors)) {
+    if (!validateRegister(data, feedback, setErrors)) {
       return;
     }
-    fb.auth.createUserWithEmailAndPassword(data.email, data.password)
-      .then(res => {
-        let newUserData = {
-          name: data.username,
-          email: res.user.email,
-          uid: res.user.uid
-        };
-        fb.createProfileData(res.user, newUserData);
-        hist.push('/createProfile-page');
-      })
-      .catch(error => {
-        methods.feedback('error', error.message)
-      })
+    createUserWithEmailAndPassword(data, feedback, hist)
   };
   const login = () => {
-    fb.auth.signInWithEmailAndPassword(data.email, data.password)
-      .then((res) => {        
-        resetData();
-      })
-      .then((res) => {        
-        hist.push('/profile-page');
-      })
-      .catch(error => {
-        methods.feedback('error', error.message);
-      })
+    signIn(data, hist, feedback)
   };
+
   const handleSubmit = (e) => {
     if (e.key === "Enter" || e.target.textContent === 'Submit' || e.target.textContent === 'Sign In') {
       title === 'Login'
@@ -97,13 +76,6 @@ export default function LoginPage() {
         : register();
     }
   };
-
-  useEffect(() => {
-    if (state.user && state.profileData.type !== undefined) {
-      hist.push('/profile-page');
-    }
-    // eslint-disable-next-line   
-  }, [state.user])
 
   return (
     <div

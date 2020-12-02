@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
 // State
 import store from 'state';
+// Constants
+import { newUser, newEmployerData, newSubData } from '../../constants/userProfiles'
+// Actions
+import { handleProfileData } from '../../actions/user';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import {
     Typography, Card, Button,
     CardContent
 } from "@material-ui/core";
 
 import bg from 'assets/img/bg.jpg'
-
+import { makeStyles } from "@material-ui/core/styles";
 import { boxShadow, card, defaultFont } from 'assets/jss/material-kit-react';
 
 const useStyles = makeStyles({
@@ -57,22 +60,18 @@ const useStyles = makeStyles({
 
 export default function CreateProfile() {
     const classes = useStyles();
-    const { state, methods, fb, constants, hist } = useContext(store);
+    const { state, feedback, hist } = useContext(store);
 
     const createNewUserProfile = userPath => () => {
-        let data = constants.newUser(state.user);
+        let data = newUser(state.user);
         userPath === "substitute"
-            ? data = { ...data, ...constants.newSubData }
-            : data = { ...data, ...constants.newEmployerData };  
+            ? data = { ...data, ...newSubData }
+            : data = { ...data, ...newEmployerData };
 
         if (state.user.uid !== undefined) {
-            fb.users.doc(state.user.uid).update({ ...data })
-                .then(() => {
-                    hist.push('/profile-page')
-                })
-                .catch(err => {
-                    methods.feedback('error', err.message)
-                });
+            handleProfileData({ action: 'update', user: state.user, data: data })
+                .then(() =>  hist.push('/profile-page'))
+                .catch(err => feedback('error', err.message));
         }
     }
 

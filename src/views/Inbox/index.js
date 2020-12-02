@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 // Store
 import store from 'state';
+// Constants
+import { filterInbox } from '../../constants/filters';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // custom components
@@ -20,14 +22,14 @@ const useStyles = makeStyles({
 
 
 export default () => {
-  const { state, filters } = useContext(store);
+  const { state } = useContext(store);
   const { inbox, profileData } = state;
   const [list, setList] = useState([])
   const classes = useStyles();
 
   useEffect(() => {
     if (profileData) {
-      setList(filters.filterInbox(inbox, profileData));
+      setList(filterInbox(inbox, profileData));
     }
     // eslint-disable-next-line
   }, [inbox, profileData])
@@ -42,7 +44,7 @@ export default () => {
       <div className={classes.body}>
         <div className='d-flex justify-content-around'>
           {list.length === 0
-            ? <ListHeader text='No contacts' />
+            ? <ListHeader text='No active chats' />
             : <React.Fragment>
               {list.map((chat, i) =>
                 <ChatButton

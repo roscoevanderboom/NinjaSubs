@@ -84,5 +84,9 @@ export default makeStyles({
   image: {
     ...boxShadow,
     borderRadius: 6
+  },
+  footer: {
+    display: 'flex',
+    justifyContent: 'space-around'
   }
 });

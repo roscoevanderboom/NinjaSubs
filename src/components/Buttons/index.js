@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { handleSignOut } from '../../constants/firebase/constants';
+import { signOut } from '../../actions/auth';
 // Components
+import CustomButton from '../CustomButtons/Button';
 import { Button } from '@material-ui/core';
 import { Close, ExitToApp } from '@material-ui/icons';
 
@@ -26,7 +27,7 @@ export const LogoutBtn = ({ props }) => {
     return (
         <Button
             onClick={() => {
-                handleSignOut(hist)
+                signOut(hist)
                 closeSnackbar(key)
             }}>
             <ExitToApp />
@@ -40,4 +41,11 @@ export const CustomBtn = ({ text, onClick }) => (
         onClick={() => onClick}>
         {text}
     </Button>
+)
+export const SubmitBtn = (props) => (
+    <CustomButton
+        children={props.children}
+        size='sm'
+        color='danger'
+        onClick={props.onClick} />
 )

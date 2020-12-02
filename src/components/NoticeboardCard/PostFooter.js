@@ -1,24 +1,10 @@
-/* eslint-disable */
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import store from 'state';
+// Constants
+import * as constants from '../../constants';
+// Actions
+import { handleProfileData } from '../../actions/user';
+import { applyToJobPost, removeJobApplication } from '../../actions/noticeboard';
 // reactstrap components
 import {
     CardFooter, Button, Row, Col
@@ -28,20 +14,21 @@ import { Hidden } from '@material-ui/core';
 import { CheckCircle, CloseRounded, Star } from '@material-ui/icons';
 
 const PostFooter = ({ post }) => {
-    const { state, methods, fb, constants } = React.useContext(store);
-    const { updateProfileData, feedback, isUserVerfied } = methods;
-    const { profileData } = state;
+    const { state, feedback } = React.useContext(store);
+    const { profileData, user } = state;
 
     const apply = () => {
-        if (!isUserVerfied()) {
+        if (user === null) {
             return;
         }
-        fb.applyToJobPost(post, profileData, feedback);
+        applyToJobPost(post, profileData, feedback);
     }
     const ignore = () => {
-        fb.removeJobApplication(post, profileData, feedback)
-        updateProfileData({
-            ignoreList: [...profileData.ignoreList, post.ref]
+        removeJobApplication(post, profileData, feedback)
+        handleProfileData({
+            action: 'update',
+            user,
+            data: { ignoreList: profileData.ignoreList.concat(post.ref) }
         });
     }
 

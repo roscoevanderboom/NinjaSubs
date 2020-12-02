@@ -1,20 +1,24 @@
 import React, { useContext } from 'react';
 import GlobalState from 'state';
-
+// Actions
+import { handleProfileData } from '../../actions/user';
 // custom components
 import SettingsItem from './SettingsItem';
 // Icon
 import { DeleteSweep } from '@material-ui/icons';
 export default () => {
 
-    const { methods } = useContext(GlobalState);
-    const { feedback, updateProfileData, isUserSignedIn } = methods;
+    const { state, feedback } = useContext(GlobalState);
 
     const clearIgnoreList = () => {
-        if (!isUserSignedIn()) {
+        if (state.user === null) {
             return;
         }
-        updateProfileData({ ignoreList: [] })
+        handleProfileData({
+            action: 'update',
+            user: state.user,
+            data: { ignoreList: [] }
+        })
             .then(() => {
                 feedback('success', 'List cleared')
             })

@@ -4,6 +4,8 @@ import React, { useContext } from "react";
 import store from '../../state';
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
+// Actions
+import { signOut } from '../../actions/auth';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { List, ListItem } from "@material-ui/core";
@@ -18,11 +20,8 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks() {
   const classes = useStyles();
-  const { hist, fb } = useContext(store);
+  const { hist } = useContext(store);
 
-  const handleSignOut = () => {
-    fb.handleSignOut(hist)
-  }
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -44,7 +43,7 @@ export default function HeaderLinks() {
             <Link to="/activities" className={classes.dropdownLink}>
               Activities
             </Link>,
-            <Link to="/contacts" className={classes.dropdownLink}>
+            <Link to="/inbox" className={classes.dropdownLink}>
               Inbox
             </Link>,
             <Link to="/profile-page" className={classes.dropdownLink}>
@@ -59,7 +58,7 @@ export default function HeaderLinks() {
 
       <ListItem className={classes.listItem}>
         <Button
-          onClick={handleSignOut}
+          onClick={() => signOut(hist)}
           color="transparent"
           className={classes.navLink}>
           <i className={classes.socialIcons + " fas fa-sign-out-alt"} />

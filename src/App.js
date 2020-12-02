@@ -1,63 +1,70 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Switch } from "react-router-dom";
 // State
-import GlobalState from 'state';
+import store from 'state';
 
+// Actions
+import { onAuthStateChanged } from './actions/auth';
+import { watchProfileData } from './actions/user';
+import { queryNoticeboard } from './actions/noticeboard';
+import { queryAvailableSubs } from './actions/availableSubs';
+import { handleInbox } from './actions/privatechat';
+
+// Components
+import Loader from 'components/Loader';
+import JobPostModal from 'components/JobPostModal';
 // pages for this product
 import LoginPage from "views/LoginPage/LoginPage";
-import Loader from 'components/Loader';
-import AvailableSubs from "views/AvailableSubs";
-import ProfilePage from "views/ProfilePage";
 import CreateProfile from 'views/CreateProfile';
+import ProfilePage from "views/ProfilePage";
 import Activities from 'views/Activities';
-import Noticeboard from 'views/Noticeboard';
-import Inbox from 'views/Inbox';
 import Settings from 'views/Settings';
+import Noticeboard from 'views/Noticeboard';
+import AvailableSubs from "views/AvailableSubs";
+import Inbox from 'views/Inbox';
 import Chatroom from 'views/Inbox/ChatArea';
-// Modals
-import Modals from 'views/Modals';
-import Notifications from 'views/Notifications';
-
-// Get notification permission from user
-// Notification.requestPermission(function (status) {
-//     console.log('Notification permission status:', status);
-// });
 
 export default function App() {
-    const { state, methods } = useContext(GlobalState);
+    const { hist, dispatch, state } = useContext(store);
+    const { user, profileData } = state;
 
     useEffect(() => {
-        methods.handleAuthState();
-        // eslint-disable-next-line
+        onAuthStateChanged(dispatch, hist);
     }, [])
 
     useEffect(() => {
-        if (state.user && state.user !== null) {
-            methods.handleProfileData();
-            methods.queryNoticeboard();
-            methods.queryAvailableSubs();
-            methods.handleInbox();
+        if (user !== null) {
+            watchProfileData(user, dispatch, hist);
         }
-        // eslint-disable-next-line
-    }, [state.user])
+    }, [user]);
+
+    useEffect(() => {
+        if (profileData) {
+            queryNoticeboard(dispatch);
+            queryAvailableSubs(dispatch);
+            handleInbox(user, dispatch);
+        }
+    }, [profileData])
+
+    // useEffect(() => {
+    //     console.log(state);
+    // }, [state])
 
     return (
         <React.Fragment>
             <Loader />
+            <JobPostModal />
             <Switch>
-                <Route exact path="/" component={LoginPage} />
-                <Route exact path="/login-page" component={LoginPage} />
-                <Route exact path="/createProfile-page" component={CreateProfile} />
-                <Route exact path="/profile-page" component={ProfilePage} />
-                <Route exact path="/noticeboard" component={Noticeboard} />
-                <Route exact path="/activities" component={Activities} />
-                <Route exact path="/availableSubs" component={AvailableSubs} />
-                <Route exact path="/contacts" component={Inbox} />
-                <Route exact path="/settings" component={Settings} />
-                <Route exact path="/chatroom" component={Chatroom} />
+                <Route path="/login-page" component={LoginPage} />
+                <Route path="/createProfile-page" component={CreateProfile} />
+                <Route path="/profile-page" component={ProfilePage} />
+                <Route path="/settings" component={Settings} />
+                <Route path="/activities" component={Activities} />
+                <Route path="/noticeboard" component={Noticeboard} />
+                <Route path="/availableSubs" component={AvailableSubs} />
+                <Route path="/inbox" component={Inbox} />
+                <Route  path="/chatroom" component={Chatroom} />
             </Switch>
-            <Modals />
-            <Notifications />
         </React.Fragment>
 
     )

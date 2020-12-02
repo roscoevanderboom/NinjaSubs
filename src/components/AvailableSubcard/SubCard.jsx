@@ -1,7 +1,10 @@
-
 import React from 'react';
 import store from 'state';
-
+// Constants
+import * as constants from '../../constants';
+// Actions
+import { like, unlike } from '../../actions/availableSubs';
+import { searchInbox } from '../../actions/privatechat';
 import {
     Card, CardHeader, CardContent, CardActions,
     Collapse, Avatar, IconButton, Typography, Badge
@@ -16,10 +19,9 @@ import clsx from 'clsx';
 import { useStyles } from './styles';
 
 export default ({ sub }) => {
-    const { state, methods, fb, constants } = React.useContext(store);
-    const { profileData } = state;
-    const { add_if_not_included, remove_from_array, ninjaStar } = constants;
-    const { searchInbox, isUserVerfied } = methods;
+    const { state, hist, dispatch } = React.useContext(store);
+    const { profileData, user, inbox } = state;
+    const { ninjaStar } = constants;
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [liked, setLiked] = React.useState(false);
@@ -27,37 +29,30 @@ export default ({ sub }) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const like = () => {      
-        fb.availableSubs.doc(sub.uid).update({
-            likes: add_if_not_included(sub.likes, profileData.uid),
-        }).then(() => { setLiked(true) })
-    }
-    const unlike = () => {
-        fb.availableSubs.doc(sub.uid).update({
-            likes: remove_from_array(sub.likes, profileData.uid),
-        }).then(() => { setLiked(false) })
-    }
+
     const handleLike = () => {
-        if (!isUserVerfied()) {
+        if (user === null) {
             return;
         }
         if (sub.uid === profileData.uid) {
             return;
         }
-        sub.likes.includes(profileData.uid) ? unlike() : like();
+        sub.likes.includes(profileData.uid)
+            ? unlike(sub, profileData, setLiked)
+            : like(sub, profileData, setLiked);
     };
     const handleStartChat = () => {
-        if (!isUserVerfied()) {
+        if (user === null) {
             return;
         }
-        searchInbox(sub)
+        searchInbox(inbox, profileData, sub, hist, dispatch)
     }
 
     const showProfilePicture = () => {
         console.log(sub.image)
     }
 
-    React.useEffect(() => {       
+    React.useEffect(() => {
         if (sub.likes !== undefined) {
             sub.likes.includes(profileData.uid)
                 ? setLiked(true)

@@ -3,6 +3,11 @@ import React, { useContext, useState, useEffect } from "react";
 import store from 'state';
 // nodejs library that concatenates classes
 import classNames from "classnames";
+// Constants
+import { newSubBoardListing, isArrayEqual, noUserImage, ninjaStar } from '../../../constants'
+import * as collections from '../../../constants/firebase/collections';
+// Actions
+import { handleProfileData } from '../../../actions/user';
 // @material-ui/core components
 import {
   Typography, Tooltip, InputAdornment, Badge,
@@ -27,10 +32,8 @@ export default function ProfilePage({ props }) {
   const { formData, handleData,
     handleSubmit, handleCancel } = props;
 
-  const { state, constants, methods, fb } = useContext(store);
+  const { state, feedback } = useContext(store);
   const { user, profileData, availableSubs } = state;
-  const { newSubBoardListing, isArrayEqual, noUserImage, ninjaStar } = constants;
-  const { updateProfileData, feedback, isUserVerfied } = methods;
 
   const [likes, setLikes] = useState(0);
   const [stars, setStars] = useState([]);
@@ -42,21 +45,36 @@ export default function ProfilePage({ props }) {
     'fas fa-heart',
   )
 
+  const handleUpdate = () => {
+    handleProfileData({
+      action: 'update',
+      user,
+      data: { available: profileData.available ? false : true }
+    })
+  }
+
   const createNewSub = () => {
-    fb.availableSubs.doc(user.uid)
+    if (profileData.name === '') {
+      window.alert('Please give yourself a display name and click update.');
+      return;
+    }
+    collections.availableSubs.doc(user.uid)
       .set(newSubBoardListing(profileData))
+      .then(() => {
+        handleUpdate();
+      })
       .catch((err) => {
         feedback('error', err.message)
       })
   }
   const handleAvailable = () => {
-    if (!isUserVerfied()) {
+    if (user === null) {
       return;
     }
-    fb.availableSubs.doc(user.uid)
+    collections.availableSubs.doc(user.uid)
       .update(newSubBoardListing(profileData))
       .then(() => {
-        updateProfileData({ available: profileData.available ? false : true })
+        handleUpdate();
       })
       .catch((err) => {
         createNewSub();
@@ -85,11 +103,11 @@ export default function ProfilePage({ props }) {
       return;
     }
     if (count !== profileData.rating) {
-      updateProfileData({ rating: count })
+      handleProfileData({ action: 'update', user, data: { rating: count } })
     }
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     if (profileData.rating !== undefined) {
       setRating();
     }

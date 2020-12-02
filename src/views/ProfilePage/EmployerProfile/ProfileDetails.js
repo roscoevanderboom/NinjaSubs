@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { InputAdornment, Tooltip, Typography } from "@material-ui/core";
 // @material-ui/icons
@@ -15,9 +15,25 @@ import DistrictSelect from './DistrictSelect'
 // Styles
 import useStyles from '../styles';
 
+const init = {
+    name: '',
+    email: '',
+    contact: '',
+    phone: '',
+    location: '',
+    address: ''
+}
+
 export default function ProfilePage({ props }) {
     const { formData, handleData } = props;
     const classes = useStyles();
+    const [data, setData] = useState(init);
+
+    React.useEffect(() => {
+        if (formData) {
+            setData(formData);
+        }        
+    }, [formData])
 
     return (
         <React.Fragment>
@@ -33,12 +49,13 @@ export default function ProfilePage({ props }) {
                     <CustomInput
                         formControlProps={{
                             fullWidth: true,
+                            error: data.name === '' ? true : false
                         }}
                         labelText='School Name'
                         id='username'
                         inputProps={{
                             type: 'text',
-                            value: formData ? formData.name : '',
+                            value: data.name === null ? '' : data.name,
                             onChange: (e) => handleData('name', e.target.value),
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -52,12 +69,13 @@ export default function ProfilePage({ props }) {
                     <CustomInput
                         formControlProps={{
                             fullWidth: true,
+                            error: data.email === '' ? true : false
                         }}
                         labelText='Email'
                         id='email'
                         inputProps={{
                             type: 'email',
-                            value: formData ? formData.email : '',
+                            value: data.email === null ? '' : data.email,
                             onChange: (e) => handleData('email', e.target.value),
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -77,7 +95,7 @@ export default function ProfilePage({ props }) {
                         id='contact'
                         inputProps={{
                             type: 'text',
-                            value: formData ? formData.contact : '',
+                            value: data.contact,
                             onChange: (e) => handleData('contact', e.target.value),
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -91,13 +109,13 @@ export default function ProfilePage({ props }) {
                     <CustomInput
                         formControlProps={{
                             fullWidth: true,
-                            error: formData.phone === '' ? true : false
+                            error: data.phone === '' ? true : false
                         }}
                         labelText='Phone'
                         id='phone'
                         inputProps={{
                             type: 'tel',
-                            value: formData ? formData.phone : '',
+                            value: data.phone,
                             onChange: (e) => handleData('phone', e.target.value),
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -114,7 +132,7 @@ export default function ProfilePage({ props }) {
                                 <Map className={classes.inputIconsColor} />
                             </InputAdornment>
                         }
-                        value={!formData ? '' : formData.location}
+                        value={data.location}
                         handleData={handleData} />
                 </GridItem>
                 {/* Address */}
@@ -122,14 +140,14 @@ export default function ProfilePage({ props }) {
                     <CustomInput
                         formControlProps={{
                             fullWidth: true,
-                            error: formData.address === '' ? true : false
+                            error: data.address === '' ? true : false
                         }}
                         labelText='Street Address'
                         id='address'
                         inputProps={{
                             type: 'text',
                             placeholder: 'Click icon to open Google Maps',
-                            value: formData ? formData.address : '',
+                            value: data.address,
                             onChange: (e) => handleData('address', e.target.value),
                             endAdornment: (
                                 <InputAdornment position="end">
