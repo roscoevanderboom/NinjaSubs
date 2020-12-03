@@ -15,10 +15,9 @@ import { newJobPost } from '../../actions/noticeboard';
 // Components
 import CustomButton from 'components/CustomButtons/Button';
 import {
-    Dialog, DialogTitle, DialogContent,
-    Button, ListItem, FormControl, InputLabel,
-    ListItemText, DialogActions, Typography,
-    Select, Input
+    Dialog, DialogTitle, DialogContent, ListItem,
+    FormControl, InputLabel, ListItemText, DialogActions,
+    Typography, Select, Input
 } from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
@@ -166,7 +165,6 @@ export default () => {
                     rows='5'
                     placeholder={examplePost}
                     onChange={handleData(`comments`)} />
-
             </DialogContent>
 
             <DialogActions
