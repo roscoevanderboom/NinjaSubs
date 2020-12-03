@@ -36,7 +36,7 @@ export default function LoginPage() {
   const { hist, feedback } = useContext(store);
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [data, setData] = useState(initState);
-  const [title, setTitle] = useState('Register');
+  const [title, setTitle] = useState('Login');
   const [errors, setErrors] = useState([]);
 
   setTimeout(function () {

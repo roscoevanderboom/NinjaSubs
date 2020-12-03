@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import store from 'state';
+// 
 // Actions
 import { deleteUser } from '../../actions/auth';
 import { handleProfileData } from '../../actions/user';
 import { deleteAllChatrooms } from '../../actions/privatechat';
+import { deleteSubListing } from '../../actions/availableSubs';
 // custom components
 import SettingsItem from './SettingsItem';
 // Icon
@@ -31,6 +33,9 @@ export default () => {
       }
     }
     if (window.confirm('Are you sure?')) {
+      if (profileData.type === 'Substitute') {
+        deleteSubListing(user.uid);
+      }
       deleteAllChatrooms(user);
       handleProfileData({ action: 'delete', user })
         .then(() => {

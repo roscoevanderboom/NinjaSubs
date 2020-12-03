@@ -2,7 +2,7 @@ import React from "react";
 // @material-ui/core components
 import { InputAdornment, Checkbox } from "@material-ui/core";
 // @material-ui/icons
-import { Email, People, Replay } from "@material-ui/icons"
+import { Email, Replay } from "@material-ui/icons"
 // core components
 import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
@@ -16,24 +16,6 @@ export default ({ props }) => {
 
     return (
         <CardBody>
-            {title === "Login" ? null :
-                <CustomInput
-                    labelText="Username.."
-                    id="username"
-                    formControlProps={{
-                        fullWidth: true
-                    }}
-                    inputProps={{
-                        type: "text",
-                        value: data.username,
-                        onChange: (e) => handleData('username', e.target.value),
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                        )
-                    }} />
-            }
 
             <CustomInput
                 labelText="Email..."

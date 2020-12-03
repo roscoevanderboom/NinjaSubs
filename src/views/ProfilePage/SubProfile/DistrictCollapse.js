@@ -3,8 +3,9 @@ import React, { useContext, useState, useEffect } from "react";
 import store from 'state';
 // Locations array
 import { taiwan } from 'constants/locations';
-// Actions
-import { handleProfileData } from '../../../actions/user';
+// FieldValue to manage firebase arrays
+import { FieldValue } from '../../../constants/firebase';
+import { users } from '../../../constants/firebase/collections';
 // @material-ui/core components
 import {
     Chip, Container, Collapse, ListItem,
@@ -28,23 +29,11 @@ export default () => {
         taoyuan: false
     })
 
-    const locationSwitch = (key, location) => {
-        switch (key) {
-            case 'remove':
-                return { locations: profileData.locations.filter(dist => dist !== location) };
-            case 'add':
-                return { locations: profileData.locations.concat(location) };
-            default:
-                break;
-        }
-    }
     const handleLocations = location => () => {
-        handleProfileData({
-            action: 'update',
-            user,
-            data: profileData.locations.includes(location)
-                ? locationSwitch('remove', location)
-                : locationSwitch('add', location)
+        users.doc(user.uid).update({
+            locations: profileData.locations.includes(location)
+                ? FieldValue.arrayRemove(location)
+                : FieldValue.arrayUnion(location)
         })
     }
     const filterChips = (array, key) => {

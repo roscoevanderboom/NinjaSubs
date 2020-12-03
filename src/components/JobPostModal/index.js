@@ -13,6 +13,7 @@ import FEEDBACK from '../../constants/feedback';
 import { setModals } from '../../actions/modals';
 import { newJobPost } from '../../actions/noticeboard';
 // Components
+import CustomButton from 'components/CustomButtons/Button';
 import {
     Dialog, DialogTitle, DialogContent,
     Button, ListItem, FormControl, InputLabel,
@@ -21,46 +22,7 @@ import {
 } from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-    btn: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-        borderRadius: 3,
-        border: 0,
-        color: 'white',
-        height: 48,
-        padding: '0 30px',
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)'
-    },
-    input: {
-        width: '50%',
-    },
-    body: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'column',
-        overflow: 'scroll',
-
-    },
-    paperScrollPaper: {
-        [theme.breakpoints.down('md')]: {
-            margin: 0,
-            maxHeight: '95%'
-        },
-        display: 'block',
-        width: '100%',
-        maxWidth: 600
-    },
-    footer: {
-        justifyContent: 'space-evenly'
-    },
-    editBtn: {
-        minWidth: 20,
-        padding: '4px 8px',
-        marginLeft: 5
-    }
-}));
+import useStyles from './styles';
 
 export default () => {
     const classes = useStyles();
@@ -213,12 +175,14 @@ export default () => {
                 }}
                 children={
                     <React.Fragment>
-                        <Button
-                            classes={{ root: classes.btn }}
+                        <CustomButton
+                            size='sm'
+                            color='github'
                             children={`Submit`}
                             onClick={handleSubmit} />
-                        <Button
-                            classes={{ root: classes.btn }}
+                        <CustomButton
+                            size='sm'
+                            color='danger'
                             children={`Cancel`}
                             onClick={() => setModals(dispatch, 'JobPostModal')} />
                     </React.Fragment>

@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core';
 export default ({ post, handleData }) => {
     return (
         <div className='row'>
-            <div className='col-xs-12 col-md-6'>
+            <div className='col-xs-12 col-sm-6'>
                 <TextField
                     fullWidth
                     type='date' value={post.start}
@@ -13,7 +13,7 @@ export default ({ post, handleData }) => {
                     onChange={handleData('start')} />
 
             </div>
-            <div className='col-xs-12 col-md-6'>
+            <div className='col-xs-12 col-sm-6'>
                 <TextField
                     fullWidth
                     type='date' value={post.end}

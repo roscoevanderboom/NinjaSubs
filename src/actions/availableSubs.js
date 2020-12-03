@@ -33,3 +33,6 @@ export const unlike = (sub, profileData, setLiked) => {
         likes: FieldValue.arrayRemove(profileData.uid),
     }).then(() => { setLiked(false) })
 }
+export const deleteSubListing = (uid) => {
+    availableSubs.doc(uid).delete()
+}
