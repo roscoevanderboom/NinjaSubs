@@ -29,4 +29,4 @@ yarn.lock
 /.firebase 
 .firebaserc
 firebase.json
-/src/constants/firebase/config.js
+/src/constants/firebase/api

@@ -30,12 +30,14 @@ export default function App() {
 
     useEffect(() => {
         onAuthStateChanged(dispatch, hist);
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         if (user !== null) {
             watchProfileData(user, dispatch, hist);
         }
+        // eslint-disable-next-line  
     }, [user]);
 
     useEffect(() => {
@@ -44,11 +46,8 @@ export default function App() {
             queryAvailableSubs(dispatch);
             handleInbox(user, dispatch);
         }
+        // eslint-disable-next-line  
     }, [profileData])
-
-    // useEffect(() => {
-    //     console.log(state);
-    // }, [state])
 
     return (
         <React.Fragment>
@@ -63,7 +62,7 @@ export default function App() {
                 <Route path="/noticeboard" component={Noticeboard} />
                 <Route path="/availableSubs" component={AvailableSubs} />
                 <Route path="/inbox" component={Inbox} />
-                <Route  path="/chatroom" component={Chatroom} />
+                <Route path="/chatroom" component={Chatroom} />
             </Switch>
         </React.Fragment>
 
