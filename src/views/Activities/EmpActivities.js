@@ -11,8 +11,8 @@ import { setModals } from '../../actions/modals';
 import { setPostToEdit, deleteJobPost } from '../../actions/noticeboard';
 
 // reactstrap components
-import { Card, Button } from "reactstrap";
-
+import { Card } from "reactstrap";
+import CustomButton from 'components/CustomButtons/Button';
 import {
     CardHeader, Avatar, Tooltip
 } from "@material-ui/core";
@@ -86,25 +86,23 @@ const ActivitiesCard = () => {
                                 <React.Fragment>
                                     <Tooltip title='Edit Post'
                                         placement='top'>
-                                        <Button
+                                        <CustomButton
                                             onClick={() => editPost(post)}
-                                            className="btn-round btn-icon"
-                                            color="success"
-                                            outline
+                                            className="p-2"
+                                            color="info"
                                             size="sm"   >
                                             <Edit />
-                                        </Button>
+                                        </CustomButton>
                                     </Tooltip>
                                     <Tooltip title='Delete Post'
                                         placement='top'>
-                                        <Button
+                                        <CustomButton
                                             onClick={() => deletePost(post)}
-                                            className="btn-round btn-icon"
+                                            className="p-2"
                                             color="danger"
-                                            outline
                                             size="sm"   >
                                             <Close />
-                                        </Button>
+                                        </CustomButton>
                                     </Tooltip>
                                 </React.Fragment>
                             }

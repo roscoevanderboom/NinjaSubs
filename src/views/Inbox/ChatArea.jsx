@@ -25,7 +25,7 @@ import { useStyles } from './styles';
 
 export default () => {
     const classes = useStyles();
-    const { state, hist } = useContext(store);
+    const { state, hist, dispatch } = useContext(store);
     const { selectedChat, profileData, user } = state;
     const [list, setList] = useState([]);
     const [recipient, setRecipient] = useState({ name: '', image: '' });
@@ -46,7 +46,7 @@ export default () => {
         if (!window.confirm(`Delete chatroom?\nChatroom will be deleted for both users.`)) {
             return;
         }
-        deleteChatroom(selectedChat.room_id);
+        deleteChatroom(selectedChat.room_id, dispatch, hist);
     }
     const blockUser = () => {
         if (!selectedChat) {

@@ -13,6 +13,7 @@ import { handleInbox } from './actions/privatechat';
 // Components
 import Loader from 'components/Loader';
 import JobPostModal from 'components/JobPostModal';
+import ImageModal from 'components/ImageModal';
 // pages for this product
 import LoginPage from "views/LoginPage/LoginPage";
 import CreateProfile from 'views/CreateProfile';
@@ -47,12 +48,13 @@ export default function App() {
             handleInbox(user, dispatch);
         }
         // eslint-disable-next-line  
-    }, [profileData])
+    }, [profileData]);
 
     return (
         <React.Fragment>
             <Loader />
             <JobPostModal />
+            <ImageModal />
             <Switch>
                 <Route path="/login-page" component={LoginPage} />
                 <Route path="/createProfile-page" component={CreateProfile} />

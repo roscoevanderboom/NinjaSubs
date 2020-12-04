@@ -24,6 +24,8 @@ const reducer = (state, action) => {
       return { ...state, searchList: data };
     case "SET_CURRENTLIST":
       return { ...state, currentList: data };
+    case "SET_CURRENTSUB":
+      return { ...state, currentSub: data };
     case "SET_POST_TO_EDIT":
       return { ...state, post_to_edit: data };
     case "SET_SELECTED_CHAT":
@@ -36,9 +38,15 @@ const reducer = (state, action) => {
           [modal]: modals[modal] ? false : true
         }
       };
+    case "RESET":
+      return data;
     default:
       break;
   }
 };
 
 export default reducer;
+
+export const resetStore = (dispatch, init) => {
+  dispatch({ type: 'RESET', data: init })
+}

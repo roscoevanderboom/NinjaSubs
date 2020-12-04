@@ -3,7 +3,8 @@ const modals = {
   JobPostModal: false,
   BlockedUsers: false,
   ChangeEmail: false,
-  ChangePassword: false
+  ChangePassword: false,
+  ImageModal: false
 };
 
 const appState = {
@@ -17,6 +18,7 @@ const appState = {
   currentList: [],
   post_to_edit: false,
   selectedChat: false,
+  currentSub: false,
   modals: modals
 };
 

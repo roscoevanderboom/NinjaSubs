@@ -5,6 +5,8 @@ import * as constants from '../../constants';
 // Actions
 import { like, unlike } from '../../actions/availableSubs';
 import { searchInbox } from '../../actions/privatechat';
+import { setModals } from 'actions/modals';
+// Components
 import {
     Card, CardHeader, CardContent, CardActions,
     Collapse, Avatar, IconButton, Typography, Badge
@@ -49,7 +51,12 @@ export default ({ sub }) => {
     }
 
     const showProfilePicture = () => {
-        console.log(sub.image)
+        dispatch({
+            type: 'SET_CURRENTSUB',
+            data: sub
+        })
+        setModals(dispatch, 'ImageModal')
+        console.log(sub.image);
     }
 
     React.useEffect(() => {

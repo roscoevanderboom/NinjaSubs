@@ -25,7 +25,8 @@ export const useStyles = makeStyles(theme => ({
     },
     avatar: {
         height: 60,
-        width: 60
+        width: 60,
+        cursor: 'pointer'
     },
     header: {
         padding: 8
