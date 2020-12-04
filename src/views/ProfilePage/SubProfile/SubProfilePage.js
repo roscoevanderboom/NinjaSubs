@@ -4,10 +4,10 @@ import store from 'state';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // Constants
-import { newSubBoardListing, isArrayEqual, noUserImage, ninjaStar } from '../../../constants'
-import * as collections from '../../../constants/firebase/collections';
+import { subBoardListing, isArrayEqual, noUserImage, ninjaStar } from '../../../constants';
 // Actions
 import { handleProfileData } from '../../../actions/user';
+import { handleSubProfile } from '../../../actions/availableSubs';
 // @material-ui/core components
 import {
   Typography, Tooltip, InputAdornment, Badge,
@@ -43,43 +43,32 @@ export default function ProfilePage({ props }) {
   const heartIcon = classNames(
     classes.heartIcon,
     'fas fa-heart',
-  )
-
-  const handleUpdate = () => {
-    handleProfileData({
-      action: 'update',
-      user,
-      data: { available: profileData.available ? false : true }
-    })
-  }
+  );
 
   const createNewSub = () => {
     if (profileData.name === '') {
-      window.alert('Please give yourself a display name and click update.');
+      feedback('error', 'Please give yourself a display name and click update.');
       return;
     }
-    collections.availableSubs.doc(user.uid)
-      .set(newSubBoardListing(profileData))
-      .then(() => {
-        handleUpdate();
-      })
-      .catch((err) => {
-        feedback('error', err.message)
-      })
-  }
+    handleSubProfile(user, {
+      action: 'set',
+      data: subBoardListing(profileData)
+    })
+  };
+
   const handleAvailable = () => {
     if (user === null) {
       return;
     }
-    collections.availableSubs.doc(user.uid)
-      .update(newSubBoardListing(profileData))
-      .then(() => {
-        handleUpdate();
-      })
-      .catch((err) => {
-        createNewSub();
-      })
-  }
+
+    const availability = { available: profileData.available ? false : true };
+
+    handleProfileData({
+      action: 'update',
+      user,
+      data: availability
+    })
+  };
   const setRating = () => {
     let count = []
     if (profileData.name !== null) {
@@ -105,7 +94,7 @@ export default function ProfilePage({ props }) {
     if (count !== profileData.rating) {
       handleProfileData({ action: 'update', user, data: { rating: count } })
     }
-  }
+  };
 
   useEffect(() => {
     if (profileData.rating !== undefined) {
@@ -113,6 +102,17 @@ export default function ProfilePage({ props }) {
     }
     // eslint-disable-next-line
   }, [profileData.rating])
+
+  useEffect(() => {
+    handleSubProfile(user, {
+      action: 'update',
+      data: subBoardListing(profileData)
+    })
+      .catch(() => {
+        createNewSub();
+      })
+    // eslint-disable-next-line
+  }, [profileData]);
 
   useEffect(() => {
     if (availableSubs && profileData.type === 'Substitute') {
@@ -123,7 +123,7 @@ export default function ProfilePage({ props }) {
       }
     }
     // eslint-disable-next-line
-  }, [availableSubs])
+  }, [availableSubs]);
 
   return (
     <Col xs='12' sm='10' lg='8'>
@@ -143,7 +143,7 @@ export default function ProfilePage({ props }) {
               control={
                 <Switch
                   checked={profileData.available}
-                  onChange={handleAvailable}
+                  onClick={handleAvailable}
                   value="availability"
                   classes={{
                     switchBase: classes.switchBase,

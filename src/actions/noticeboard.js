@@ -8,15 +8,13 @@ export const setNoticeboardQuery = (dispatch, data) => {
         type: 'SET_NOTICEBOARD',
         data: data
     })
-}
-
+};
 export const setPostToEdit = (dispatch, data) => {
     dispatch({
         type: 'SET_POST_TO_EDIT',
         data: data
     })
-}
-
+};
 export const queryNoticeboard = (dispatch) => {
     noticeboard.onSnapshot(function (querySnapshot) {
         let posts = [];
@@ -28,11 +26,10 @@ export const queryNoticeboard = (dispatch) => {
             return;
         }
         setNoticeboardQuery(dispatch, posts)
-    }, function (error) {
+    }, function () {
         setNoticeboardQuery(dispatch, [])
-        console.log(error.message);
     })
-}
+};
 const handleFirebase = (key, post, profileData, details) => {
     let data = {};
     const add = {
@@ -55,21 +52,21 @@ const handleFirebase = (key, post, profileData, details) => {
             .then(() => resolve(true))
             .catch((err) => reject(err.message))
     })
-}
+};
 export const newJobPost = (post, stars, dispatch, feedback) => {
     noticeboard.doc(`${post.ref}`).set({ ...post, stars: stars })
         .then(() => {
             setModals(dispatch, 'JobPostModal')
         })
         .catch(err => { feedback('error', err.message) })
-}
+};
 export const applyToJobPost = (post, profileData, feedback) => {
     let details = newJobApplicationData(profileData);
     handleFirebase('add', post, profileData, details)
         .catch((err) => {
             feedback('error', err.message)
         })
-}
+};
 export const removeJobApplication = (post, profileData, feedback) => {
     let details = {}
     post.candidates_uid.forEach((uid, index) => {
@@ -81,7 +78,7 @@ export const removeJobApplication = (post, profileData, feedback) => {
         .catch((err) => {
             feedback('error', err.message)
         })
-}
+};
 export const deleteJobPost = (post, feedback) => {
     noticeboard.doc(`${post.ref}`).delete()
         .then(() => {
@@ -90,5 +87,5 @@ export const deleteJobPost = (post, feedback) => {
         .catch((err) => {
             feedback('error', err.message);
         })
-}
+};
 

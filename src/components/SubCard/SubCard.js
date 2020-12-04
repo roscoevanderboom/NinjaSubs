@@ -1,18 +1,21 @@
 import React, { useContext, useState } from 'react';
 // State
 import store from 'state';
-
+// actions
+import { searchInbox } from 'actions/privatechat'
+// Components
+import CustomButton from 'components/CustomButtons/Button';
 import {
     Dialog, DialogActions, DialogContent, DialogTitle,
-    DialogContentText, Chip, Avatar, Button
+    DialogContentText, Chip, Avatar
 } from '@material-ui/core';
 
 import { useStyles } from './styles';
 
 export default function SubCard({ sub }) {
     const classes = useStyles();
-    const { methods } = useContext(store);
-    const { searchInbox, isUserVerfied } = methods;
+    const { state, dispatch, hist } = useContext(store);
+    const { inbox, profileData } = state;
 
     const [open, setOpen] = useState(false)
 
@@ -21,10 +24,10 @@ export default function SubCard({ sub }) {
     }
 
     const handleStartChat = () => {
-        if (!isUserVerfied()) {
+        if (state.user === null) {
             return;
-        }       
-        searchInbox(sub)
+        }
+        searchInbox(inbox, profileData, sub, hist, dispatch);
     }
 
     return (
@@ -55,11 +58,12 @@ export default function SubCard({ sub }) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        variant='outlined'
+                    <CustomButton
+                        size='sm'
+                        color='github'
                         onClick={handleStartChat}>
                         Contact
-                    </Button>
+                    </CustomButton>
                 </DialogActions>
             </Dialog>
         </div>

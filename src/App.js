@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation, useParams } from "react-router-dom";
 // State
 import store from 'state';
 
@@ -28,6 +28,16 @@ import Chatroom from 'views/Inbox/ChatArea';
 export default function App() {
     const { hist, dispatch, state } = useContext(store);
     const { user, profileData } = state;
+
+    const location = useLocation();
+    const params = useParams();
+
+    useEffect(() => {
+        console.log(location);
+    },[location])
+    useEffect(() => {
+        console.log(params);
+    },[params])
 
     useEffect(() => {
         onAuthStateChanged(dispatch, hist);

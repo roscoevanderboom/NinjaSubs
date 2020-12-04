@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 
 export default ({ post }) => {
-    const classes = useStyles()    
+    const classes = useStyles()
     const [open, setOpen] = useState(false);
 
     const handleModal = () => {
@@ -55,6 +55,7 @@ export default ({ post }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button
+                        size='sm'
                         color='danger'
                         children={`Close`}
                         onClick={handleModal} />

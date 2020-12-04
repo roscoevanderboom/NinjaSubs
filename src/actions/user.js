@@ -20,8 +20,7 @@ export const watchProfileData = (user, dispatch, hist) => {
             hist.push('/login-page');
         }
         setLoading(dispatch, false);
-    }, function (error) {
-        console.log(error.message);
+    }, function () {
         setProfileData(dispatch, false);
         setLoading(dispatch, false);
     });

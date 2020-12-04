@@ -9,16 +9,14 @@ export const setInbox = (dispatch, chats) => {
     dispatch({
         type: "SET_INBOX",
         data: chats
-    })
-}
-
+    });
+};
 export const setSelectedChat = (dispatch, chat) => {
     dispatch({
         type: "SET_SELECTED_CHAT",
         data: chat
-    })
-}
-
+    });
+};
 export const handleInbox = (user, dispatch) => {
     privateChats.where('participants', 'array-contains', `${user.uid}`)
         .onSnapshot((querySnapshot) => {
@@ -30,11 +28,10 @@ export const handleInbox = (user, dispatch) => {
                 }
             });
             setInbox(dispatch, myChats)
-        }, function (error) {
-            setInbox(dispatch, [])
-            console.log(error.message);
-        })
-}
+        }, function () {
+            setInbox(dispatch, []);
+        });
+};
 export const deleteChatroom = (id, dispatch, hist) => {
     privateChats.doc(`${id}`).delete()
         .then(() => {
@@ -44,7 +41,7 @@ export const deleteChatroom = (id, dispatch, hist) => {
         .catch(err => {
             console.log(err.message)
         })
-}
+};
 export const startChat = (profileData, chatee, history, dispatch) => {
     let newChat = newChatRoom(profileData, chatee)
     privateChats.doc(`${newChat.room_id}`).set(newChat)
@@ -59,8 +56,10 @@ export const followChat = (id, history, dispatch) => {
             setSelectedChat(dispatch, doc.data());
             history.push('/chatroom');
         }
+    }, () => {
+        history.push('/inbox');
     })
-}
+};
 export const deleteAllChatrooms = (user) => {
     privateChats.where('participants', 'array-contains', `${user.uid}`)
         .get().then(function (querySnapshot) {
@@ -71,7 +70,7 @@ export const deleteAllChatrooms = (user) => {
         .catch(function (error) {
             console.log("Error getting documents: ", error);
         });
-}
+};
 export const searchInbox = (inbox, profileData, chatee, history, dispatch) => {
     if (chatee.uid === profileData.uid) {
         return;
@@ -89,7 +88,7 @@ export const searchInbox = (inbox, profileData, chatee, history, dispatch) => {
     }
     startChat(profileData, chatee, history, dispatch)
     setModals(dispatch, 'CandidateDetails');
-}
+};
 export const handleNewChatMessage = (profileData, newPost, selectedChat) => {
     var newChat = chatPost(profileData, newPost, selectedChat);
 
@@ -100,4 +99,4 @@ export const handleNewChatMessage = (profileData, newPost, selectedChat) => {
             .then(() => resolve(true))
             .catch((err) => reject(err.message))
     })
-}
+};

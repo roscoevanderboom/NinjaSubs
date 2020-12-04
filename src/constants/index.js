@@ -141,7 +141,7 @@ export const newEmployerData = {
     phone: '',
     posts: []
 }
-export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, available }) => ({
+export const subBoardListing = ({ uid, rating, name, image, bio, locations, available }) => ({
     uid,
     rating,
     name,
@@ -149,7 +149,7 @@ export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, a
     bio,
     likes: [],
     locations,
-    available: !available
+    available: available
 })
 
 // General

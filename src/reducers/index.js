@@ -8,8 +8,6 @@ const reducer = (state, action) => {
       return { ...state, config: data };
     case "SET_LOADING":
       return { ...state, loading: data };
-    case "SET_LOGGEDIN":
-      return { ...state, loggedIn: data };
     case "SET_USER":
       return { ...state, user: data };
     case "SET_PROFILEDATA":

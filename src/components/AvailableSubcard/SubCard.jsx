@@ -55,8 +55,7 @@ export default ({ sub }) => {
             type: 'SET_CURRENTSUB',
             data: sub
         })
-        setModals(dispatch, 'ImageModal')
-        console.log(sub.image);
+        setModals(dispatch, 'ImageModal');
     }
 
     React.useEffect(() => {
