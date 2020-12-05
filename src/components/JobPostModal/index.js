@@ -64,7 +64,7 @@ export default () => {
         setPost({ ...post, neg: post.neg ? false : true })
     }
     const handleSubmit = () => {
-        if (!user.verified) {
+        if (!user.emailVerified) {
             feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.ONLY_VERIFIED_USERS_CAN_USE_THIS_FEATURE);
             return;
         }
