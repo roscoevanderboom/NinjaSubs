@@ -14,7 +14,7 @@ import styles from "assets/jss/material-kit-react/components/customInputStyle.js
 
 const useStyles = makeStyles(styles);
 
-const locationSettings = taiwan.Taipei;
+const locationSettings = taiwan.Taichung;
 const mainDistricts = Object.keys(locationSettings);
 const subDistricts = Object.values(locationSettings);
 

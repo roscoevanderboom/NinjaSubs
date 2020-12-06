@@ -5,7 +5,7 @@ import { taiwan } from 'constants/locations';
 import CustomCollapse from "./Districts-Collapse";
 import Container from "@material-ui/core/Container";
 
-const locationSettings = taiwan.Taipei;
+const locationSettings = taiwan.Taichung;
 const mainDistricts = Object.keys(locationSettings);
 const subDistricts = Object.values(locationSettings);
 
