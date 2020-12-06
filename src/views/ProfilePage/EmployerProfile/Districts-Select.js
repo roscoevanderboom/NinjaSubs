@@ -14,8 +14,11 @@ import styles from "assets/jss/material-kit-react/components/customInputStyle.js
 
 const useStyles = makeStyles(styles);
 
+const locationSettings = taiwan.Taipei;
+const mainDistricts = Object.keys(locationSettings);
+const subDistricts = Object.values(locationSettings);
+
 export default function DistrictSelect(props) {
-    const { Taipei, Taoyuan, newTaipei } = taiwan.Taipei;
     const {
         handleData,
         formControlProps,
@@ -28,20 +31,6 @@ export default function DistrictSelect(props) {
     } = props;
     const classes = useStyles();
 
-    const selectOptions = [
-        {
-            header: 'Taipei',
-            values: Taipei
-        },
-        {
-            header: 'New Taipei',
-            values: newTaipei
-        },
-        {
-            header: 'Taoyuan',
-            values: Taoyuan
-        },
-    ]
     const labelClasses = classNames({
         [" " + classes.labelRootError]: error,
         [" " + classes.labelRootSuccess]: success && !error
@@ -97,9 +86,9 @@ export default function DistrictSelect(props) {
                         id="location-select" />
                 }>
                 <option>{value}</option>
-                {selectOptions.map((group, i) =>
-                    <optgroup key={i} label={group.header}>
-                        {group.values.map(dist => <option key={dist} value={dist}>{dist}</option>)}
+                {mainDistricts.map((district, i) =>
+                    <optgroup key={i} label={district}>
+                        {subDistricts[i].map(dist => <option key={dist} value={dist}>{dist}</option>)}
                     </optgroup>
                 )}
             </Select>

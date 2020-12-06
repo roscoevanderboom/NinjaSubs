@@ -1,4 +1,5 @@
 // Constants
+import { FieldValue } from '../constants/firebase';
 import { users } from '../constants/firebase/collections';
 // Actions
 import setLoading from '../actions/loading';
@@ -34,5 +35,13 @@ export const handleProfileData = ({ action, user, data }) => {
             }).catch((err) => {
                 reject(err.message)
             })
+    })
+}
+
+export const handleLocations = (user, profileData, location) => () => {
+    users.doc(user.uid).update({
+        locations: profileData.locations.includes(location)
+            ? FieldValue.arrayRemove(location)
+            : FieldValue.arrayUnion(location)
     })
 }

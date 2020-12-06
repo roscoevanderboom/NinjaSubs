@@ -11,7 +11,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import CustomInput from "components/CustomInput/CustomInput";
 // Custom components
-import DistrictSelect from './DistrictSelect'
+import DistrictSelect from './Districts-Select';
 // Styles
 import useStyles from '../styles';
 

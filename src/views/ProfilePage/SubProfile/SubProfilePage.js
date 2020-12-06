@@ -23,7 +23,7 @@ import GridItem from "components/Grid/GridItem.js";
 import CustomInput from "components/CustomInput/CustomInput";
 // Custom components
 import ProfileImage from '../ProfileImage';
-import DistrictCollapse from './DistrictCollapse';
+import DistrictCollapse from './Districts';
 import Footer from '../ProfileFooter';
 // Styles
 import useStyles from '../styles';
@@ -126,9 +126,9 @@ export default function ProfilePage({ props }) {
   }, [availableSubs]);
 
   return (
-    <Col xs='12' sm='10' lg='8'>
+    <Col xs='12' lg='10'>
       <Row className='justify-content-around'>
-        <Col xs='11' md='7' lg='4'
+        <Col xs='11' md='7' lg='5' xl='4'
           className={classes.gridItem}>
           <ProfileImage formData={formData} />
 

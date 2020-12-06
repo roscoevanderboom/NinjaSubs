@@ -19,9 +19,9 @@ export default function ProfilePage({ props }) {
   const classes = useStyles();
 
   return (
-    <Col xs='12' sm='10' lg='8'>
+    <Col xs='12' lg='10'>
       <Row className='justify-content-around'>
-        <Col xs='11' md='7' lg='4'
+        <Col xs='11' md='7' lg='5' xl='4'
           className={classes.gridItem}>
 
           <ProfileImage formData={formData} />

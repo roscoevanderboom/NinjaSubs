@@ -30,8 +30,8 @@ export default function App() {
     const { user, profileData } = state;
 
     useEffect(() => {
-        console.log('Clean up effect of Login-page');
-    },[])
+        console.log(`To change location, select a new locations object in view/ProfilePage/SubProfile/District and view/ProfilePage/EmployerProfile/Districts-Select.`);
+    }, [])
 
     useEffect(() => {
         onAuthStateChanged(dispatch, hist);

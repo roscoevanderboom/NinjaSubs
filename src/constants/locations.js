@@ -1,11 +1,11 @@
 export const taiwan = {
     Taipei: {
-        Taipei: [
+        "Taipei": [
             'Beitou', `Da'an`, 'Datong', 'Nangang',
             'Neihu', 'Shilin', 'Songshan', 'Wanhua',
             'Wenshen', 'Xinyi', 'Zhongshan', 'Zhongzheng'
         ],
-        newTaipei: [
+        "New Taipei": [
             'Banqiao', `Xinzhuang`, 'Zhonghe', 'Yonghe',
             'Tucheng', 'Shulin', 'Sanxia', 'Yingge',
             'Sanchong', 'Luzhou', 'Wugu', 'Taishan',
@@ -15,60 +15,64 @@ export const taiwan = {
             'Xindian', 'Shenkeng', 'Shiding', 'Pinglin',
             'Wulai'
         ],
-        Taoyuan: [
+        "Taoyuan": [
             'Taoyuan', `Zhongli`, 'Daxi', 'Yangmei',
             'Luzhu', 'Dayuan', 'Guishan', 'Bade',
             'Longtan', 'Pingzhen', 'Xinwu', 'Guanyin',
             'Fuxing'
         ]
     },
-    Taichung: [
-        'Beitun', 'Central', 'Daan', 'Dadu',
-        'Dajia', 'Dali', 'Daya', 'Dongshi',
-        'Fengyuan', 'Heping', 'Houli', 'Longjing',
-        'Nantun', 'Qingshui', 'Shalu', 'Shengang',
-        'Taiping', 'Tanzi', 'Waipu', 'Wufeng',
-        'Wuqi', 'Wuri', 'Xinshe', 'Xitun'
-    ],
+    Taichung: {
+        "Taichung": [
+            'Beitun', 'Central', 'Daan', 'Dadu',
+            'Dajia', 'Dali', 'Daya', 'Dongshi',
+            'Fengyuan', 'Heping', 'Houli', 'Longjing',
+            'Nantun', 'Qingshui', 'Shalu', 'Shengang',
+            'Taiping', 'Tanzi', 'Waipu', 'Wufeng',
+            'Wuqi', 'Wuri', 'Xinshe', 'Xitun'
+        ]
+    },
     Kaoshiung: {
-        Kaoshiung: [
+        "Kaoshiung": [
             'Yancheng', 'Gushan', 'Zuoying', 'Nanzih',
             'Sanmin', 'Sinsing', 'Cianjin', 'Lingya',
             'Cianjhen', 'Cijin', 'Siaogang'
         ],
-        Fengshan: [
+        "Fengshan": [
             'Fengshan', 'Linyuan', 'Daliao', 'Dashu',
             'Dashe', 'Renwu', 'Niaosong'
         ],
-        Gangshan: [
+        "Gangshan": [
             'Gangshan', 'Ciaotou', 'Yanchao', 'Tianliao',
             'Alian', 'Lujhu', 'Hunei', 'Cieding',
             'Yongan', 'Mituo', 'Zihguan'
         ],
-        Cishan: [
+        "Cishan": [
             'Cishan', 'Meinong', 'Liouguei', 'Jiansian',
             'Shanlin', 'Neimen'
         ]
     },
     Tainan: {
-        inner: [
+        "Inner": [
             'West Central', 'East', 'South', 'North',
             'Anping', 'Annan'
         ],
-        river_South: [
-            'Yongkang', 'Gueiren' , 'Sinhua', 'Zuojhen',
-            'Yujing', 'Nansi', 'Nanhua', 'Rende',  'Guanmiao',
-            'Longci', 'Shanhua', 'Shanshang', 
+        "River South": [
+            'Yongkang', 'Gueiren', 'Sinhua', 'Zuojhen',
+            'Yujing', 'Nansi', 'Nanhua', 'Rende', 'Guanmiao',
+            'Longci', 'Shanhua', 'Shanshang',
         ]
     }
 }
 
 export const japan = {
-    Tokyo: [
-        'Adachi', 'Arakawa', 'Bunkyo', 'Chiyoda',
-        'Chūō', 'Edogawa', 'Itabashi', 'Katsushika', 'Kita',
-        'Kōtō', 'Meguro', 'Minato', 'Nakano', 'Nerima', 'Ōta',
-        'Setagaya', 'Shibuya', 'Shinagawa', 'Shinjuku',
-        'Suginami', 'Sumida', 'Taitō', 'Toshima'
-    ]
+    Tokyo: {
+        "Tokyo": [
+            'Adachi', 'Arakawa', 'Bunkyo', 'Chiyoda',
+            'Chūō', 'Edogawa', 'Itabashi', 'Katsushika', 'Kita',
+            'Kōtō', 'Meguro', 'Minato', 'Nakano', 'Nerima', 'Ōta',
+            'Setagaya', 'Shibuya', 'Shinagawa', 'Shinjuku',
+            'Suginami', 'Sumida', 'Taitō', 'Toshima'
+        ]
+    }
 }   
