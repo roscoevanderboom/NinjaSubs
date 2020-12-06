@@ -1,13 +1,9 @@
 import React from "react";
 // Locations array
-import { taiwan } from 'constants/locations';
+import { mainDistricts, subDistricts } from 'constants/locations';
 // @material-ui/core components
 import CustomCollapse from "./Districts-Collapse";
 import Container from "@material-ui/core/Container";
-
-const locationSettings = taiwan.Taipei;
-const mainDistricts = Object.keys(locationSettings);
-const subDistricts = Object.values(locationSettings);
 
 export default () => {
 
