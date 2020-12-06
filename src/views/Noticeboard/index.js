@@ -47,10 +47,7 @@ export default () => {
 
   useEffect(() => {
     if (profileData && noticeboardQuery) {
-      const methodProps = { noticeboardQuery, searchParams, profileData }
-      profileData.type === 'Substitute'
-        ? setList(filterNoticeboard('SUBSTITUTE', methodProps))
-        : setList(filterNoticeboard('EMPLOYER', methodProps))
+      setList(filterNoticeboard(noticeboardQuery, searchParams, profileData))
     }
     // eslint-disable-next-line
   }, [noticeboardQuery, profileData, searchParams]);
