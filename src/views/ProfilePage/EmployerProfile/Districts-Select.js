@@ -1,6 +1,6 @@
 import React from 'react';
 // Locations array
-import { taiwan } from 'constants/locations';
+import { mainDistricts, subDistricts } from 'constants/locations';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -13,10 +13,6 @@ import Select from '@material-ui/core/Select';
 import styles from "assets/jss/material-kit-react/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
-
-const locationSettings = taiwan.Taichung;
-const mainDistricts = Object.keys(locationSettings);
-const subDistricts = Object.values(locationSettings);
 
 export default function DistrictSelect(props) {
     const {

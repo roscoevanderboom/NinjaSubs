@@ -75,4 +75,8 @@ export const japan = {
             'Suginami', 'Sumida', 'Taitō', 'Toshima'
         ]
     }
-}   
+}  
+
+const locationSettings = taiwan.Taichung;
+export const mainDistricts = Object.keys(locationSettings);
+export const subDistricts = Object.values(locationSettings);
