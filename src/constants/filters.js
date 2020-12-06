@@ -28,21 +28,43 @@ export const filterInbox = (arr, profileData) => {
     })
     return filtered
 }
-export const filterNoticeboard = (key, arr, profileData) => {
-    let filtered = [];
-    // eslint-disable-next-line
+export const filterNoticeboard = (key, { noticeboardQuery, searchParams, profileData }) => {
+    const searchFilter = (post) => (searchParams.includes(post.type));
     switch (key) {
-        case 'sub':
-            filtered = arr.filter(job =>
-                !job.candidates_uid.includes(profileData.uid)
-                && !profileData.ignoreList.includes(job.ref)
-                && profileData.locations.includes(job.location))
-            break;
-        case 'emp':
-            filtered = arr.filter(job =>
-                job.location === profileData.location
+        case 'SUBSTITUTE':
+            const hasNotApplied = (post) => (!post.candidates_uid.includes(profileData.uid));
+            const notIgnored = (post) => (!profileData.ignoreList.includes(post.ref));
+            const locationsFilter = (post) => (profileData.locations.includes(post.location));
+            return noticeboardQuery.filter(post =>
+                hasNotApplied(post)
+                && notIgnored(post)
+                && searchFilter(post)
+                && locationsFilter(post))
+        case 'EMPLOYER':
+            const locationFilter = (post) => (post.location === profileData.location);
+            return noticeboardQuery.filter(post =>
+                locationFilter(post)
+                && searchFilter(post)
             )
-            break;
+        default:
+            break
     }
-    return filtered
+}
+export const filterChips = (array, profileData) => {
+    let newArray = []
+    array.forEach(dist => {
+        if (profileData.locations.includes(dist)) {
+            newArray.push({
+                name: dist,
+                variant: 'outlined',
+                color: 'primary'
+            })
+            return;
+        }
+        newArray.push({
+            name: dist,
+            variant: 'default'
+        })
+    })
+    return newArray;
 }

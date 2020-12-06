@@ -6,7 +6,8 @@ import { filterSubActivities } from '../../constants/filters';
 // Actions
 import { removeJobApplication } from '../../actions/noticeboard';
 // reactstrap components
-import { Card, Button, } from "reactstrap";
+import { Card } from "reactstrap";
+import CustomBtn from 'components/CustomButtons/Button';
 // @material-ui/core components
 import {
     CardHeader, Avatar, Tooltip
@@ -16,11 +17,12 @@ import { Close } from "@material-ui/icons";
 // Custom components
 import PostBody from 'components/NoticeboardCard/PostBody';
 import ListHeader from 'components/EmptyListHeader';
+import ClearIgnoredPosts from "./ClearIgnoredPosts";
 
 const ActivitiesCard = () => {
     const { state, feedback } = useContext(store);
     const { profileData, noticeboardQuery } = state;
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
 
     useEffect(() => {
         if (noticeboardQuery) {
@@ -34,6 +36,15 @@ const ActivitiesCard = () => {
             {list.length > 0 ? null :
                 <ListHeader text='No activities' />
             }
+
+            {!profileData || profileData.ignoreList.length === 0 ? null :
+                <>
+                    <br />
+                    <ClearIgnoredPosts />
+                    <br />
+                </>
+            }
+
             <React.Fragment>
                 {list.map((post, i) =>
                     <Card key={i}
@@ -46,14 +57,13 @@ const ActivitiesCard = () => {
                             action={
                                 <Tooltip title='Remove Job Application'
                                     placement='top'>
-                                    <Button
+                                    <CustomBtn
                                         onClick={() => removeJobApplication(post, profileData, feedback)}
-                                        className="btn-round btn-icon"
+                                        className="p-2"
                                         color="danger"
-                                        outline
                                         size="sm"   >
                                         <Close />
-                                    </Button>
+                                    </CustomBtn>
                                 </Tooltip>
                             } />
                         <PostBody post={post} />
