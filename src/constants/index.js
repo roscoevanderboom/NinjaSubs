@@ -151,6 +151,15 @@ export const subBoardListing = ({ uid, rating, name, image, bio, locations, avai
     locations,
     available: available
 })
+export const updateSubBoardListing = ({ uid, rating, name, image, bio, locations, available }) => ({
+    uid,
+    rating,
+    name,
+    image,
+    bio,
+    locations,
+    available: available
+})
 
 // General
 export const isEven = value => value % 2 === 0

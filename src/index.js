@@ -19,6 +19,7 @@ ReactDOM.render(
       vertical: 'bottom',
       horizontal: 'center',
     }}
+    preventDuplicate
     hideIconVariant={false}
     autoHideDuration={5000}
     maxSnack={3}>

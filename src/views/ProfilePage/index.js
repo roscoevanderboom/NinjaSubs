@@ -26,15 +26,15 @@ export default function ProfilePage() {
             [key]: value,
         });
     };
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (user === null) {
             return;
         }
         let res = validate(profileData, formData, user, feedback);
         if (res) {
-            handleProfileData({ action: "update", user, data: formData })
-                .then(() => feedback("success", "Profile has been updated"))
+            await handleProfileData({ action: "update", user, data: formData })
                 .catch((err) => feedback("error", err));
+            feedback("success", "Profile has been updated")
         }
     };
     const handleCancel = () => {

@@ -4,10 +4,10 @@ import store from 'state';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // Constants
-import { subBoardListing, isArrayEqual, noUserImage, ninjaStar } from '../../../constants';
+import { updateSubBoardListing, isArrayEqual, noUserImage, ninjaStar } from '../../../constants';
 // Actions
 import { handleProfileData } from '../../../actions/user';
-import { handleSubProfile } from '../../../actions/availableSubs';
+import { handleAvailable, createNewSub, handleSubProfile } from '../../../actions/availableSubs';
 // @material-ui/core components
 import {
   Typography, Tooltip, InputAdornment, Badge,
@@ -45,29 +45,8 @@ export default function ProfilePage({ props }) {
     'fas fa-heart',
   );
 
-  const createNewSub = () => {
-    if (profileData.name === '') {
-      feedback('error', 'Please give yourself a display name and click update.');
-      return;
-    }
-    handleSubProfile(user, {
-      action: 'set',
-      data: subBoardListing(profileData)
-    })
-  };
-
-  const handleAvailable = () => {
-    if (user === null) {
-      return;
-    }
-
-    const availability = { available: profileData.available ? false : true };
-
-    handleProfileData({
-      action: 'update',
-      user,
-      data: availability
-    })
+  const handleAvailability = () => {
+    handleAvailable(profileData, user, feedback);
   };
   const setRating = () => {
     let count = []
@@ -104,13 +83,11 @@ export default function ProfilePage({ props }) {
   }, [profileData.rating])
 
   useEffect(() => {
-    handleSubProfile(user, {
+    handleSubProfile(user.uid, {
       action: 'update',
-      data: subBoardListing(profileData)
+      data: { ...updateSubBoardListing(profileData) }
     })
-      .catch(() => {
-        createNewSub();
-      })
+      .catch(() => createNewSub(profileData))
     // eslint-disable-next-line
   }, [profileData]);
 
@@ -143,7 +120,7 @@ export default function ProfilePage({ props }) {
               control={
                 <Switch
                   checked={profileData.available}
-                  onClick={handleAvailable}
+                  onClick={handleAvailability}
                   value="availability"
                   classes={{
                     switchBase: classes.switchBase,
