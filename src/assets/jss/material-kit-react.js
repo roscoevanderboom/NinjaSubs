@@ -159,7 +159,10 @@ const cardActions = {
 const cardHeader = {
   margin: "-30px 15px 0",
   borderRadius: "3px",
-  padding: "15px"
+  padding: "15px",
+   "@media (max-width: 570px)": {
+    width: '90%'
+  },
 };
 
 const defaultBoxShadow = {
