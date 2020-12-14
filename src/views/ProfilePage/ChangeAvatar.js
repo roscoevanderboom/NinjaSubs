@@ -3,10 +3,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import store from 'state';
 // Constants
 import { noUserImage } from '../../constants';
-import { storageRef } from '../../constants/firebase/storage';
 // Actions
-import setLoading from "../../actions/loading";
-import { handleProfileData } from "../../actions/user";
+import { selectImage, upLoadFile } from "../../actions/imageUpload";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui Components
@@ -69,6 +67,7 @@ export default () => {
     const { state, feedback, dispatch } = useContext(store);
     const { profileData, user } = state;
     const [url, setUrl] = useState('');
+    const [newFile, setNewFile] = useState({});
     const [open, setOpen] = useState(false);
 
     const cameraIcon = classNames(
@@ -76,36 +75,13 @@ export default () => {
         'fas fa-camera-retro',
     )
     const handleModal = () => {
-        open ? setOpen(false) : setOpen(true)
+        setOpen(!open);
     }
     const handleSubmit = () => {
-        user.updateProfile({
-            photoURL: url
-        })
-            .then((res) => {
-                handleProfileData({ action: 'update', user, data: { ...profileData, image: url } });
-                setOpen(false);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        upLoadFile(user, newFile, dispatch, feedback);
     }
     const handleFileSelect = (e) => {
-        setLoading(dispatch, true);
-        var imagesRef = storageRef.child(`${profileData.uid}/temp`);
-
-        imagesRef.put(e.target.files[0])
-            .then(function (snapshot) {
-                snapshot.ref.getDownloadURL()
-                    .then((url) => {
-                        setUrl(url);
-                        setLoading(dispatch, false);
-                    })
-            })
-            .catch(error => {
-                feedback('error', error.message);
-                setLoading(dispatch, false);
-            })
+        selectImage(e, setUrl, setNewFile);
     }
 
     useEffect(() => {
@@ -144,12 +120,14 @@ export default () => {
                     </div>
 
                 </DialogContent>
-                <div className='d-flex justify-content-around mt-3'>
+                <div className='d-flex justify-content-around mt-2 mb-2'>
                     <Button
+                        size="sm"
                         color='info'
                         children={`Submit`}
                         onClick={handleSubmit} />
                     <Button
+                        size="sm"
                         color='danger'
                         children={`Cancel`}
                         onClick={handleModal} />
