@@ -44,7 +44,6 @@ export const handleSubProfile = (uid, { action, data }) => {
     })
 }
 export const createNewSub = (profileData) => {
-    console.log("createNewSub");
     handleSubProfile(profileData.uid, {
         action: 'set',
         data: subBoardListing(profileData)

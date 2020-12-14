@@ -5,6 +5,8 @@ import store from 'state';
 import classNames from "classnames";
 // Constants
 import { updateSubBoardListing, isArrayEqual, noUserImage, ninjaStar } from '../../../constants';
+import { validateLocations } from "../../../constants/validation";
+import FEEDBACK from "constants/feedback";
 // Actions
 import { handleProfileData } from '../../../actions/user';
 import { handleAvailable, createNewSub, handleSubProfile } from '../../../actions/availableSubs';
@@ -14,7 +16,7 @@ import {
   Container, FormControlLabel, Switch
 } from "@material-ui/core";
 // @material-ui/icons
-import { Email, AccountBox } from "@material-ui/icons";
+import { AccountBox } from "@material-ui/icons";
 // Reactstrap components
 import { Row, Col } from 'reactstrap';
 // core components
@@ -46,7 +48,11 @@ export default function ProfilePage({ props }) {
   );
 
   const handleAvailability = () => {
-    handleAvailable(profileData, user, feedback);
+    if (validateLocations(profileData)) {
+      handleAvailable(profileData, user, feedback);
+      return;
+    }
+    feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PLEASE_ADD_A_FEW_DISTRICTS);
   };
   const setRating = () => {
     let count = []
@@ -157,8 +163,8 @@ export default function ProfilePage({ props }) {
             variant='h6'>
             Profile details
         </Typography>
-          <GridContainer>
-            <GridItem xs={12} sm={6}>
+          <GridContainer justifyContent="center" alignItems="center">
+            <GridItem xs={10}>
               <CustomInput
                 formControlProps={{
                   fullWidth: true,
@@ -177,26 +183,9 @@ export default function ProfilePage({ props }) {
                   )
                 }} />
             </GridItem>
-            <GridItem xs={12} sm={6}>
-              <CustomInput
-                formControlProps={{
-                  fullWidth: true,
-                  className: 'mt-3'
-                }}
-                labelText='Email'
-                id='email'
-                inputProps={{
-                  type: 'email',
-                  value: formData ? formData.email : '',
-                  onChange: (e) => handleData('email', e.target.value),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Email className={classes.inputIconsColor} />
-                    </InputAdornment>
-                  )
-                }} />
-            </GridItem>
           </GridContainer>
+
+          <br />
 
           <Typography
             className={classes.districtTitle}

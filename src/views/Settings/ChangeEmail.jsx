@@ -4,7 +4,7 @@ import GlobalState from "state";
 // Components
 import { TextField } from "@material-ui/core";
 // Icons
-import { Security } from "@material-ui/icons";
+import { Email } from "@material-ui/icons";
 // custom components
 import SettingsItem from "./SettingsItem";
 import CustomDialog from "../../components/CustomDialog";
@@ -13,51 +13,45 @@ export default () => {
   const { state, feedback } = useContext(GlobalState);
   const { user } = state;
 
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
+  const handleInput = (e) => {
+    setEmail(e.target.value);
   };
   const handleSubmit = () => {
     user
-      .updatePassword(password)
-      .then(function () {
-        setOpen(false);
-        feedback("success", "Password changed");
-      })
-      .catch(function (error) {
-        setOpen(false);
-        feedback("logout", error.message);
-      });
+      .updateEmail(email)
+      .then(() => feedback("success", "Password changed"))
+      .catch((error) => feedback("logout", error.message));
   };
 
   return (
     <CustomDialog
       open={open}
       handleOpen={handleOpen}
-      title="Change Password"
+      title="Change Email"
       handleSubmit={handleSubmit}
       component={
         <SettingsItem
-          text="Change your password."
-          icon={<Security />}
+          text="Change your email."
+          icon={<Email />}
           onClick={handleOpen}
         />
       }
     >
       <TextField
-        type="password"
+        type="email"
         margin="dense"
-        label="Password"
-        value={password}
+        label="Email"
+        value={email}
         fullWidth
-        onChange={handlePassword}
-        placeholder="Enter new password"
+        onChange={handleInput}
+        placeholder="Enter new email"
       />
     </CustomDialog>
   );

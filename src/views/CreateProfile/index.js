@@ -2,14 +2,17 @@ import React, { useContext } from 'react';
 // State
 import store from 'state';
 // Constants
-import { newUser, newEmployerData, newSubData } from '../../constants/userProfiles'
+import { newUser, newEmployerData, newSubData } from '../../constants/userProfiles';
+import { noUserImage } from '../../constants';
+import dojo from "../../assets/img/Dojo.png"
 // Actions
 import { handleProfileData } from '../../actions/user';
 // @material-ui/core components
 import {
-    Typography, Card, Button,
+    Typography, Card,
     CardContent
 } from "@material-ui/core";
+import CustomButton from "components/CustomButtons/Button";
 
 import bg from 'assets/img/bg.jpg'
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,8 +23,9 @@ const useStyles = makeStyles({
         height: '100vh',
         width: '100vw',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
+        flexDirection: 'column',
         margin: 0,
         padding: 0,
         backgroundColor: 'slategray',
@@ -34,7 +38,8 @@ const useStyles = makeStyles({
         ...boxShadow,
         ...card,
         maxWidth: 350,
-        width: '95%'
+        width: '95%',
+        overflowY: 'scroll'
     },
     content: {
         display: 'flex',
@@ -46,15 +51,16 @@ const useStyles = makeStyles({
         ...boxShadow,
         ...defaultFont,
         fontWeight: "400",
-        position: 'fixed',
-        bottom: 0,
-        right: 0,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         padding: 12,
         backgroundColor: '#f0f8ff26',
         borderRadius: 8
     },
-    header: {
-        paddingTop: 12
+    title: {
+        ...defaultFont,
+        padding: "20px 0px"
     }
 })
 
@@ -77,19 +83,21 @@ export default function CreateProfile() {
 
     return (
         <div className={classes.container}>
+            <div></div>
             <Card className={classes.card}>
                 <Typography
-                    component='header'
+                    component='h1'
                     variant='h4'
-                    className={classes.header}
+                    className={classes.title}
                     align='center'>
                     Choose your path
                 </Typography>
                 <CardContent className={classes.content} >
-                    <Button
-                        variant='outlined'
+                    <img width="auto" height="100" src={noUserImage} alt="ronin" />
+                    <CustomButton
+                        color='github'
                         onClick={createNewUserProfile('substitute')}
-                        children={`Substitute`} />
+                        children={`Ronin ( Substitute )`} />
 
                     <Typography
                         variant='subtitle1'
@@ -98,14 +106,14 @@ export default function CreateProfile() {
                         or
                     </Typography>
 
-                    <Button
-                        variant='outlined'
+                    <img width="auto" height="100" src={dojo} alt="dojo" />
+
+                    <CustomButton
+                         color='github'
                         onClick={createNewUserProfile('employer')}
-                        children={`Employer`} />
+                        children={`Dojo ( Employer )`} />
                 </CardContent>
             </Card>
-
-
             <div className={classes.footer}>
                 Photo by{" "}
                 <a

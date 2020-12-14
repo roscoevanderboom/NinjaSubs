@@ -1,5 +1,9 @@
 import React from 'react';
 import store from 'state';
+// Constants
+import { add_if_not_included } from "../../constants";
+// Actions
+import { handleProfileData } from "../../actions/user";
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
@@ -15,7 +19,7 @@ const useStyles = makeStyles({
 
 export default function SubCardMenu({ sub }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { state, methods, constants } = React.useContext(store);
+  const { state } = React.useContext(store);
   const classes = useStyles();
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -27,8 +31,10 @@ export default function SubCardMenu({ sub }) {
 
   const handleIgnoreUser = () => {
     if (window.confirm(`Block ${sub.name}?\nYou can unblock user from Settings page.`)) {
-      methods.updateProfileData({
-        blackList: constants.add_if_not_included(state.profileData.blackList, sub.uid)
+      handleProfileData({
+        action: "update",
+        user: state.user,
+        data: { blackList: add_if_not_included(state.profileData.blackList, sub.uid) }
       })
       setAnchorEl(null);
     }

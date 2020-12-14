@@ -1,35 +1,20 @@
 import FEEDBACK from "constants/feedback";
-export default (profileData, formData,user, feedback) => {
-    if (profileData === formData) {
-        console.log('no changes')
-        return;
-    }
-    let res = true;
+import { validateLocations, validateDistrict } from "../../constants/validation";
+
+export default (profileData, feedback) => {
     switch (profileData.type) {
         case 'Substitute':
-            if (formData.locations.length === 0) {
-                feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.PLEASE_ADD_A_FEW_DISTRICTS);
-                res = false;
-                return;
+            if (!validateLocations(profileData)) {
+                feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PLEASE_ADD_A_FEW_DISTRICTS);
+            }
+            break;
+        case 'Employer':
+            if (!validateDistrict(profileData)) {
+                feedback(FEEDBACK.TYPE.INFO, FEEDBACK.MESSAGE.PLEASE_SELECT_A_DISTRICT);
             }
             break;
         default:
-            if (formData.location === '') {
-                feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.PLEASE_SELECT_A_DISTRICT);
-                res = false
-                return;
-            }
             break;
     }
-    if (formData.name !== profileData.name) {
-        user.updateProfile({ displayName: formData.name });
-    }
-    if (formData.email !== profileData.email) {
-        user.updateEmail(formData.email)
-            .catch((err) => {
-                feedback(FEEDBACK.TYPE.LOGOUT, err.message);
-                res = false;
-            })
-    }
-    return res;
 }
+

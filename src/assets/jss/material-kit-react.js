@@ -82,7 +82,7 @@ const bodyContainer = 'd-flex flex-column align-items-center col-12 col-sm-10 co
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
-  lineHeight: "1.5em"
+  lineHeight: "1.5rem"
 };
 
 const primaryColor = "#9c27b0";

@@ -41,6 +41,17 @@ export const createFeedback = (variant, message, enqueueSnackbar, closeSnackbar,
                 action: dismiss
             });
             break;
+        case 'info':
+            enqueueSnackbar(message, {
+                variant,
+                action: dismiss,
+                autoHideDuration: null,
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "center"
+                }
+            });
+            break;
         default:
             enqueueSnackbar(message, {
                 variant

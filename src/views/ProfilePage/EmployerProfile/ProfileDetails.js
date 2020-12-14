@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { InputAdornment, Tooltip, Typography } from "@material-ui/core";
 // @material-ui/icons
 import {
-    Email, AccountBox, People, Phone,
+    AccountBox, People, Phone,
     Map, PinDrop
 } from "@material-ui/icons";
 // core components
@@ -64,26 +64,7 @@ export default function ProfilePage({ props }) {
                             )
                         }} />
                 </GridItem>
-                {/* Email */}
-                <GridItem xs={12} sm={6}>
-                    <CustomInput
-                        formControlProps={{
-                            fullWidth: true,
-                            error: data.email === '' ? true : false
-                        }}
-                        labelText='Email'
-                        id='email'
-                        inputProps={{
-                            type: 'email',
-                            value: data.email === null ? '' : data.email,
-                            onChange: (e) => handleData('email', e.target.value),
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <Email className={classes.inputIconsColor} />
-                                </InputAdornment>
-                            )
-                        }} />
-                </GridItem>
+               
                 {/* Contact person */}
                 <GridItem xs={12} sm={6}>
                     <CustomInput

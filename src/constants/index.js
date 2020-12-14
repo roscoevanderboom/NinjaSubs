@@ -6,29 +6,6 @@ import ninjastar from '../assets/img/ninjastar.png';
 export const ninjaStar = ninjastar;
 export const terms = 'https://www.termsandconditionsgenerator.com/live.php?token=cUjuC2S5w2vTipxpiAQVx56WBJZReus7';
 export const privacy_policy = 'https://www.privacypolicytemplate.net/live.php?token=G1ODSTh6D6xdPVL2vUrNtMLouRykOV2O';
-// 
-// Locations
-export const Taipei = [
-    'Beitou', `Da'an`, 'Datong', 'Nangang',
-    'Neihu', 'Shilin', 'Songshan', 'Wanhua',
-    'Wenshen', 'Xinyi', 'Zhongshan', 'Zhongzheng'
-];
-export const newTaipei = [
-    'Banqiao', `Xinzhuang`, 'Zhonghe', 'Yonghe',
-    'Tucheng', 'Shulin', 'Sanxia', 'Yingge',
-    'Sanchong', 'Luzhou', 'Wugu', 'Taishan',
-    'Linkou', 'Bali', 'Tamsui', 'Sanzhi',
-    'Shimen', 'Jinshan', 'Wanli', 'Xizhi',
-    'Ruifang', 'Gongliao', 'Pingxi', 'Shuangxi',
-    'Xindian', 'Shenkeng', 'Shiding', 'Pinglin',
-    'Wulai'
-];
-export const Taoyuan = [
-    'Taoyuan', `Zhongli`, 'Daxi', 'Yangmei',
-    'Luzhu', 'Dayuan', 'Guishan', 'Bade',
-    'Longtan', 'Pingzhen', 'Xinwu', 'Guanyin',
-    'Fuxing'
-];
 
 export const creativeCommons = {
     href: "http://creativecommons.org/licenses/by/4.0/",

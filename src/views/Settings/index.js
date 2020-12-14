@@ -7,6 +7,7 @@ import { Typography, Container, List } from "@material-ui/core";
 import BlockedUsers from './BlockedUsers';
 import ChangePassword from './ChangePassword';
 import ClearIgnoredPosts from './ClearIgnoredPosts';
+import ChangeEmail from './ChangeEmail';
 import ResendVerification from './ResendVerification';
 import DeleteAccount from './DeleteAccount';
 // core components
@@ -41,6 +42,7 @@ export default () => {
                 <ClearIgnoredPosts />}
               <BlockedUsers />
               <ResendVerification />
+              <ChangeEmail />
               <ChangePassword />
               <DeleteAccount />
             </List>

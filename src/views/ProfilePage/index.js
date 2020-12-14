@@ -30,12 +30,9 @@ export default function ProfilePage() {
         if (user === null) {
             return;
         }
-        let res = validate(profileData, formData, user, feedback);
-        if (res) {
-            await handleProfileData({ action: "update", user, data: formData })
-                .catch((err) => feedback("error", err));
-            feedback("success", "Profile has been updated")
-        }
+        await handleProfileData({ action: "update", user, data: formData })
+            .catch((err) => feedback("error", err));
+        feedback("success", "Profile has been updated")
     };
     const handleCancel = () => {
         setFormData(profileData);
@@ -47,6 +44,13 @@ export default function ProfilePage() {
         }
         // eslint-disable-next-line
     }, [profileData]);
+
+    useEffect(() => {
+        if (profileData && formData) {
+            validate(profileData, feedback);
+        }
+        // eslint-disable-next-line
+    }, [profileData, formData]);
 
     return (
         <div>
