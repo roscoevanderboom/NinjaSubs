@@ -57,7 +57,7 @@ const PostFooter = ({ post }) => {
                 </Col>
             </Hidden>}
             <Hidden only={['md', 'lg', 'xl']}>
-                <Col md='6' sm='12'>
+                <Col className="p-0 m-p" md='6' sm='12'>
                     <Row className='justify-content-end'>
                         <Button
                             size='sm'

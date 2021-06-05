@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import { title } from "../../assets/jss/material-kit-react";
 
 // core components
 import Button from "components/CustomButtons/Button.js";
@@ -35,25 +36,25 @@ const Mobile = () => {
   return (
     <React.Fragment>
       <div className={classes.section1}>
-        <Typography component="header" variant="h6">
+        <h3 className={classes.title}>
           Where schools from around the world come to find quality substitute
           teachers.
-        </Typography>
+        </h3>
+        <p>
+          Every teacher needs a break from time to time. But finding a suitable
+          substitute can be hard. NinjaSubs is here to facilitate that process.
+        </p>
         <br />
         <Button
           color="danger"
-          size="sm"
           href="https://www.youtube.com/channel/UCFNy9LI10k1_Q-fSR14lEfw/videos?view_as=subscriber"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fas fa-play" />
           YouTube Channel
         </Button>
         <Link to="/login-page" className={classes.links}>
-          <Button color="info" size="lg">
-            Login
-          </Button>
+          <Button color="info">Login</Button>
         </Link>
         <div className="mt-3">
           Photo by

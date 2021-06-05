@@ -3,10 +3,10 @@ import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
-import config from './api/config';
+import config, { test } from "./api/config";
 
 // Export to work with Firebase arrays
 export const FieldValue = app.firestore.FieldValue;
 // Export app
-export default app.initializeApp(config);
+export default app.initializeApp(test);
 export const firebase = app;

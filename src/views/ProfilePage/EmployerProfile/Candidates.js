@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // @material-ui/core
 import {
     Dialog, DialogTitle, DialogContent,
-    DialogActions, Badge,
+    DialogActions, Badge, Divider
 } from '@material-ui/core';
 // @material-ui/icons
 import People from '@material-ui/icons/People';
@@ -49,7 +49,8 @@ export default ({ post }) => {
                 classes={{
                     paperWidthSm: classes.paperWidthSm
                 }}>
-                <DialogTitle children={'Candidates'} className={classes.title} />
+                <DialogTitle children={'Candidates'} className="m-0" />
+                <Divider />
                 <DialogContent>
                     {post.candidates.map((sub, i) =>
                         <SubCard key={i} sub={sub} trigger="listItem" />

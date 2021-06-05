@@ -19,6 +19,7 @@ import {
   ListItemIcon,
   ListItemAvatar,
   Typography,
+  Divider
 } from "@material-ui/core";
 import { OpenInBrowser } from "@material-ui/icons";
 
@@ -31,7 +32,7 @@ export default function SubProfileDialog({ sub, trigger }) {
 
   const [open, setOpen] = useState(false);
 
-  const handleModal = () =>  setOpen(!open);
+  const handleModal = () => setOpen(!open);
 
   const handleStartChat = () => {
     if (state.user === null) {
@@ -80,7 +81,8 @@ export default function SubProfileDialog({ sub, trigger }) {
         aria-describedby="subcard-bio"
       >
         <CardHeader
-          avatar={<Avatar className="m-2" src={sub.image} alt={sub.name} />}
+          className="p-0"
+          avatar={<Avatar className="m-3" src={sub.image} alt={sub.name} />}
           title={
             <Typography
               variant="h5"
@@ -90,6 +92,7 @@ export default function SubProfileDialog({ sub, trigger }) {
             />
           }
         />
+        <Divider />
         <DialogContent>
           <Typography component="header" variant="h6" className={classes.title}>
             Bio:

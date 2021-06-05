@@ -18,6 +18,7 @@ export const newSubData = user => ({
     cv: '',
     lessonPlans: [],
     locations: [],
+    videos: [],
     name: user.displayName
 
 })
@@ -30,7 +31,7 @@ export const newEmployerData = {
     posts: [],
     "School name": ""
 }
-export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, available }) => ({
+export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, available, videos }) => ({
     uid,
     rating,
     name,
@@ -38,5 +39,6 @@ export const newSubBoardListing = ({ uid, rating, name, image, bio, locations, a
     bio,
     likes: [],
     locations,
+    videos,
     available: !available
 })
