@@ -47,6 +47,7 @@ export default () => {
               <ChangeEmail />
               <BlockedUsers />
               <ResendVerification />
+              <ChangeEmail />
               <ChangePassword />
               <DeleteAccount />
             </List>

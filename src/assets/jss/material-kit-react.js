@@ -82,7 +82,7 @@ const bodyContainer = 'd-flex flex-column align-items-center col-12 col-sm-10 co
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
-  lineHeight: "1.5em"
+  lineHeight: "1.5rem"
 };
 
 const primaryColor = "#9c27b0";
@@ -159,7 +159,10 @@ const cardActions = {
 const cardHeader = {
   margin: "-30px 15px 0",
   borderRadius: "3px",
-  padding: "15px"
+  padding: "15px",
+   "@media (max-width: 570px)": {
+    width: '90%'
+  },
 };
 
 const defaultBoxShadow = {

@@ -9,6 +9,7 @@ export default makeStyles(theme => ({
     ...boxShadow,
     ...defaultFont,
     ...primaryGradient,
+    borderRadius: 6,
     marginTop: '-20px',
     padding: '8px 0px',
     textAlign: 'center',
