@@ -1,62 +1,44 @@
-import React, { useContext, useState } from 'react';
-import GlobalState from 'state';
-
-// Components
-import { SubmitBtn } from '../../components/Buttons';
-import {
-    Dialog, DialogTitle, DialogActions, TextField, DialogContent
-} from '@material-ui/core';
-// Icons
-import { Security } from '@material-ui/icons';
+import React, { useContext } from 'react';
+import store from 'state';
+// @material-ui/icons
+import Lock from "@material-ui/icons/Lock";
 // custom components
 import SettingsItem from './SettingsItem';
+import SmallDialog from "components/SmallDialogs";
 
 export default () => {
-
-    const { state, feedback } = useContext(GlobalState);
+    const [value, setValue] = React.useState("");
+    const { state, feedback } = useContext(store);
     const { user } = state;
 
-    const [password, setPassword] = useState('');
-    const [open, setOpen] = useState(false);
+    const handleValue = (e) => setValue(e.target.value);
 
-    const handleOpen = (value) => {
-        setOpen(value)
-    }
-
-    const handlePassword = (e) => {
-        setPassword(e.target.value);
-    }
     const handleSubmit = () => {
-        user.updatePassword(password).then(function () {
-            setOpen(false);
-            feedback('success', 'Password changed')
-        }).catch(function (error) {
-            setOpen(false);
-            feedback('logout', error.message)
-        });
-    }
+        user
+            .updatePassword(value)
+            .then(function () {
+                feedback("success", "Password changed");
+            })
+            .catch(function (error) {
+                feedback("logout", error.message);
+            });
+    };
 
     return (
         <React.Fragment>
             <SettingsItem
                 text='Change your password.'
-                icon={<Security />}
-                onClick={() => handleOpen(true)} />
-            <Dialog open={open} onClose={() => handleOpen(false)}>
-                <DialogTitle children={'Change Password'} />
-                <DialogContent>
-                    <TextField
-                        type='password'
-                        margin="dense"
-                        label="Password"
-                        value={password}
-                        onChange={handlePassword}
-                        placeholder='Enter new password' />
-                </DialogContent>
-                <DialogActions children={
-                    <SubmitBtn onClick={handleSubmit} children={`Submit`} />
-                } />
-            </Dialog>
+                icon={
+                    <SmallDialog
+                        id="change-password"
+                        lable="Change your password"
+                        type="text"
+                        value={value}
+                        icon={<Lock />}
+                        handleValue={handleValue}
+                        handleSubmit={handleSubmit}
+                        Trigger={Lock}
+                    />} />
         </React.Fragment>
 
     )

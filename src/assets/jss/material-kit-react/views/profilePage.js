@@ -37,7 +37,6 @@ const profilePageStyle = {
     ...title,
     display: "inline-block",
     position: "relative",
-    marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
   },

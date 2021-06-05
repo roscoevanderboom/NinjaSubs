@@ -1,4 +1,4 @@
-import { title } from "assets/jss/material-kit-react.js";
+import { title, boxShadow } from "assets/jss/material-kit-react.js";
 
 const productStyle = {
   section: {
@@ -14,6 +14,11 @@ const productStyle = {
   },
   description: {
     color: "#999"
+  },
+  flags: {
+    ...boxShadow,
+    width: 150,
+    height: "auto"
   }
 };
 

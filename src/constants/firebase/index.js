@@ -9,3 +9,4 @@ import config from './api/config';
 export const FieldValue = app.firestore.FieldValue;
 // Export app
 export default app.initializeApp(config);
+export const firebase = app;

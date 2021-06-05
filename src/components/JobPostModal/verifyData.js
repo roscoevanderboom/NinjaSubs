@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { noUserImage, add_if_not_included } from '../../constants';
+import FEEDBACK from 'constants/feedback';
 
 export const verifyData = (post) => {
     let errors = [];
@@ -27,4 +28,23 @@ export const verifyData = (post) => {
     }
 
     return { result, errors };
+}
+
+export const checkDate = (post, key, userDate, feedback) => {
+    let res;
+    switch (key) {
+        case 'start':
+            res = moment(userDate).isSameOrAfter(moment(), 'day');
+            if (!res) {
+                feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.DATE_IS_EARLIER_THAN_CURRENT_DATE);
+            }
+            break;
+        default:
+            res = moment(userDate).isSameOrAfter(post.start);
+            if (!res) {
+                feedback(FEEDBACK.TYPE.ERROR, FEEDBACK.MESSAGE.SELECT_A_DATE_LATER_THAN_THE_START_DATE);
+            }
+            break;
+    }
+    return res;
 }

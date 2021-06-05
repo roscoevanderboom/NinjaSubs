@@ -92,7 +92,7 @@ export default () => {
     }
     const handleFileSelect = (e) => {
         setLoading(dispatch, true);
-        var imagesRef = storageRef.child(`${profileData.uid}/temp`);
+        var imagesRef = storageRef.child(`images/${profileData.uid}/profile`);
 
         imagesRef.put(e.target.files[0])
             .then(function (snapshot) {

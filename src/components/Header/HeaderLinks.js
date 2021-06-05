@@ -34,6 +34,9 @@ export default function HeaderLinks() {
           }}
           buttonIcon={Apps}
           dropdownList={[
+            <Link to="/profile-page" className={classes.dropdownLink}>
+              Profile
+            </Link>,
             <Link to="/noticeboard" className={classes.dropdownLink}>
               Noticeboard
             </Link>,
@@ -45,9 +48,6 @@ export default function HeaderLinks() {
             </Link>,
             <Link to="/inbox" className={classes.dropdownLink}>
               Inbox
-            </Link>,
-            <Link to="/profile-page" className={classes.dropdownLink}>
-              Profile
             </Link>,
             <Link to="/settings" className={classes.dropdownLink}>
               Settings

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import GlobalState from 'state';
+import store from 'state';
 // Constants
 import * as constants from '../../constants';
 import * as filters from 'constants/filters';
@@ -33,7 +33,7 @@ const styles = makeStyles({
 
 export default () => {
     const classes = styles();
-    const { state } = useContext(GlobalState);
+    const { state } = useContext(store);
     const { profileData, availableSubs, user } = state;
     const [list, setList] = useState([]);
     const [open, setOpen] = useState(false);

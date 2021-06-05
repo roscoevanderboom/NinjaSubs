@@ -10,7 +10,7 @@ import {
 } from '@material-ui/icons';
 
 
-import SubCard from '../SubCard/SubCard';
+import SubCard from '../SubProfileDialog';
 
 export default ({ candidates }) => {
     const [collapse, setCollapse] = React.useState(false);

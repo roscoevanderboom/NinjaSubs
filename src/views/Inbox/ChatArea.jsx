@@ -2,10 +2,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 // Store
 import store from 'state';
-// Constants
-import { FieldValue } from '../../constants/firebase';
 // Actions
-import { handleProfileData } from '../../actions/user';
+import { handleProfileDataArrays } from '../../actions/user';
 import { deleteChatroom } from '../../actions/privatechat';
 import {
     Toolbar, IconButton, Container,
@@ -30,6 +28,8 @@ export default () => {
     const [list, setList] = useState([]);
     const [recipient, setRecipient] = useState({ name: '', image: '' });
 
+    const confirmMessage = `Block ${recipient.name}?\nYou can unblock user from Settings page.`
+
     const NoChat = () => {
         return (
             <Typography
@@ -49,21 +49,11 @@ export default () => {
         deleteChatroom(selectedChat.room_id, dispatch, hist);
     }
     const blockUser = () => {
-        if (!selectedChat) {
-            return;
+        if (selectedChat && window.confirm(confirmMessage)) {
+            let user_to_block = selectedChat.participants.filter(uid => uid !== profileData.uid);
+            handleProfileDataArrays(user, "arrayUnion", "blackList", user_to_block[0])
+                .then(() => deleteChat())
         }
-        if (!window.confirm(`Block ${recipient.name}?\nYou can unblock user\nfrom Settings page.`)) {
-            return;
-        }
-        let badUser = selectedChat.participants.filter(uid => uid !== profileData.uid)
-        handleProfileData({
-            action: 'update',
-            user,
-            data: { blackList: FieldValue.arrayUnion(badUser[0]) }
-        })
-            .then(() => {
-                deleteChat();
-            })
     }
     const goBack = () => {
         hist.push('/inbox');
@@ -72,9 +62,9 @@ export default () => {
     useEffect(() => {
         if (selectedChat) {
             setList(selectedChat.messages)
-            profileData.uid === selectedChat.user1.uid
-                ? setRecipient(selectedChat.user2)
-                : setRecipient(selectedChat.user1);
+            profileData.type === "Employer"
+                ? setRecipient(selectedChat["Substitute"])
+                : setRecipient(selectedChat["Employer"]);
         }
     }, [selectedChat, profileData])
 

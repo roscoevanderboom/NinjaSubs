@@ -13,7 +13,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import {
     Map, DateRange, Money, PinDrop, Phone,
-    AccountBox, ExpandLess, ExpandMore
+    AccountBox, ExpandLess, ExpandMore, Mail
 } from '@material-ui/icons';
 
 import CustomListIem from 'components/ListItem/Item';
@@ -67,7 +67,7 @@ export default ({ post }) => {
                     <Col md='6' sm='12'>
                         <CustomListIem
                             icon={<AccountBox />}
-                            secondary={post.contact} />
+                            secondary={post["Contact person"]} />
                     </Col>
                     <Col md='6' sm='12'>
                         <CustomListIem
@@ -93,6 +93,12 @@ export default ({ post }) => {
                             <CustomListIem
                                 icon={<Phone />}
                                 secondary={`${post.phone}`} />
+                        </Col>}
+                    {post.email === "" ? null :
+                        <Col md='6' sm='12'>
+                            <CustomListIem
+                                icon={<Mail />}
+                                secondary={`${post.email}`} />
                         </Col>}
                 </Row>
                 <Container className={classes.commentsContainer}>

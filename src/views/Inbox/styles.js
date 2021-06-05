@@ -91,13 +91,13 @@ export const useStyles = makeStyles(theme => ({
         padding: 0
     },
     listItemLeft: {
-        backgroundColor: 'gray',
+        backgroundColor: '#182848',
         borderRadius: 8,
         padding: 6,
         color: 'white'
     },
     listItemRight: {
-        backgroundColor: 'slategray',
+        backgroundColor: '#4b6cb7',
         borderRadius: 8,
         padding: 6,
         color: 'white'

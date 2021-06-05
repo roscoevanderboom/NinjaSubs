@@ -74,7 +74,7 @@ const body = {
   padding: 0,
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center'
+  alignItems: 'center',
 };
 
 const bodyContainer = 'd-flex flex-column align-items-center col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5';
@@ -202,6 +202,11 @@ const secondaryGradient = {
   background: 'linear-gradient(90deg, #d53369 0%, #daae51 100%)'
 }
 
+const navLink ={
+  color: "inherit",
+  textDecoration: "none"
+}
+
 
 export {
   //variables
@@ -241,5 +246,6 @@ export {
   cardLink,
   cardSubtitle,
   primaryGradient,
-  secondaryGradient
+  secondaryGradient,
+  navLink
 };

@@ -51,7 +51,7 @@ export const useStyles = makeStyles(theme => ({
     },
     textArea: {
         border: 'none',
-        fontSize: 'small',
+        // fontSize: 'small',
         width: '100%'
     }
 }));

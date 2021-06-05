@@ -28,7 +28,7 @@ export default () => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (profileData) {
+    if (profileData && inbox) {
       setList(filterInbox(inbox, profileData));
     }
     // eslint-disable-next-line

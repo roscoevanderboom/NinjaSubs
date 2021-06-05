@@ -7,13 +7,10 @@ import { Row, Col } from 'reactstrap';
 import ProfileImage from '../ProfileImage';
 import ProfileDetails from './ProfileDetails';
 import ActivePosts from './ActivePosts';
-import Footer from '../ProfileFooter';
 // Styles
 import useStyles from '../styles';
 
-export default function ProfilePage({ props }) {
-  const { formData, handleData,
-    handleSubmit, handleCancel } = props;
+export default function ProfilePage() {
   const { state } = useContext(store);
   const { profileData } = state;
   const classes = useStyles();
@@ -24,19 +21,14 @@ export default function ProfilePage({ props }) {
         <Col xs='11' md='7' lg='5' xl='4'
           className={classes.gridItem}>
 
-          <ProfileImage formData={formData} />
+          <ProfileImage profileData={profileData} />
 
           <ActivePosts />
         </Col>
 
         <Col xs='11' md='7' lg='6'
           className={classes.gridItem}>         
-          <ProfileDetails props={{ formData, handleData }} />
-          {formData === profileData ? null :
-            <Footer
-              handleSubmit={handleSubmit}
-              handleCancel={handleCancel} />
-          }
+          <ProfileDetails />
         </Col>
       </Row>
     </Col>

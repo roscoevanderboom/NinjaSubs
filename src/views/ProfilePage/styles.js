@@ -74,10 +74,10 @@ export default makeStyles({
     backgroundPosition: "center center",
     backgroundSize: "cover",
     height: '100vh',
-
+    overflowY: "scroll"
   },
   profileContainer:{
-    paddingTop: '24vh',
+    paddingTop: '15vh',
     display: 'flex',
     justifyContent: 'center'
   },
@@ -88,5 +88,18 @@ export default makeStyles({
   footer: {
     display: 'flex',
     justifyContent: 'space-around'
+  },
+  infoContainer: {
+    padding: "20px 12px",
+    width: "90%"
+  },
+  lessonPlanLink: {
+    textDecoration: "none",
+    color: "inherit"
+  },
+  lessonPlanListItem: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
   }
 });

@@ -5,7 +5,7 @@ export const sendMail = (formData, feedback, setFormData, init) => {
     .doc()
     .set(formData)
     .then(() => {
-      feedback("success", "Your mall has been sent!");
+      feedback("success", "Your mail has been sent!");
       setFormData(init);
     })
     .catch(err => feedback("error", err.message));

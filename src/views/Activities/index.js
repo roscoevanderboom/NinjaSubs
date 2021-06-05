@@ -1,27 +1,44 @@
-import React, { useContext }  from "react";
+import React, { useContext, useState, useEffect } from "react";
 // Store
-import store from 'state';
+import store from "state";
+// Filters
+import { filterSubActivities, filterEmpActivities } from "constants/filters";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { Card, CardHeader, Avatar } from "@material-ui/core";
 // core components
 import Header from "components/Header/Header.js";
 // Menu Links
 import HeaderLinks from "components/Header/HeaderLinks.js";
 // Custom components
-import SubActivities from './SubActivities';
-import EmpActivities from './EmpActivities';
+import { SubstituteActions } from "./SubActivities";
+import { EmployerActions, CreatePost } from "./EmpActivities";
+import PostBody from "components/NoticeboardCard/PostBody";
 // Styles
 import { body, bodyContainer } from "assets/jss/material-kit-react";
 const useStyles = makeStyles({
   body: {
-    ...body
-  }
+    ...body,
+    marginTop: 12,
+  },
 });
 
-export default () => {
+const Activities = () => {
   const classes = useStyles();
   const { state } = useContext(store);
-  const { profileData } = state;
+  const { profileData, noticeboardQuery } = state;
+  const [list, setList] = useState([]);
+
+  const dataReady = noticeboardQuery && profileData;
+
+  useEffect(() => {
+    if (dataReady && profileData.type === "Substitute") {
+      setList(filterSubActivities(noticeboardQuery, profileData));
+    } else if (dataReady && profileData.type === "Employer") {
+      setList(filterEmpActivities(noticeboardQuery, profileData));
+    }
+    // eslint-disable-next-line
+  }, [profileData, noticeboardQuery]);
 
   return (
     <div>
@@ -33,12 +50,31 @@ export default () => {
       />
       <div className={classes.body}>
         <div className={bodyContainer}>
-          {profileData.type === 'Employer'
-            ? <EmpActivities />
-            : <SubActivities />
-          }
+          {profileData.type === "Employer" && <CreatePost />}
+          <React.Fragment>
+            {list.map((post, i) => (
+              <Card key={i} className="mt-2">
+                <CardHeader
+                  className="text-dark"
+                  avatar={<Avatar src={post.image} alt="avatar" />}
+                  title={post["School name"]}
+                  subheader={post.location}
+                  action={
+                    profileData.type === "Employer" ? (
+                      <EmployerActions post={post} />
+                    ) : (
+                      <SubstituteActions post={post} />
+                    )
+                  }
+                />
+                <PostBody post={post} />
+              </Card>
+            ))}
+          </React.Fragment>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Activities;

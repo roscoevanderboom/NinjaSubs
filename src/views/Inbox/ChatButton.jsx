@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 // Store
 import store from 'state';
-// Constants
-import { noUserImage } from '../../constants';
 // Actions
 import { followChat } from '../../actions/privatechat';
 import { Avatar } from '@material-ui/core';
@@ -14,30 +12,31 @@ export default ({ chat }) => {
   const { state, hist, dispatch } = useContext(store);
   const { profileData, user } = state;
 
-  const [recipient, setRecipient] = useState({ name: '', image: '' });
+  const [otherUser, setOtherUser] = useState(false);
 
   const selectChat = () => {
-    if (user === null) {
-      return;
-    }
-    followChat(chat.room_id, hist, dispatch);
+    if (user !== null) {
+      followChat(chat.room_id, hist, dispatch)
+    };
   }
 
+  const src = otherUser ? otherUser.image : "";
+  const alt = otherUser && otherUser.name !== undefined ? otherUser.name : otherUser["School name"];
+  const text = otherUser && otherUser.name !== undefined ? otherUser.name : otherUser["School name"];
+
   useEffect(() => {
-    if (chat.user1 !== undefined) {
-      profileData.uid === chat.user1.uid
-        ? setRecipient(chat.user2)
-        : setRecipient(chat.user1);
+    if (chat.participants !== undefined) {
+      profileData.type === "Employer"
+        ? setOtherUser(chat["Substitute"])
+        : setOtherUser(chat["Employer"]);
     }
   }, [chat, profileData])
 
-  return (chat.user1 !== undefined &&
+  return (chat.participants !== undefined &&
     <div onClick={selectChat} className={classes.contactBtn}>
-      <Avatar src={recipient.image === ''
-        ? noUserImage
-        : recipient.image} alt={`${recipient.name}`} className={classes.avatar} />
+      <Avatar src={src} alt={alt} className={classes.avatar} />
       <div className={classes.nameTag}>
-        {recipient.name}
+        {text}
       </div>
     </div>);
 }

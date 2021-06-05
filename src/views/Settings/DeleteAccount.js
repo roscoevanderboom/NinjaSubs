@@ -2,16 +2,13 @@ import React, { useContext } from 'react';
 import store from 'state';
 // 
 // Actions
-import { deleteUser } from '../../actions/auth';
-import { handleProfileData } from '../../actions/user';
-import { deleteAllChatrooms } from '../../actions/privatechat';
-import { deleteSubListing } from '../../actions/availableSubs';
+import { deleteProfile } from '../../actions/auth';
 // custom components
 import SettingsItem from './SettingsItem';
 // Icon
 import { Cancel } from '@material-ui/icons';
 export default () => {
-  const { state, feedback, hist } = useContext(store);
+  const { state, feedback, dispatch } = useContext(store);
   const { profileData, noticeboardQuery, user } = state;
 
   const checkActivePosts = () => {
@@ -23,7 +20,7 @@ export default () => {
     return true
   }
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (user === null) {
       return;
     }
@@ -32,19 +29,7 @@ export default () => {
         return;
       }
     }
-    if (window.confirm('Are you sure?')) {
-      if (profileData.type === 'Substitute') {
-        deleteSubListing(user.uid);
-      }
-      deleteAllChatrooms(user);
-      handleProfileData({ action: 'delete', user })
-        .then(() => {
-          deleteUser(user)
-            .then(() => hist.push("/login-page"))
-            .catch((err) => feedback('error', err))
-        })
-        .catch((err) => feedback('error', err))
-    }
+    deleteProfile(user, profileData, feedback, dispatch)
   }
 
   return (

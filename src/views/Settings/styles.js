@@ -27,7 +27,7 @@ export default makeStyles(theme => ({
     marginTop: 30
   },
   list: {
-    width: '75%',
+    width: '90%',
     marginBottom: 20,
     [theme.breakpoints.down('sm')]: {
       padding: 0

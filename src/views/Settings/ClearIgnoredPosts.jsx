@@ -11,20 +11,20 @@ export default () => {
     const { state, feedback } = useContext(GlobalState);
 
     const clearIgnoreList = () => {
-        if (state.user === null) {
-            return;
+        if (state.user !== null) {
+            handleProfileData({
+                action: 'update',
+                user: state.user,
+                data: { ignoreList: [] }
+            })
+                .then(() => {
+                    feedback('success', 'List cleared')
+                })
+                .catch((err) => {
+                    feedback('error', err)
+                })
         }
-        handleProfileData({
-            action: 'update',
-            user: state.user,
-            data: { ignoreList: [] }
-        })
-            .then(() => {
-                feedback('success', 'List cleared')
-            })
-            .catch((err) => {
-                feedback('error', err)
-            })
+
     }
 
     return (

@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 // Store
-import store from 'state';
+import store from "state";
 // @material-ui/core components
 import { Typography, Container, List } from "@material-ui/core";
 // custom components
-import BlockedUsers from './BlockedUsers';
-import ChangePassword from './ChangePassword';
-import ClearIgnoredPosts from './ClearIgnoredPosts';
-import ResendVerification from './ResendVerification';
-import DeleteAccount from './DeleteAccount';
+import BlockedUsers from "./BlockedUsers";
+import ChangePassword from "./ChangePassword";
+import ClearIgnoredPosts from "./ClearIgnoredPosts";
+import ResendVerification from "./ResendVerification";
+import DeleteAccount from "./DeleteAccount";
+import ChangeDisplayName from "./ChangeDisplayName";
+import ChangeEmail from "./ChangeEmail";
 // core components
 import Header from "components/Header/Header.js";
 // Menu Links
@@ -19,6 +21,7 @@ import useStyles from "./styles";
 
 export default () => {
   const { state } = useContext(store);
+  const { profileData } = state;
   const classes = useStyles();
 
   return (
@@ -32,13 +35,16 @@ export default () => {
       <div className={classes.body}>
         <div className={bodyContainer}>
           <Container className={classes.container}>
-            <Typography className={classes.header}
-              componant='header'
-              variant='h5'
-              children={'Account Settings'} />
+            <Typography
+              className={classes.header}
+              componant="header"
+              variant="h5"
+              children={"Account Settings"}
+            />
             <List className={classes.list}>
-              {state.profileData.type === 'Employer' ? null :
-                <ClearIgnoredPosts />}
+              {profileData.type === "Employer" ? null : <ChangeDisplayName />}              
+              {profileData.type === "Employer" ? null : <ClearIgnoredPosts />}
+              <ChangeEmail />
               <BlockedUsers />
               <ResendVerification />
               <ChangePassword />
@@ -49,4 +55,4 @@ export default () => {
       </div>
     </div>
   );
-}
+};

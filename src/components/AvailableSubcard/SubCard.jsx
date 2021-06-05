@@ -9,12 +9,13 @@ import { setModals } from 'actions/modals';
 // Components
 import {
     Card, CardHeader, CardContent, CardActions,
-    Collapse, Avatar, IconButton, Typography, Badge
+    Collapse, Avatar, IconButton, Typography, Badge,
+    List, ListItem, ListItemText, ListItemIcon
 } from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import SubCardMenu from './Menu'
 
-import { Favorite, ExpandMore, ChatBubble } from '@material-ui/icons';
+import { Favorite, ExpandMore, ChatBubble, OpenInBrowser } from '@material-ui/icons';
 
 // Styles
 import clsx from 'clsx';
@@ -103,11 +104,12 @@ export default ({ sub }) => {
                     </Badge>
                 </IconButton>
 
-                <IconButton
-                    onClick={handleStartChat}
-                    aria-label="chat">
-                    <ChatBubble />
-                </IconButton>
+                {profileData && profileData.type === "Employer" && (
+                    <IconButton
+                        onClick={handleStartChat}
+                        aria-label="chat">
+                        <ChatBubble />
+                    </IconButton>)}
 
                 <IconButton
                     className={clsx(classes.expand, {
@@ -128,6 +130,40 @@ export default ({ sub }) => {
                         </Typography>
                     <TextareaAutosize className={classes.textArea}
                         value={sub.bio} />
+                    <Typography
+                        component='header'
+                        variant='h6'>
+                        Lesson plans:
+                    </Typography>
+                    <List>
+                        {sub !== undefined && sub.lessonPlans.map((plan, i) =>
+                            <ListItem key={i}>
+                                <ListItemText primary={plan.name} />
+                                <a href={plan.url} rel="noopener noreferrer" target="_blank">
+                                    <ListItemIcon>
+                                        <OpenInBrowser />
+                                    </ListItemIcon>
+                                </a>
+                            </ListItem>
+                        )}
+                    </List>
+                    <Typography
+                        component='header'
+                        variant='h6'>
+                        Videos:
+                    </Typography>
+                    <List>
+                        {sub.videos !== undefined && sub.videos.map((video, i) =>
+                            <ListItem key={i}>
+                                <ListItemText primary={video.name} />
+                                <a href={video.url} rel="noopener noreferrer" target="_blank">
+                                    <ListItemIcon>
+                                        <OpenInBrowser />
+                                    </ListItemIcon>
+                                </a>
+                            </ListItem>
+                        )}
+                    </List>
                 </CardContent>
             </Collapse>
         </Card>

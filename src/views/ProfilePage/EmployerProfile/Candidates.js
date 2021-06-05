@@ -9,18 +9,23 @@ import People from '@material-ui/icons/People';
 // Core components
 import Button from "components/CustomButtons/Button.js";
 // Custom Components
-import SubCard from 'components/SubCard/SubCard';
+import SubCard from 'components/SubProfileDialog';
 import { makeStyles } from '@material-ui/core/styles';
+import { title } from "assets/jss/material-kit-react";
 
 const useStyles = makeStyles(theme => ({
     paperWidthSm: {
-        margin: 5
+        width: "90%",
+        maxWidth: 500
     },
     dialogContent: {
         display: 'flex',
         justifyContent: 'space-around',
+    },
+    title: {
+        ...title,
+        marginTop: 0
     }
-
 }));
 
 
@@ -28,9 +33,7 @@ export default ({ post }) => {
     const classes = useStyles()
     const [open, setOpen] = useState(false);
 
-    const handleModal = () => {
-        open ? setOpen(false) : setOpen(true)
-    }
+    const handleModal = () =>  setOpen(!open);
 
     return (
         <React.Fragment>
@@ -46,11 +49,10 @@ export default ({ post }) => {
                 classes={{
                     paperWidthSm: classes.paperWidthSm
                 }}>
-                <DialogTitle children={'Candidates'} />
-                <DialogContent
-                    className={classes.dialogContent}>
+                <DialogTitle children={'Candidates'} className={classes.title} />
+                <DialogContent>
                     {post.candidates.map((sub, i) =>
-                        <SubCard key={i} sub={sub} />
+                        <SubCard key={i} sub={sub} trigger="listItem" />
                     )}
                 </DialogContent>
                 <DialogActions>

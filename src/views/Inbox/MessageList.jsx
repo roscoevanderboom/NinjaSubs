@@ -16,8 +16,8 @@ export default ({ list }) => {
                 <div
                     key={i}
                     className={item.sender_uid === profileData.uid
-                        ? 'text-dark mt-2 row p-0 m-0 justify-content-end'
-                        : 'text-dark mt-2 row p-0 m-0 justify-content-start'}>
+                        ? 'text-dark mt-2 row p-0 m-0 justify-content-start'
+                        : 'text-dark mt-2 row p-0 m-0 justify-content-end'}>
                     <ListItem
                         className='col-6 p-0 m-0'
                         children={
@@ -25,12 +25,12 @@ export default ({ list }) => {
                                 inset={true}
                                 classes={{
                                     primary: item.sender_uid === profileData.uid
-                                        ? classes.listItemRight
-                                        : classes.listItemLeft
+                                        ? classes.listItemLeft
+                                        : classes.listItemRight
                                 }}
                                 className={item.sender_uid === profileData.uid
-                                    ? 'row p-0 m-0 justify-content-end'
-                                    : 'row p-0 m-0 justify-content-start'}
+                                    ? 'row p-0 m-0 justify-content-start'
+                                    : 'row p-0 m-0 justify-content-end'}
                                 primary={item.post} />
                         } />
                 </div>
