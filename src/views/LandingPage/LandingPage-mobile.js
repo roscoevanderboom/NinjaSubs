@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
-import { title } from "../../assets/jss/material-kit-react";
 
 // core components
 import Button from "components/CustomButtons/Button.js";
