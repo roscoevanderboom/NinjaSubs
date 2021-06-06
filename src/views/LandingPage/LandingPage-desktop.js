@@ -20,7 +20,7 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
-const backgroundImage = require("assets/img/landing-bg.jpg");
+import bgImage from "../../assets/img/landing-bg.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -29,7 +29,7 @@ const Desktop = () => {
 
   return (
     <React.Fragment>
-      <Parallax filter image={backgroundImage}>
+      <Parallax filter image={bgImage}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -42,22 +42,25 @@ const Desktop = () => {
                 can be hard. NinjaSubs is here to facilitate that process. `}
               </h4>
               <br />
-              <Button
-                className="mr-2"
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/channel/UCFNy9LI10k1_Q-fSR14lEfw/videos?view_as=subscriber"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
+              <div className="d-flex justify-content-between">
+                <Button
+                  className="mr-2"
+                  color="danger"
+                  size="lg"
+                  href="https://www.youtube.com/channel/UCFNy9LI10k1_Q-fSR14lEfw/videos?view_as=subscriber"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fas fa-play" />
                 YouTube Channel
               </Button>
-              <Link to="/login-page" className={classes.links}>
-                <Button className="ml-2" color="info" size="lg">
-                  Login
-                </Button>
-              </Link>
+                <Link to="/login-page" className={classes.links}>
+                  <Button className="ml-2" color="info" size="lg">
+                    <i className="fas fa-user mr-2" />
+                    Login
+                  </Button>
+                </Link>
+              </div>
             </GridItem>
           </GridContainer>
           <div className="mt-4 pt-4">

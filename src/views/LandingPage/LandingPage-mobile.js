@@ -11,11 +11,11 @@ import Features from "./Sections/Features";
 import TeamSection from "./Sections/TeamSection";
 import WorkSection from "./Sections/WorkSection.js";
 
-const backgroundImage = require("assets/img/landing-bg.jpg");
+import bgImage from "../../assets/img/landing-bg.jpg"
 
 const useStyles = makeStyles({
   section1: {
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${bgImage})`,
     backgroundPosition: "center center",
     backgroundSize: "cover",
     height: "100vh",

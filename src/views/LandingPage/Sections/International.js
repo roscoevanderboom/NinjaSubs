@@ -6,10 +6,10 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // Styles
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+// Images
+import taiwanFlag from "assets/img/taiwan-flag.png"
+import japanFlag from "assets/img/japan-flag.png"
 const useStyles = makeStyles(styles);
-
-const taiwanFlag = require("assets/img/taiwan-flag.png");
-const japanFlag = require("assets/img/japan-flag.png");
 
 function ProductSection() {
   const classes = useStyles();
