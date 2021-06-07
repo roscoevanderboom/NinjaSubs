@@ -23,7 +23,6 @@ import { makeStyles } from "@material-ui/core";
 const styles = makeStyles({
   list: {
     minWidth: 200,
-    width: 350,
   },
   item: {
     backgroundColor: "lightgrey",

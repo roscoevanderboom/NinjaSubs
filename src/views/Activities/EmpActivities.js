@@ -56,7 +56,7 @@ export const EmployerActions = (props) => {
 
   return (
     <React.Fragment>
-      <span className="mr-2">{post.type}</span>
+      <span className="me-2">{post.type}</span>
       <Tooltip title="Edit Post" placement="top">
         <CustomButton
           onClick={() => editPost(post)}

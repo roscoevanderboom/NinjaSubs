@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 // Services
 import React, { createContext, useReducer } from "react";
+import PropTypes from "prop-types";
 // import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 
@@ -35,12 +37,12 @@ export const GlobalStatePovider = (props) => {
         feedback,
       }}
     >
-      <props.children />
+      {props.children}
     </GlobalState.Provider>
   );
 };
 export default GlobalState;
 
-// GlobalState.propTypes = {
-//   children: PropTypes.element,
-// }
+GlobalState.propTypes = {
+  children: PropTypes.element,
+};

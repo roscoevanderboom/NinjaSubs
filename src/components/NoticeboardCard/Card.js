@@ -12,7 +12,7 @@ const NoticeboardCard = ({ post }) => (
       className="text-dark"
       avatar={<Avatar src={post.image} alt="avatar" />}
       title={post["School name"]}
-      action={post.type}
+      action={<span className="me-2">{post.type}</span>}
       subheader={post.location}
     />
     <PostBody post={post} />

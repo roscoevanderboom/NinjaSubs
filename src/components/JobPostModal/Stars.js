@@ -41,5 +41,5 @@ export default Stars;
 
 Stars.propTypes = {
   stars: PropTypes.number,
-  errors: PropTypes.string,
+  errors: PropTypes.array,
 };

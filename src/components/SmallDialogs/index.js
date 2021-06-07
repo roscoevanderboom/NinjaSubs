@@ -87,7 +87,7 @@ DefaultDialog.propTypes = {
   type: PropTypes.string,
   handleValue: PropTypes.func,
   handleSubmit: PropTypes.func,
-  Trigger: PropTypes.func,
+  Trigger: PropTypes.object,
   icon: PropTypes.element,
 };
 

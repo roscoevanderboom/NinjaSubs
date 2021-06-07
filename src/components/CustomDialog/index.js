@@ -20,7 +20,8 @@ const CustomDialog = (props) => {
   const classes = styles();
   return (
     <React.Fragment>
-      <props.component />
+      {/* <props.component /> */}
+      {props.component}
       <Dialog
         open={props.open}
         onClose={props.handleOpen}
@@ -28,12 +29,8 @@ const CustomDialog = (props) => {
           paperScrollPaper: classes.dialog,
         }}
       >
-        <DialogTitle>
-          <props.title />
-        </DialogTitle>
-        <DialogContent>
-          <props.children />
-        </DialogContent>
+        <DialogTitle>{props.title}</DialogTitle>
+        <DialogContent>{props.children}</DialogContent>
         <DialogActions>
           <SubmitBtn onClick={props.handleSubmit}>Submit</SubmitBtn>
         </DialogActions>
@@ -48,4 +45,7 @@ CustomDialog.propTypes = {
   open: PropTypes.bool,
   handleOpen: PropTypes.func,
   handleSubmit: PropTypes.func,
+  title: PropTypes.string,
+  component: PropTypes.element,
+  children: PropTypes.element,
 };

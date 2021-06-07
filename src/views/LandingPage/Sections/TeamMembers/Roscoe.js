@@ -8,7 +8,7 @@ import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import Anchor from "components/Anchors";
+import Anchor, { IconLinks } from "components/Anchors";
 // Member image
 import roscoe from "assets/img/faces/roscoevanderboom.jpg";
 // Styles
@@ -62,11 +62,11 @@ const Roscoe = () => {
           </p>
         </CardBody>
         <CardFooter className={classes.justifyCenter}>
-          <Anchor
+          <IconLinks
             href="https://github.com/roscoevanderboom"
             text={<i className={classes.socials + " m-3 fab fa-github"}></i>}
           />
-          <Anchor
+          <IconLinks
             href="https://roscoe-vanderboom.firebaseapp.com/"
             text={<i className={classes.socials + " m-3 fas fa-home"}></i>}
           />

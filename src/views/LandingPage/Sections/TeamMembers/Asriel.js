@@ -9,7 +9,7 @@ import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import Anchor from "components/Anchors";
+import { IconLinks } from "components/Anchors";
 // Team images
 import asriel from "assets/img/faces/asriel.jpg";
 // Styles
@@ -45,11 +45,11 @@ function Asriel() {
           </p>
         </CardBody>
         <CardFooter className={classes.justifyCenter}>
-          <Anchor
+          <IconLinks
             href="https://github.com/luffy84217"
             text={<i className={classes.socials + " m-3 fab fa-github"}></i>}
           />
-          <Anchor
+          <IconLinks
             href="https://www.linkedin.com/in/fuchuan-yu-a2026a14a/"
             text={<i className={classes.socials + " m-3 fab fa-linkedin"}></i>}
           />

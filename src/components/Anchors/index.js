@@ -14,6 +14,21 @@ const Links = (props) => {
 export default Links;
 
 Links.propTypes = {
-  text: PropTypes.string,
+  text: PropTypes.string || PropTypes.object,
+  href: PropTypes.string,
+};
+
+export const IconLinks = (props) => {
+  const { text, href } = props;
+  return (
+    <a target="_blank" rel="noopener noreferrer" href={href}>
+      {" "}
+      {text}{" "}
+    </a>
+  );
+};
+
+IconLinks.propTypes = {
+  text: PropTypes.object,
   href: PropTypes.string,
 };

@@ -24,5 +24,5 @@ export default function Districts(props) {
 }
 
 Districts.propTypes = {
-  styles: PropTypes.object,
+  styles: PropTypes.string,
 };

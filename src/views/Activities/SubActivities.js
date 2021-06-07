@@ -17,7 +17,7 @@ export const SubstituteActions = (props) => {
   const { profileData } = state;
   return (
     <>
-      <span className="mr-2">{post.type}</span>
+      <span className="me-2">{post.type}</span>
       <Tooltip title="Remove Job Application" placement="top">
         <CustomBtn
           onClick={() => removeJobApplication(post, profileData, feedback)}

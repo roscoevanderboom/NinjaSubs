@@ -75,36 +75,37 @@ const CardDetails = ({ post }) => {
 
       <Collapse in={collapse}>
         <Row>
-          <Col md="6" sm="12">
-            <CustomListIem
-              icon={<AccountBox />}
-              secondary={post["Contact person"]}
-            />
-          </Col>
-          <Col md="6" sm="12">
+          <Col xl="6" sm="12">
             <CustomListIem
               icon={<DateRange />}
               secondary={`${post.start} to  ${post.end}`}
             />
           </Col>
+          <Col xl="6" sm="12">
+            <CustomListIem
+              icon={<AccountBox />}
+              secondary={post["Contact person"]}
+            />
+          </Col>
+
           {post.location === "" ? null : (
-            <Col md="6" sm="12">
+            <Col xl="6" sm="12">
               <CustomListIem icon={<Map />} secondary={`${post.location}`} />
             </Col>
           )}
           {post.address === "" ? null : (
-            <Col md="6" sm="12">
+            <Col xl="6" sm="12">
               <CustomListIem icon={<PinDrop />} secondary={`${post.address}`} />
             </Col>
           )}
-          {post.phone === "" ? null : (
-            <Col md="6" sm="12">
-              <CustomListIem icon={<Phone />} secondary={`${post.phone}`} />
+          {post.email === "" ? null : (
+            <Col xl="6" sm="12">
+              <CustomListIem icon={<Mail />} secondary={`${post.email}`} />
             </Col>
           )}
-          {post.email === "" ? null : (
-            <Col md="6" sm="12">
-              <CustomListIem icon={<Mail />} secondary={`${post.email}`} />
+          {post.phone === "" ? null : (
+            <Col xl="6" sm="12">
+              <CustomListIem icon={<Phone />} secondary={`${post.phone}`} />
             </Col>
           )}
         </Row>

@@ -36,7 +36,7 @@ const PostFooter = ({ post }) => {
 
   return (
     state.profileData.type === "Substitute" && (
-      <CardFooter className="d-flex align-items-center bt-1">
+      <CardFooter className="d-flex align-items-center border-top-1 border-dark">
         <Col md="6" sm="12">
           <div className="stats text-dark">
             {constants.mapFromNumber(post.stars).map((star, i) => (
@@ -47,14 +47,14 @@ const PostFooter = ({ post }) => {
         {
           <Hidden only={["xs", "sm"]}>
             <Col md="6" sm="12">
-              <Row className="justify-content-end">
-                <Button color="success" className="ml-1 mr-1" onClick={apply}>
+              <div className="d-flex justify-content-end w-100">
+                <Button color="success" className="me-1" onClick={apply}>
                   Apply
                 </Button>
-                <Button color="warning" className="ml-1 mr-1" onClick={ignore}>
+                <Button color="warning" className="ms-1" onClick={ignore}>
                   Ignore
                 </Button>
-              </Row>
+              </div>
             </Col>
           </Hidden>
         }

@@ -31,6 +31,9 @@ const useStyles = makeStyles(() => ({
     ...title,
     marginTop: 0,
   },
+  divider: {
+    backgroundColor: "black",
+  },
 }));
 
 export default function Candidates({ post }) {
@@ -59,7 +62,7 @@ export default function Candidates({ post }) {
         }}
       >
         <DialogTitle className="m-0">Candidates</DialogTitle>
-        <Divider />
+        <Divider className={classes.divider} />
         <DialogContent>
           {post.candidates.map((sub, i) => (
             <SubCard key={i} sub={sub} trigger="listItem" />

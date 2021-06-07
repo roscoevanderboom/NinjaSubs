@@ -78,7 +78,7 @@ const body = {
 };
 
 const bodyContainer =
-  "d-flex flex-column align-items-center col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5";
+  "d-flex flex-column align-items-center col-12 col-sm-10 col-md-8 col-lg-8 col-xl-6";
 
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',

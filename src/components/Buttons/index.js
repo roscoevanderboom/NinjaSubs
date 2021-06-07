@@ -55,9 +55,10 @@ CustomBtn.propTypes = {
 };
 export const SubmitBtn = (props) => (
   <CustomButton size="sm" color="danger" onClick={props.onClick}>
-    <props.children />
+    {props.children}
   </CustomButton>
 );
 SubmitBtn.propTypes = {
   onClick: PropTypes.func,
+  children: PropTypes.string,
 };
