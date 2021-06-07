@@ -52,8 +52,8 @@ const Desktop = () => {
                   rel="noopener noreferrer"
                 >
                   <i className="fas fa-play" />
-                YouTube Channel
-              </Button>
+                  YouTube Channel
+                </Button>
                 <Link to="/login-page" className={classes.links}>
                   <Button className="ml-2" color="info" size="lg">
                     <i className="fas fa-user mr-2" />

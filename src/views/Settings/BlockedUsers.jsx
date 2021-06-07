@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import store from 'state';
+import React, { useContext, useEffect, useState } from "react";
+import store from "state";
 // Constants
 import * as constants from "../../constants";
 import * as filters from "constants/filters";
@@ -27,15 +27,15 @@ const styles = makeStyles({
   },
   item: {
     backgroundColor: "lightgrey",
-  }
+  },
 });
 
 export default () => {
-    const classes = styles();
-    const { state } = useContext(store);
-    const { profileData, availableSubs, user } = state;
-    const [list, setList] = useState([]);
-    const [open, setOpen] = useState(false);
+  const classes = styles();
+  const { state } = useContext(store);
+  const { profileData, availableSubs, user } = state;
+  const [list, setList] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     if (user === null) {

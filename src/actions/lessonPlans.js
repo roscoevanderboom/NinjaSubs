@@ -16,7 +16,7 @@ export const addFileToStorage = (user, file, dispatch, feedback) => {
           handleProfileDataArrays(user, "arrayUnion", "lessonPlans", data);
           setLoading(dispatch, false);
         })
-        .catch((err) => setLoading(dispatch, false));
+        .catch(() => setLoading(dispatch, false));
     })
     .catch((err) => {
       console.log(err.code);
@@ -57,8 +57,7 @@ export const deleteAllItems = (user) => {
         var childRef = storageRef.child(
           `/lessonPlans/${user.uid}/${itemRef.name}`
         );
-        childRef.delete()
-        .then(() => console.log(itemRef.name + " deleted"))
+        childRef.delete().then(() => console.log(itemRef.name + " deleted"));
       });
     })
     .then(() => console.log("lesson plans deleted"))
@@ -74,7 +73,7 @@ export const listStorageItems = (user) => {
         console.log(itemRef.name);
       });
     })
-    .catch((error) => {
+    .catch(() => {
       // Uh-oh, an error occurred!
     });
 };

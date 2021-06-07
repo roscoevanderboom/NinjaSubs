@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     padding: 12,
     backgroundColor: "#f0f8ff26",
     borderRadius: 8,
-  }
+  },
 });
 
 export default function CreateProfile() {

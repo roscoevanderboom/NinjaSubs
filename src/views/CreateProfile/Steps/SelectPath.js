@@ -2,10 +2,7 @@ import React, { useContext } from "react";
 // State
 import store from "state";
 // Constants
-import {
-  newEmployerData,
-  newSubData,
-} from "../../../constants/userProfiles";
+import { newEmployerData, newSubData } from "../../../constants/userProfiles";
 // Actions
 import { handleProfileData } from "../../../actions/user";
 // @material-ui/core components
@@ -39,8 +36,8 @@ export default function SelectPath() {
   const selectPath = (userPath) => () => {
     let data = {};
     userPath === "substitute"
-      ? data = newSubData(state.user)
-      : data = newEmployerData;
+      ? (data = newSubData(state.user))
+      : (data = newEmployerData);
 
     if (state.user.uid !== undefined) {
       handleProfileData({ action: "update", user: state.user, data: data })

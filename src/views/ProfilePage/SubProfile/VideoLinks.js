@@ -37,7 +37,12 @@ export default function Video() {
         <List>
           {profileData.videos.map((video, i) => (
             <ListItem key={i} className={classes.lessonPlanListItem}>
-              <a href={video.url} rel="noopener noreferrer" target="_blank" className={classes.lessonPlanLink}>
+              <a
+                href={video.url}
+                rel="noopener noreferrer"
+                target="_blank"
+                className={classes.lessonPlanLink}
+              >
                 <ListItemText primary={video.name} />
               </a>
               <ListItemIcon onClick={() => handleDeleteVideoLink(video)}>

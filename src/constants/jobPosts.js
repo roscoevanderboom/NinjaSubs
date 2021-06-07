@@ -23,7 +23,7 @@ export const create_new_post = (profileData) => {
     location,
     address,
     phone,
-    email
+    email,
   };
 };
 
@@ -35,7 +35,7 @@ export const newJobApplicationData = ({
   rating,
   uid,
   lessonPlans,
-  videos
+  videos,
 }) => ({
   name,
   bio,
@@ -44,7 +44,7 @@ export const newJobApplicationData = ({
   rating,
   uid,
   lessonPlans,
-  videos
+  videos,
 });
 
 export const isNewPostAllowed = (array, profileData) =>

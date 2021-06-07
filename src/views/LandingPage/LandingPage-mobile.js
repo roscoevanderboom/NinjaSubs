@@ -11,7 +11,7 @@ import Features from "./Sections/Features";
 import TeamSection from "./Sections/TeamSection";
 import WorkSection from "./Sections/WorkSection.js";
 
-import bgImage from "../../assets/img/landing-bg.jpg"
+import bgImage from "../../assets/img/landing-bg.jpg";
 
 const useStyles = makeStyles({
   section1: {

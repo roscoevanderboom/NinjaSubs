@@ -20,21 +20,19 @@ export default function Footer(props) {
   const { whiteFont } = props;
   const footerClasses = classNames({
     [classes.footer]: true,
-    [classes.footerWhiteFont]: whiteFont    
+    [classes.footerWhiteFont]: whiteFont,
   });
   const aClasses = classNames({
     [classes.a]: true,
-    [classes.footerWhiteFont]: whiteFont
+    [classes.footerWhiteFont]: whiteFont,
   });
   return (
-    <footer className={footerClasses + 'fixed-bottom'}>
+    <footer className={footerClasses + "fixed-bottom"}>
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href=""
-                className={classes.block}>
+              <a href="" className={classes.block}>
                 A service for schools and substitute teachers to connect.
               </a>
             </ListItem>
@@ -49,8 +47,7 @@ export default function Footer(props) {
             target="_blank"
           >
             Creative Tim.
-          </a>
-          {" "}
+          </a>{" "}
           Edited by{" "}
           <a
             href="https://roscoe-vanderboom.firebaseapp.com/"
@@ -66,5 +63,5 @@ export default function Footer(props) {
 }
 
 Footer.propTypes = {
-  whiteFont: PropTypes.bool
+  whiteFont: PropTypes.bool,
 };

@@ -4,7 +4,7 @@ const modals = {
   BlockedUsers: false,
   ChangeEmail: false,
   ChangePassword: false,
-  ImageModal: false
+  ImageModal: false,
 };
 
 const appState = {
@@ -19,7 +19,7 @@ const appState = {
   post_to_edit: false,
   selectedChat: false,
   currentSub: false,
-  modals: modals
+  modals: modals,
 };
 
 export default appState;

@@ -35,7 +35,7 @@ const landingPageStyle = {
     ...navLink,
     "&:hover": {
       ...navLink,
-    }
+    },
   },
 };
 

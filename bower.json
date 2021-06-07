@@ -1,18 +1,17 @@
 {
-  "name": "ninjaSubs",
-  "homepage": "https://ninja-subs.web.app/",
+  "name": "material-kit-react",
+  "homepage": "https://github.com/creativetimofficial/material-kit-react",
   "authors": [
-    "creative-tim",
-    "roscoe van der boom"
+    "creative-tim"
   ],
-  "description": "A service for schools and substitute teachers to connect.",
+  "description": "A Badass Material-UI Kit based on Material Design",
   "main": "dist/index.js",
   "keywords": [
     "material",
     "design",
     "material-ui",
-    "education",
-    "react"
+    "google",
+    "twitter"
   ],
   "license": "Creative TIM License",
   "ignore": [

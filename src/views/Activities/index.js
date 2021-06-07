@@ -14,7 +14,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import { SubstituteActions } from "./SubActivities";
 import { EmployerActions, CreatePost } from "./EmpActivities";
 import PostBody from "components/NoticeboardCard/PostBody";
-import ListHeader from 'components/EmptyListHeader';
+import ListHeader from "components/EmptyListHeader";
 // Styles
 import { body, bodyContainer } from "assets/jss/material-kit-react";
 const useStyles = makeStyles({
@@ -31,8 +31,8 @@ const Activities = () => {
   const [list, setList] = useState([]);
 
   const dataReady = noticeboardQuery && profileData;
-  const subTitle = profileData.type === "Substitute" && list.length === 0 
-  const empTitle = profileData.type === "Employer" && list.length === 0 
+  const subTitle = profileData.type === "Substitute" && list.length === 0;
+  const empTitle = profileData.type === "Employer" && list.length === 0;
 
   useEffect(() => {
     if (dataReady && profileData.type === "Substitute") {
@@ -54,8 +54,12 @@ const Activities = () => {
       <div className={classes.body}>
         <div className={bodyContainer}>
           {profileData.type === "Employer" && <CreatePost />}
-          {subTitle && <ListHeader text='You have not applied to any positions yet.' />}
-          {empTitle && <ListHeader text='You have not created any positions yet.' />}
+          {subTitle && (
+            <ListHeader text="You have not applied to any positions yet." />
+          )}
+          {empTitle && (
+            <ListHeader text="You have not created any positions yet." />
+          )}
           <React.Fragment>
             {list.map((post, i) => (
               <Card key={i} className="mt-2 w-100">

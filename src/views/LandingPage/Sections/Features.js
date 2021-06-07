@@ -14,36 +14,36 @@ import International from "./International";
 import {
   primaryColor,
   dangerColor,
-  warningColor
+  warningColor,
 } from "assets/jss/material-kit-react.js";
 
 const icon = {
   width: "80px",
-  height: "80px"
+  height: "80px",
 };
 
 const useStyles = makeStyles({
   verifiedIcon: {
     ...icon,
-    color: dangerColor
+    color: dangerColor,
   },
   chatIcon: {
     ...icon,
-    color: primaryColor
+    color: primaryColor,
   },
   contentIcon: {
     ...icon,
-    color: warningColor
+    color: warningColor,
   },
   description: {
     overflow: "hidden",
     marginTop: "0px",
     fontSize: "14px",
-    padding: "0px 12px"
+    padding: "0px 12px",
   },
   descriptionWrapper: {
-    overflow: "hidden"
-  }
+    overflow: "hidden",
+  },
 });
 
 const Features = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unexpected-multiline */
 // constants
 import { availableSubs } from "../constants/firebase/collections";
 import { FieldValue } from "../constants/firebase";

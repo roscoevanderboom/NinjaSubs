@@ -11,7 +11,7 @@ import {
   People,
   Phone,
   Map,
-  PinDrop
+  PinDrop,
 } from "@material-ui/icons";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -191,7 +191,12 @@ export default function ProfileDetails() {
           />
         </GridItem>
       </GridContainer>
-      {profileData !== data && <ProfileFooter handleSubmit={handleSubmit} handleCancel={handleCancel} />}
+      {profileData !== data && (
+        <ProfileFooter
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />
+      )}
     </React.Fragment>
   );
 }

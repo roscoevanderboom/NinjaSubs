@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 // Actions
 import { handleProfileData } from "../../../actions/user";
 // Material components
 import { FormControlLabel, Switch } from "@material-ui/core";
 
-export default (props) => {
+export default function AvailableSwitch(props) {
   const { state, feedback, classes } = props;
   const { user, profileData } = state;
 
@@ -19,7 +20,7 @@ export default (props) => {
         action: "update",
         user,
         data: { available: !profileData.available },
-      })
+      });
     }
   };
 
@@ -44,4 +45,10 @@ export default (props) => {
       label="Availability"
     />
   );
+}
+
+AvailableSwitch.propTypes = {
+  state: PropTypes.object,
+  classes: PropTypes.object,
+  feedback: PropTypes.func,
 };

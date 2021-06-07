@@ -1,41 +1,46 @@
-import React, { useContext } from 'react';
-import store from 'state';
-// 
+import React, { useContext } from "react";
+import store from "state";
+//
 // Actions
-import { deleteProfile } from '../../actions/auth';
+import { deleteProfile } from "../../actions/auth";
 // custom components
-import SettingsItem from './SettingsItem';
+import SettingsItem from "./SettingsItem";
 // Icon
-import { Cancel } from '@material-ui/icons';
-export default () => {
+import { Cancel } from "@material-ui/icons";
+const DeleteAccount = () => {
   const { state, feedback, dispatch } = useContext(store);
   const { profileData, noticeboardQuery, user } = state;
 
   const checkActivePosts = () => {
-    const posts = noticeboardQuery.filter(post => post.uid === profileData.uid);
+    const posts = noticeboardQuery.filter(
+      (post) => post.uid === profileData.uid
+    );
     if (posts.length > 0) {
-      feedback('error', 'Please delete active posts first.');
+      feedback("error", "Please delete active posts first.");
       return false;
     }
-    return true
-  }
+    return true;
+  };
 
   const handleDelete = () => {
     if (user === null) {
       return;
     }
-    if (profileData.type === 'Employer') {
+    if (profileData.type === "Employer") {
       if (!checkActivePosts()) {
         return;
       }
     }
-    deleteProfile(user, profileData, feedback, dispatch)
-  }
+    deleteProfile(user, profileData, feedback, dispatch);
+  };
 
   return (
     <SettingsItem
-      text='Delete account.'
+      text="Delete account."
       icon={<Cancel />}
-      onClick={handleDelete} />
-  )
-}
+      onClick={handleDelete}
+    />
+  );
+};
+
+export default DeleteAccount;

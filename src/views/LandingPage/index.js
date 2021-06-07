@@ -17,7 +17,7 @@ export default function LandingPage() {
         fixed
         changeColorOnScroll={{
           height: 100,
-          color: "white"
+          color: "white",
         }}
       />
 

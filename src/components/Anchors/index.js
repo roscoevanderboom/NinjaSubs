@@ -1,13 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default (props) => {
-    const { text, href } = props;
-    return (
-        <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={href}>
-            {text}
-        </a>
-    )
-}
+const Links = (props) => {
+  const { text, href } = props;
+  return (
+    <a target="_blank" rel="noopener noreferrer" href={href}>
+      {" "}
+      {text}{" "}
+    </a>
+  );
+};
+
+export default Links;
+
+Links.propTypes = {
+  text: PropTypes.string,
+  href: PropTypes.string,
+};

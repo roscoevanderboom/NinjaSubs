@@ -74,8 +74,8 @@ export default function ProductSection() {
           <h6 className={classes.description}>
             Since Google offers their database service, <FirebaseAnchor /> for
             free, and all of the design elements are also free, thanks to{" "}
-            <MaterialUIAnchor /> and <CreativeTimAnchor />, NinjaSubs is
-             a free service without any advertising.
+            <MaterialUIAnchor /> and <CreativeTimAnchor />, NinjaSubs is a free
+            service without any advertising.
           </h6>
           <br />
         </GridItem>

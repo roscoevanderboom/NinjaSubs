@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 // Store
 import store from "state";
 // Constants
@@ -50,7 +51,7 @@ const CustomCollapse = (props) => {
         {locationChips.map((chip, i) => (
           <Chip
             key={i}
-            onClick={handleLocations(user, profileData,chip.name)}
+            onClick={handleLocations(user, profileData, chip.name)}
             className="m-1"
             label={chip.name}
             clickable={true}
@@ -64,3 +65,8 @@ const CustomCollapse = (props) => {
 };
 
 export default CustomCollapse;
+
+CustomCollapse.propTypes = {
+  districts: PropTypes.array,
+  title: PropTypes.string,
+};

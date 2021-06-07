@@ -9,10 +9,10 @@ const validateDistrict = (data) => data.location !== "";
 const validateContact = (data) => data.contact !== "";
 
 export {
-    validateContact, 
-    validateUserEmail, 
-    validateUser, 
-    validateProfileName, 
-    validateLocations, 
-    validateDistrict
-}
+  validateContact,
+  validateUserEmail,
+  validateUser,
+  validateProfileName,
+  validateLocations,
+  validateDistrict,
+};

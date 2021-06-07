@@ -1,9 +1,10 @@
 // Services
 import React, { createContext, useReducer } from "react";
+// import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 
-import init from './initialState';
-import reducer from '../reducers';
+import init from "./initialState";
+import reducer from "../reducers";
 
 // Feedback
 import { useSnackbar } from "notistack";
@@ -28,11 +29,18 @@ export const GlobalStatePovider = (props) => {
   return (
     <GlobalState.Provider
       value={{
-        state, dispatch, hist, feedback
+        state,
+        dispatch,
+        hist,
+        feedback,
       }}
     >
-      {props.children}
+      <props.children />
     </GlobalState.Provider>
   );
 };
 export default GlobalState;
+
+// GlobalState.propTypes = {
+//   children: PropTypes.element,
+// }

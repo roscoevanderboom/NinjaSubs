@@ -46,7 +46,11 @@ export default function SelectCountry() {
 
   const selectCountry = (country) => () => {
     if (state.user.uid !== undefined) {
-      handleProfileData({ action: "update", user: state.user, data: { country: country } })
+      handleProfileData({
+        action: "update",
+        user: state.user,
+        data: { country: country },
+      })
         .then(() => hist.push("/createProfile-page/select-city"))
         .catch((err) => feedback("error", err));
     }

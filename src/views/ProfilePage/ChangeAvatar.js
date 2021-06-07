@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: 20
+    marginBottom: 20,
   },
   avatar: {
     maxWidth: 160,
@@ -81,18 +81,12 @@ export default () => {
 
   const Footer = () => (
     <div className="d-flex justify-content-around mt-2 mb-2">
-      <Button
-        size="sm"
-        color="info"
-        children={`Submit`}
-        onClick={handleSubmit}
-      />
-      <Button
-        size="sm"
-        color="danger"
-        children={`Cancel`}
-        onClick={handleModal}
-      />
+      <Button size="sm" color="info" onClick={handleSubmit}>
+        Submit
+      </Button>
+      <Button size="sm" color="danger" onClick={handleModal}>
+        Cancel
+      </Button>
     </div>
   );
 
@@ -116,7 +110,7 @@ export default () => {
           paperWidthSm: classes.paperWidthSm,
         }}
       >
-        <DialogTitle children={"Change avatar image"} />
+        <DialogTitle>Change avatar image</DialogTitle>
         <DialogContent className={classes.dialogContent}>
           <img
             className={classes.avatar}

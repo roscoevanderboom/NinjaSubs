@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 // Store
 import store from "state";
 // Actions
@@ -29,4 +30,8 @@ export const SubstituteActions = (props) => {
       </Tooltip>
     </>
   );
+};
+
+SubstituteActions.propTypes = {
+  post: PropTypes.object,
 };

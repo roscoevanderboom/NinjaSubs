@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 // Store
 import store from "state";
 // Constants
@@ -11,11 +12,11 @@ import FEEDBACK from "../../constants/feedback";
 import Button from "components/CustomButtons/Button.js";
 import CardHeader from "components/Card/CardHeader.js";
 
-export default ({ props }) => {
+export default function FormHeader({ props }) {
   const { classes, title, data } = props;
   const { hist, feedback } = useContext(store);
 
-  const googleSignIn = () => {    
+  const googleSignIn = () => {
     if (title === "Register" && !data.terms) {
       feedback(
         FEEDBACK.TYPE.INFO,
@@ -25,7 +26,6 @@ export default ({ props }) => {
       var provider = new firebase.auth.GoogleAuthProvider();
       signInWithPopup(provider, hist, feedback);
     }
-    
   };
 
   return (
@@ -38,4 +38,11 @@ export default ({ props }) => {
       </div>
     </CardHeader>
   );
+}
+
+FormHeader.propTypes = {
+  props: PropTypes.object,
+  classes: PropTypes.object,
+  data: PropTypes.object,
+  title: PropTypes.string,
 };

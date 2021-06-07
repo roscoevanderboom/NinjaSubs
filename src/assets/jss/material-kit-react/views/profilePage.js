@@ -10,35 +10,35 @@ const profilePageStyle = {
       maxWidth: "160px",
       width: "100%",
       margin: "0 auto",
-      transform: "translate3d(0, -50%, 0)"
-    }
+      transform: "translate3d(0, -50%, 0)",
+    },
   },
   description: {
     margin: "1.071rem auto 0",
     maxWidth: "600px",
-    color: "#999"
+    color: "#999",
   },
   name: {
-    marginTop: "-60px"
+    marginTop: "-60px",
   },
   ...imagesStyle,
   main: {
     background: "#FFFFFF",
     position: "relative",
-    zIndex: "3"
+    zIndex: "3",
   },
   mainRaised: {
     margin: "-20vh 30px 0px",
     borderRadius: "6px",
     boxShadow:
-      "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
+      "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
   },
   title: {
     ...title,
     display: "inline-block",
     position: "relative",
     minHeight: "32px",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   socials: {
     marginTop: "0",
@@ -49,12 +49,12 @@ const profilePageStyle = {
     height: "100%",
     lineHeight: "41px",
     fontSize: "20px",
-    color: "#999"
+    color: "#999",
   },
   navWrapper: {
     margin: "20px auto 50px auto",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 };
 
 export default profilePageStyle;

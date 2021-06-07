@@ -1,4 +1,4 @@
-import firebase from './index';
+import firebase from "./index";
 // Auth
 const auth = firebase.auth();
 // Get current user

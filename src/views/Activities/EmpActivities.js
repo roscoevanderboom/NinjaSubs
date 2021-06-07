@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 // Store
 import store from "state";
 // Constants
@@ -78,4 +79,8 @@ export const EmployerActions = (props) => {
       </Tooltip>
     </React.Fragment>
   );
+};
+
+EmployerActions.propTypes = {
+  post: PropTypes.object,
 };

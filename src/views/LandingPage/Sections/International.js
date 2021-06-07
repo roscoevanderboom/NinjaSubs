@@ -7,8 +7,8 @@ import GridItem from "components/Grid/GridItem.js";
 // Styles
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 // Images
-import taiwanFlag from "assets/img/taiwan-flag.png"
-import japanFlag from "assets/img/japan-flag.png"
+import taiwanFlag from "assets/img/taiwan-flag.png";
+import japanFlag from "assets/img/japan-flag.png";
 const useStyles = makeStyles(styles);
 
 function ProductSection() {

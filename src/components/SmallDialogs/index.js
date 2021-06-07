@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 // Actions
 import { addFileToStorage, fileValidation } from "actions/lessonPlans";
 import { handleProfileDataArrays } from "actions/user";
@@ -32,7 +33,7 @@ const styles = makeStyles({
   },
 });
 
-export default (props) => {
+const DefaultDialog = (props) => {
   const classes = styles();
   const [open, setOpen] = React.useState(false);
   const { value, handleValue, handleSubmit, id, lable, icon, type, Trigger } =
@@ -75,6 +76,19 @@ export default (props) => {
       </Dialog>
     </>
   );
+};
+
+export default DefaultDialog;
+
+DefaultDialog.propTypes = {
+  value: PropTypes.string,
+  id: PropTypes.string,
+  lable: PropTypes.string,
+  type: PropTypes.string,
+  handleValue: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  Trigger: PropTypes.func,
+  icon: PropTypes.element,
 };
 
 export const DialogWithoutTrigger = (props) => {
@@ -125,6 +139,18 @@ export const DialogWithoutTrigger = (props) => {
   );
 };
 
+DialogWithoutTrigger.propTypes = {
+  value: PropTypes.string,
+  id: PropTypes.string,
+  lable: PropTypes.string,
+  type: PropTypes.string,
+  handleValue: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  icon: PropTypes.element,
+  open: PropTypes.bool,
+  handleModal: PropTypes.func,
+};
+
 export const FileUploadDialog = (props) => {
   const { user, dispatch, feedback } = props;
   const [file, setFile] = React.useState({
@@ -154,7 +180,7 @@ export const FileUploadDialog = (props) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     if (user.emailVerified) {
       addFileToStorage(user, file, dispatch, feedback);
     } else {
@@ -217,6 +243,12 @@ export const FileUploadDialog = (props) => {
   );
 };
 
+FileUploadDialog.propTypes = {
+  user: PropTypes.object,
+  dispatch: PropTypes.func,
+  feedback: PropTypes.func,
+};
+
 export const VideoLinksDialog = ({ user }) => {
   const classes = styles();
   const [open, setOpen] = React.useState(false);
@@ -246,7 +278,7 @@ export const VideoLinksDialog = ({ user }) => {
         onClose={handleModal}
         classes={{ paperScrollPaper: classes.dialog }}
       >
-        <DialogTitle children={"Teaching videos"} />
+        <DialogTitle>Teaching videos</DialogTitle>
         <DialogContent>
           <Typography variant="body2">
             We currently only accept links to YouTube videos.
@@ -284,4 +316,8 @@ export const VideoLinksDialog = ({ user }) => {
       </Dialog>
     </>
   );
+};
+
+VideoLinksDialog.propTypes = {
+  user: PropTypes.object,
 };

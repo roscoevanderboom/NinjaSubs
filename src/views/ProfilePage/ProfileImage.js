@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 // Custom components
 import ChangeAvatar from "./ChangeAvatar";
 // Styles
@@ -28,3 +29,7 @@ export default function ProfileImage({ profileData }) {
     </div>
   );
 }
+
+ProfileImage.propTypes = {
+  profileData: PropTypes.object,
+};

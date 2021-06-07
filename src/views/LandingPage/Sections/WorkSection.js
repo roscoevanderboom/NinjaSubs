@@ -16,7 +16,7 @@ const init = {
   name: "",
   email: "",
   message: "",
-  date: new Date()
+  date: new Date(),
 };
 
 export default function WorkSection() {
@@ -48,11 +48,11 @@ export default function WorkSection() {
                   labelText="Your Name"
                   id="name"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                   inputProps={{
                     value: formData.name,
-                    onChange: e => handleData("name", e.target.value)
+                    onChange: (e) => handleData("name", e.target.value),
                   }}
                 />
               </GridItem>
@@ -61,11 +61,11 @@ export default function WorkSection() {
                   labelText="Your Email"
                   id="email"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                   inputProps={{
                     value: formData.email,
-                    onChange: e => handleData("email", e.target.value)
+                    onChange: (e) => handleData("email", e.target.value),
                   }}
                 />
               </GridItem>
@@ -74,13 +74,13 @@ export default function WorkSection() {
                 id="message"
                 formControlProps={{
                   fullWidth: true,
-                  className: classes.textArea
+                  className: classes.textArea,
                 }}
                 inputProps={{
                   multiline: true,
                   rows: 5,
                   value: formData.message,
-                  onChange: e => handleData("message", e.target.value)
+                  onChange: (e) => handleData("message", e.target.value),
                 }}
               />
               <GridContainer justify="center">

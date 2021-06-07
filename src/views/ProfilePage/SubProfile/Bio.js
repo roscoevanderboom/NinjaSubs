@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 // Store
 import store from "state"; // Actions
 import { handleProfileData } from "actions/user";
@@ -8,7 +9,7 @@ import { Container, Typography } from "@material-ui/core";
 // Custom components
 import Footer from "../ProfileFooter";
 
-export default ({ classes }) => {
+export default function Bio({ classes }) {
   const { state } = useContext(store);
   const { user, profileData } = state;
   const [bio, setBio] = useState("");
@@ -29,9 +30,9 @@ export default ({ classes }) => {
 
   useEffect(() => {
     if (profileData && profileData.bio !== undefined) {
-        setBio(profileData.bio);
+      setBio(profileData.bio);
     }
-  },[profileData])
+  }, [profileData]);
 
   return (
     <>
@@ -51,4 +52,8 @@ export default ({ classes }) => {
       </Container>
     </>
   );
+}
+
+Bio.propTypes = {
+  classes: PropTypes.object,
 };

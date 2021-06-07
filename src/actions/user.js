@@ -55,7 +55,9 @@ export const changeDisplayName = (user, displayName, feedback) => {
         handleProfileData({
           action: "update",
           user,
-          data: { name: displayName },
+          data: {
+            name: displayName,
+          },
         }).then(() => feedback("success", "Display name set."));
       });
   }

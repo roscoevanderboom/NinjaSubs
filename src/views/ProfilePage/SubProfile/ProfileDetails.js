@@ -14,7 +14,6 @@ import { AccountBox, Mail } from "@material-ui/icons";
 import useStyles from "../styles";
 
 export default function ProfileDetails() {
-
   const { state } = useContext(store);
   const { user, profileData } = state;
 

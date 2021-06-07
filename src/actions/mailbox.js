@@ -8,5 +8,5 @@ export const sendMail = (formData, feedback, setFormData, init) => {
       feedback("success", "Your mail has been sent!");
       setFormData(init);
     })
-    .catch(err => feedback("error", err.message));
+    .catch((err) => feedback("error", err.message));
 };

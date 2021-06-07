@@ -33,8 +33,8 @@ const reducer = (state, action) => {
         ...state,
         modals: {
           ...modals,
-          [modal]: modals[modal] ? false : true
-        }
+          [modal]: modals[modal] ? false : true,
+        },
       };
     case "RESET":
       return data;
@@ -46,5 +46,5 @@ const reducer = (state, action) => {
 export default reducer;
 
 export const resetStore = (dispatch, init) => {
-  dispatch({ type: 'RESET', data: init })
-}
+  dispatch({ type: "RESET", data: init });
+};

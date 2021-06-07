@@ -9,10 +9,10 @@ import {
   roseColor,
   transition,
   boxShadow,
-  drawerWidth
+  drawerWidth,
 } from "assets/jss/material-kit-react.js";
 
-const headerStyle = theme => ({
+const headerStyle = (theme) => ({
   appBar: {
     display: "flex",
     border: "0",
@@ -28,15 +28,15 @@ const headerStyle = theme => ({
     flexFlow: "row nowrap",
     justifyContent: "flex-start",
     position: "relative",
-    zIndex: "unset"
+    zIndex: "unset",
   },
   absolute: {
     position: "absolute",
-    zIndex: "1100"
+    zIndex: "1100",
   },
   fixed: {
     position: "fixed",
-    zIndex: "1100"
+    zIndex: "1100",
   },
   container: {
     ...container,
@@ -45,13 +45,13 @@ const headerStyle = theme => ({
     alignItems: "center",
     justifyContent: "space-between",
     display: "flex",
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
-  title: {   
-    ...defaultFont, 
+  title: {
+    ...defaultFont,
     lineHeight: "30px",
     fontSize: "18px",
     borderRadius: "3px",
@@ -59,69 +59,69 @@ const headerStyle = theme => ({
     color: "inherit",
     padding: "8px 16px",
     letterSpacing: "unset",
-    textDecoration:'none',
+    textDecoration: "none",
     "&:hover,&:focus": {
       color: "inherit",
-      background: "transparent"
-    }
+      background: "transparent",
+    },
   },
   appResponsive: {
-    margin: "20px 10px"
+    margin: "20px 10px",
   },
   primary: {
     backgroundColor: primaryColor,
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(156, 39, 176, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(156, 39, 176, 0.46)",
   },
   info: {
     backgroundColor: infoColor,
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(0, 188, 212, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(0, 188, 212, 0.46)",
   },
   success: {
     backgroundColor: successColor,
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(76, 175, 80, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(76, 175, 80, 0.46)",
   },
   warning: {
     backgroundColor: warningColor,
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(255, 152, 0, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(255, 152, 0, 0.46)",
   },
   danger: {
     backgroundColor: dangerColor,
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(244, 67, 54, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(244, 67, 54, 0.46)",
   },
   rose: {
     backgroundColor: roseColor,
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(233, 30, 99, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(233, 30, 99, 0.46)",
   },
   transparent: {
     backgroundColor: "transparent !important",
     boxShadow: "none",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   dark: {
     color: "#FFFFFF",
     backgroundColor: "#212121 !important",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(33, 33, 33, 0.46)"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(33, 33, 33, 0.46)",
   },
   white: {
-    border: "0",   
+    border: "0",
     marginBottom: "20px",
     color: "#555",
     backgroundColor: "#fff !important",
     boxShadow:
-      "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)"
+      "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)",
   },
   drawerPaper: {
     border: "none",
@@ -143,7 +143,7 @@ const headerStyle = theme => ({
     textAlign: "left",
     paddingRight: "0px",
     paddingLeft: "0",
-    ...transition
+    ...transition,
   },
   navLink: {
     color: "inherit",
@@ -159,7 +159,7 @@ const headerStyle = theme => ({
     display: "inline-flex",
     "&:hover,&:focus": {
       color: "inherit",
-      background: "rgba(200, 200, 200, 0.2)"
+      background: "rgba(200, 200, 200, 0.2)",
     },
     [theme.breakpoints.down("sm")]: {
       width: "calc(100% - 30px)",
@@ -168,22 +168,22 @@ const headerStyle = theme => ({
       marginTop: "8px",
       textAlign: "left",
       "& > span:first-child": {
-        justifyContent: "flex-start"
-      }
-    }    
+        justifyContent: "flex-start",
+      },
+    },
   },
   dropdownLink: {
     "&,&:hover,&:focus": {
       color: "inherit",
       textDecoration: "none",
       display: "block",
-      padding: "10px 20px"
-    }
+      padding: "10px 20px",
+    },
   },
-  brand:{
-    textDecoration: 'none',
-    color: 'inherit'
-  }
+  brand: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 });
 
 export default headerStyle;

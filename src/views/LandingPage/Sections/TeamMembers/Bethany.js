@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -52,20 +53,6 @@ const Bethany = () => {
             students study.
           </p>
         </CardBody>
-        {/* <CardFooter className={classes.justifyCenter}>
-                    <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.margin5}  >
-                        <i className={classes.socials + " fab fa-twitter"} />
-                    </Button>
-                    <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.margin5} >
-                        <i className={classes.socials + " fab fa-facebook"} />
-                    </Button>
-                </CardFooter> */}
       </Card>
     </GridItem>
   );

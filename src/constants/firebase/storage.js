@@ -1,4 +1,4 @@
-import firebase from './';
+import firebase from "./";
 
 // File Storage
 export const storage = firebase.storage();

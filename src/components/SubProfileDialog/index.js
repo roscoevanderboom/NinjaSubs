@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import PropTypes from "prop-types";
 // State
 import store from "state";
 // actions
@@ -19,7 +20,7 @@ import {
   ListItemIcon,
   ListItemAvatar,
   Typography,
-  Divider
+  Divider,
 } from "@material-ui/core";
 import { OpenInBrowser } from "@material-ui/icons";
 
@@ -88,8 +89,9 @@ export default function SubProfileDialog({ sub, trigger }) {
               variant="h5"
               component="header"
               className={classes.title}
-              children={sub.name}
-            />
+            >
+              {sub.name}
+            </Typography>
           }
         />
         <Divider />
@@ -138,3 +140,8 @@ export default function SubProfileDialog({ sub, trigger }) {
     </div>
   );
 }
+
+SubProfileDialog.propTypes = {
+  sub: PropTypes.object,
+  trigger: PropTypes.string,
+};

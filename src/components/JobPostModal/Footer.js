@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 // Actions
 import { setModals } from "../../actions/modals";
 // Components
@@ -7,29 +8,31 @@ import { DialogActions } from "@material-ui/core";
 // Styles
 import useStyles from "./styles";
 
-export default ({ handleSubmit, dispatch }) => {
+const Footer = ({ handleSubmit, dispatch }) => {
   const classes = useStyles();
   return (
     <DialogActions
       classes={{
         root: classes.footer,
       }}
-      children={
-        <React.Fragment>
-          <CustomButton
-            size="sm"
-            color="github"
-            children={`Submit`}
-            onClick={handleSubmit}
-          />
-          <CustomButton
-            size="sm"
-            color="danger"
-            children={`Cancel`}
-            onClick={() => setModals(dispatch, "JobPostModal")}
-          />
-        </React.Fragment>
-      }
-    />
+    >
+      <CustomButton size="sm" color="github" onClick={handleSubmit}>
+        Submit
+      </CustomButton>
+      <CustomButton
+        size="sm"
+        color="danger"
+        onClick={() => setModals(dispatch, "JobPostModal")}
+      >
+        Cancel
+      </CustomButton>
+    </DialogActions>
   );
+};
+
+export default Footer;
+
+Footer.propTypes = {
+  handleSubmit: PropTypes.func,
+  dispatch: PropTypes.func,
 };

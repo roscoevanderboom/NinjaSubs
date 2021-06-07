@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
-import GlobalState from 'state';
+import React, { useContext } from "react";
+import GlobalState from "state";
 // Actions
-import { handleVerification as verify } from '../../actions/auth';
+import { handleVerification as verify } from "../../actions/auth";
 // custom components
-import SettingsItem from './SettingsItem';
+import SettingsItem from "./SettingsItem";
 // Icon
-import { SettingsBackupRestore } from '@material-ui/icons';
+import { SettingsBackupRestore } from "@material-ui/icons";
 
-export default () => {
-
+const ResendVerification = () => {
   const { state, feedback } = useContext(GlobalState);
   const { user } = state;
 
@@ -17,19 +16,22 @@ export default () => {
       return;
     }
     if (user.emailVerified) {
-      feedback('error', 'Your email is already verified');
+      feedback("error", "Your email is already verified");
       return;
     }
-    if (!window.confirm('Resend verification email?')) {
+    if (!window.confirm("Resend verification email?")) {
       return;
     }
     verify(user, feedback);
-  }
+  };
 
   return (
     <SettingsItem
-      text='Resend verification email.'
+      text="Resend verification email."
       icon={<SettingsBackupRestore />}
-      onClick={handleVerification} />
-  )
-}
+      onClick={handleVerification}
+    />
+  );
+};
+
+export default ResendVerification;

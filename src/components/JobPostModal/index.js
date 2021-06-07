@@ -32,7 +32,7 @@ import Actions from "./Footer";
 
 import useStyles from "./styles";
 
-export default () => {
+const JobPostDialog = () => {
   const classes = useStyles();
   const { state, feedback, dispatch } = useContext(store);
   const { profileData, modals, post_to_edit, noticeboardQuery, user } = state;
@@ -105,24 +105,21 @@ export default () => {
         open={modals.JobPostModal}
         onClose={() => setModals(dispatch, "JobPostModal")}
       >
-        <DialogTitle
-          children={
-            <ListItem>
-              <ListItemText>
-                <Typography
-                  align="left"
-                  component="header"
-                  variant="h5"
-                  children={`Job post for ${
-                    profileData && profileData["School name"]
-                  }`}
-                />
-              </ListItemText>
+        <DialogTitle>
+          <ListItem>
+            <ListItemText>
+              <Typography
+                align="left"
+                component="header"
+                variant="h5"
+              >{`Job post for ${
+                profileData && profileData["School name"]
+              }`}</Typography>
+            </ListItemText>
 
-              <StarRating stars={stars} errors={formErrors} />
-            </ListItem>
-          }
-        />
+            <StarRating stars={stars} errors={formErrors} />
+          </ListItem>
+        </DialogTitle>
         <DialogContent classes={{ root: classes.body }}>
           <div className="row">
             <div className="col-6">
@@ -180,3 +177,5 @@ export default () => {
     )
   );
 };
+
+export default JobPostDialog;

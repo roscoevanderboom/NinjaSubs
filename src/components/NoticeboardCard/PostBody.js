@@ -18,24 +18,25 @@
 
 */
 import React from "react";
-import store from 'state';
+import store from "state";
 
 // reactstrap components
 import { CardBody } from "reactstrap";
 
-import Applicants from './Applicants';
-import Details from './Details';
+import Applicants from "./Applicants";
+import Details from "./Details";
 
 const PostBody = ({ post }) => {
-    const { state } = React.useContext(store);
+  const { state } = React.useContext(store);
 
-    return (
-        <CardBody className='text-dark' >
-            <Details post={post} />
-            {state.profileData.type === 'Substitute' ? null :
-                <Applicants candidates={post.candidates} />}
-        </CardBody>
-    )
-}
+  return (
+    <CardBody className="text-dark">
+      <Details post={post} />
+      {state.profileData.type === "Substitute" ? null : (
+        <Applicants candidates={post.candidates} />
+      )}
+    </CardBody>
+  );
+};
 
-export default PostBody
+export default PostBody;

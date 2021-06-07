@@ -19,7 +19,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import { bodyContainer } from "assets/jss/material-kit-react";
 import useStyles from "./styles";
 
-export default () => {
+const Settings = () => {
   const { state } = useContext(store);
   const { profileData } = state;
   const classes = useStyles();
@@ -39,10 +39,11 @@ export default () => {
               className={classes.header}
               componant="header"
               variant="h5"
-              children={"Account Settings"}
-            />
+            >
+              Account Settings
+            </Typography>
             <List className={classes.list}>
-              {profileData.type === "Employer" ? null : <ChangeDisplayName />}              
+              {profileData.type === "Employer" ? null : <ChangeDisplayName />}
               {profileData.type === "Employer" ? null : <ClearIgnoredPosts />}
               <ChangeEmail />
               <BlockedUsers />
@@ -57,3 +58,5 @@ export default () => {
     </div>
   );
 };
+
+export default Settings;
