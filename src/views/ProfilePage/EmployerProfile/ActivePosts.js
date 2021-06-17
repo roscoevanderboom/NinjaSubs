@@ -80,7 +80,10 @@ export default function ActivePosts() {
   }, [state.noticeboardQuery, state.profileData]);
 
   return (
-    <Container className={classes.activePostsContainer}>
+    <Container
+      style={{ display: "flex" }}
+      className={classes.activePostsContainer}
+    >
       <Typography className={classes.districtTitle} align="center" variant="h6">
         Active Posts
       </Typography>

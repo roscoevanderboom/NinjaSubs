@@ -95,12 +95,14 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     padding: 6,
     color: "white",
+    width: "fit-content",
   },
   listItemRight: {
     backgroundColor: "#4b6cb7",
     borderRadius: 8,
     padding: 6,
     color: "white",
+    width: "fit-content",
   },
   list: {
     display: "flex",

@@ -19,8 +19,8 @@ export default function MessageList({ list }) {
             key={i}
             className={
               item.sender_uid === profileData.uid
-                ? "text-dark mt-2 row p-0 m-0 justify-content-start"
-                : "text-dark mt-2 row p-0 m-0 justify-content-end"
+                ? "text-dark mt-2 row p-0 m-0 justify-content-end"
+                : "text-dark mt-2 row p-0 m-0 justify-content-start"
             }
           >
             <ListItem className="col-6 p-0 m-0">
@@ -34,8 +34,8 @@ export default function MessageList({ list }) {
                 }}
                 className={
                   item.sender_uid === profileData.uid
-                    ? "row p-0 m-0 justify-content-start"
-                    : "row p-0 m-0 justify-content-end"
+                    ? "row p-0 m-0 justify-content-end"
+                    : "row p-0 m-0 justify-content-start"
                 }
                 primary={item.post}
               />

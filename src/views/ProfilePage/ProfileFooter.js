@@ -10,7 +10,7 @@ export default function ProfileFooter(props) {
   const classes = styles();
   const { handleSubmit, handleCancel } = props;
   return (
-    <Container className={classes.footer}>
+    <Container style={{ dispaly: "flex" }} className={classes.footer}>
       <Button size="sm" color="info" onClick={handleSubmit}>
         Update
       </Button>
