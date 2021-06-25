@@ -9,5 +9,5 @@ import config, { test } from "./api/config";
 // Export to work with Firebase arrays
 export const FieldValue = app.firestore.FieldValue;
 // Export app
-export default app.initializeApp(test);
+export default app.initializeApp(config);
 export const firebase = app;

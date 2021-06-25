@@ -28,6 +28,8 @@ const init = {
   "Contact person": "",
   phone: "",
   location: "",
+  city: "",
+  country: "",
   address: "",
   "School name": "",
 };
@@ -157,6 +159,7 @@ export default function ProfileDetails() {
               </InputAdornment>
             }
             value={data.location}
+            profileData={profileData}
             handleData={handleData}
           />
         </GridItem>

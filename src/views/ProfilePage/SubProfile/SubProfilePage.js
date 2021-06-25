@@ -93,7 +93,7 @@ export default function ProfilePage() {
               </Badge>
             </Tooltip>
           </div>
-          <Districts styles={classes.districtTitle} />
+          <Districts profileData={profileData} styles={classes.districtTitle} />
         </Col>
         <Col xs="11" md="7" lg="6" className={classes.gridItem}>
           <ProfileDetails />

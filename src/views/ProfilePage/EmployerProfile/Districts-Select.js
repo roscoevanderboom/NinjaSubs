@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 // Locations array
-import { mainDistricts, subDistricts } from "constants/locations";
+import location from "constants/locations";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -16,6 +16,8 @@ import styles from "assets/jss/material-kit-react/components/customInputStyle.js
 const useStyles = makeStyles(styles);
 
 export default function DistrictSelect(props) {
+  const [mainDistricts, setMainDistricts] = React.useState([]);
+  const [subDistricts, setSubDistricts] = React.useState([]);
   const {
     handleData,
     formControlProps,
@@ -25,7 +27,9 @@ export default function DistrictSelect(props) {
     inputRootCustomClasses,
     success,
     endAdornment,
+    profileData,
   } = props;
+  const { country, city } = profileData;
   const classes = useStyles();
 
   const labelClasses = classNames({
@@ -54,6 +58,13 @@ export default function DistrictSelect(props) {
   } else {
     formControlClasses = classes.formControl;
   }
+
+  React.useEffect(() => {
+    if (profileData) {
+      setMainDistricts(Object.keys(location[country][city]));
+      setSubDistricts(Object.values(location[country][city]));
+    }
+  }, [profileData]);
 
   return (
     <FormControl
@@ -109,6 +120,7 @@ DistrictSelect.propTypes = {
   handleData: PropTypes.func,
   formControlProps: PropTypes.object,
   inputRootCustomClasses: PropTypes.object,
+  profileData: PropTypes.object,
   value: PropTypes.string,
   white: PropTypes.string,
   success: PropTypes.bool,
