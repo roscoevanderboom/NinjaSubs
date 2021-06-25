@@ -5,7 +5,7 @@ Created with React, MaterialUI and Firebase Cloud Firestore.
 
 Here is  the test server.
 
-https://ninjasubs-test.firebaseapp.com/
+https://ninjasubs-test.web.app/
 
 <h4>Features:</h4>
 Substitutes can: 
