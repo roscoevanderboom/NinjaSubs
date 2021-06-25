@@ -30,3 +30,6 @@ yarn.lock
 .firebaserc
 firebase.json
 /src/constants/firebase/api
+/src/constants/firebase/index.js
+
+yarn.lock
